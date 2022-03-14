@@ -38,6 +38,8 @@ float releaseMs = 0.0f;
 int octave = 2;
 float stereoSpread = 0.5f;
 
+float pitchRibbon = 0.0f;
+float cutoffRibbon = 0.0f;
 
 
 
