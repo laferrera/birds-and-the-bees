@@ -1,0 +1,3813 @@
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"vibrato.cpp"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text._ZN7daisysp13VibratoEngine4InitEf,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	_ZN7daisysp13VibratoEngine4InitEf
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	_ZN7daisysp13VibratoEngine4InitEf:
+  27              	.LVL0:
+  28              	.LFB3674:
+  29              		.file 1 "../Epiphyte/vibrato.cpp"
+   1:../Epiphyte/vibrato.cpp **** #include "../DaisySP/Source/Utility/dsp.h"
+   2:../Epiphyte/vibrato.cpp **** #include "vibrato.h"
+   3:../Epiphyte/vibrato.cpp **** #include <math.h>
+   4:../Epiphyte/vibrato.cpp **** 
+   5:../Epiphyte/vibrato.cpp **** using namespace daisysp;
+   6:../Epiphyte/vibrato.cpp **** 
+   7:../Epiphyte/vibrato.cpp **** //ChorusEngine stuff
+   8:../Epiphyte/vibrato.cpp **** void VibratoEngine::Init(float sample_rate)
+   9:../Epiphyte/vibrato.cpp **** {
+  30              		.loc 1 9 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  10:../Epiphyte/vibrato.cpp ****     sample_rate_ = sample_rate;
+  34              		.loc 1 10 5 view .LVU1
+   9:../Epiphyte/vibrato.cpp ****     sample_rate_ = sample_rate;
+  35              		.loc 1 9 1 is_stmt 0 view .LVU2
+  36 0000 10B5     		push	{r4, lr}
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0446     		mov	r4, r0
+  41              	.LBB168:
+  42              	.LBB169:
+  43              	.LBB170:
+  44              	.LBB171:
+  45              		.file 2 "../DaisySP/Source/Utility/delayline.h"
+   1:../DaisySP/Source/Utility/delayline.h **** #pragma once
+   2:../DaisySP/Source/Utility/delayline.h **** #ifndef DSY_DELAY_H
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 2
+
+
+   3:../DaisySP/Source/Utility/delayline.h **** #define DSY_DELAY_H
+   4:../DaisySP/Source/Utility/delayline.h **** #include <stdlib.h>
+   5:../DaisySP/Source/Utility/delayline.h **** #include <stdint.h>
+   6:../DaisySP/Source/Utility/delayline.h **** namespace daisysp
+   7:../DaisySP/Source/Utility/delayline.h **** {
+   8:../DaisySP/Source/Utility/delayline.h **** /** Simple Delay line.
+   9:../DaisySP/Source/Utility/delayline.h **** November 2019
+  10:../DaisySP/Source/Utility/delayline.h **** 
+  11:../DaisySP/Source/Utility/delayline.h **** Converted to Template December 2019
+  12:../DaisySP/Source/Utility/delayline.h **** 
+  13:../DaisySP/Source/Utility/delayline.h **** declaration example: (1 second of floats)
+  14:../DaisySP/Source/Utility/delayline.h **** 
+  15:../DaisySP/Source/Utility/delayline.h **** DelayLine<float, SAMPLE_RATE> del;
+  16:../DaisySP/Source/Utility/delayline.h **** 
+  17:../DaisySP/Source/Utility/delayline.h **** By: shensley
+  18:../DaisySP/Source/Utility/delayline.h **** */
+  19:../DaisySP/Source/Utility/delayline.h **** template <typename T, size_t max_size>
+  20:../DaisySP/Source/Utility/delayline.h **** class DelayLine
+  21:../DaisySP/Source/Utility/delayline.h **** {
+  22:../DaisySP/Source/Utility/delayline.h ****   public:
+  23:../DaisySP/Source/Utility/delayline.h ****     DelayLine() {}
+  24:../DaisySP/Source/Utility/delayline.h ****     ~DelayLine() {}
+  25:../DaisySP/Source/Utility/delayline.h ****     /** initializes the delay line by clearing the values within, and setting delay to 1 sample.
+  26:../DaisySP/Source/Utility/delayline.h ****     */
+  27:../DaisySP/Source/Utility/delayline.h ****     void Init() { Reset(); }
+  28:../DaisySP/Source/Utility/delayline.h ****     /** clears buffer, sets write ptr to 0, and delay to 1 sample.
+  29:../DaisySP/Source/Utility/delayline.h ****     */
+  30:../DaisySP/Source/Utility/delayline.h ****     void Reset()
+  31:../DaisySP/Source/Utility/delayline.h ****     {
+  32:../DaisySP/Source/Utility/delayline.h ****         for(size_t i = 0; i < max_size; i++)
+  33:../DaisySP/Source/Utility/delayline.h ****         {
+  34:../DaisySP/Source/Utility/delayline.h ****             line_[i] = T(0);
+  46              		.loc 2 34 22 view .LVU3
+  47 0004 244A     		ldr	r2, .L7
+  48 0006 0021     		movs	r1, #0
+  49              	.LBE171:
+  50              	.LBE170:
+  51              	.LBE169:
+  52              	.LBE168:
+  53              		.loc 1 10 18 view .LVU4
+  54 0008 2430     		adds	r0, r0, #36
+  55              	.LVL1:
+   9:../Epiphyte/vibrato.cpp ****     sample_rate_ = sample_rate;
+  56              		.loc 1 9 1 view .LVU5
+  57 000a 2DED028B 		vpush.64	{d8}
+  58              		.cfi_def_cfa_offset 16
+  59              		.cfi_offset 80, -16
+  60              		.cfi_offset 81, -12
+   9:../Epiphyte/vibrato.cpp ****     sample_rate_ = sample_rate;
+  61              		.loc 1 9 1 view .LVU6
+  62 000e B0EE408A 		vmov.f32	s16, s0
+  63              		.loc 1 10 18 view .LVU7
+  64 0012 84ED000A 		vstr.32	s0, [r4]
+  11:../Epiphyte/vibrato.cpp **** 
+  12:../Epiphyte/vibrato.cpp ****     del_.Init();
+  65              		.loc 1 12 5 is_stmt 1 view .LVU8
+  66              	.LVL2:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 3
+
+
+  67              	.LBB181:
+  68              	.LBI168:
+  27:../DaisySP/Source/Utility/delayline.h ****     /** clears buffer, sets write ptr to 0, and delay to 1 sample.
+  69              		.loc 2 27 10 view .LVU9
+  70              	.LBB177:
+  71              	.LBI169:
+  30:../DaisySP/Source/Utility/delayline.h ****     {
+  72              		.loc 2 30 10 view .LVU10
+  73              	.LBB173:
+  74              	.LBB172:
+  32:../DaisySP/Source/Utility/delayline.h ****         {
+  75              		.loc 2 32 29 view .LVU11
+  76              		.loc 2 34 22 is_stmt 0 view .LVU12
+  77 0016 FFF7FEFF 		bl	memset
+  78              	.LVL3:
+  79              		.loc 2 34 22 view .LVU13
+  80              	.LBE172:
+  81              	.LBE173:
+  82              	.LBE177:
+  83              	.LBE181:
+  84              	.LBB182:
+  85              	.LBB183:
+  13:../Epiphyte/vibrato.cpp ****     lfo_amp_ = 0.f;
+  14:../Epiphyte/vibrato.cpp ****     feedback_ = .2f;
+  15:../Epiphyte/vibrato.cpp ****     SetDelay(.75);
+  16:../Epiphyte/vibrato.cpp **** 
+  17:../Epiphyte/vibrato.cpp ****     lfo_phase_ = 0.f;
+  18:../Epiphyte/vibrato.cpp ****     SetLfoFreq(.3f);
+  19:../Epiphyte/vibrato.cpp ****     SetLfoDepth(.9f);
+  20:../Epiphyte/vibrato.cpp **** }
+  21:../Epiphyte/vibrato.cpp **** 
+  22:../Epiphyte/vibrato.cpp **** float VibratoEngine::Process(float in)
+  23:../Epiphyte/vibrato.cpp **** {
+  24:../Epiphyte/vibrato.cpp ****     float lfo_sig = ProcessLfo();
+  25:../Epiphyte/vibrato.cpp ****     del_.SetDelay(lfo_sig + delay_);
+  26:../Epiphyte/vibrato.cpp **** 
+  27:../Epiphyte/vibrato.cpp ****     float out = del_.Read();
+  28:../Epiphyte/vibrato.cpp ****     del_.Write(in + out * feedback_);
+  29:../Epiphyte/vibrato.cpp **** 
+  30:../Epiphyte/vibrato.cpp ****     // return (in + out) * .5f; //equal mix
+  31:../Epiphyte/vibrato.cpp ****     return out;
+  32:../Epiphyte/vibrato.cpp **** }
+  33:../Epiphyte/vibrato.cpp **** 
+  34:../Epiphyte/vibrato.cpp **** void VibratoEngine::SetLfoDepth(float depth)
+  35:../Epiphyte/vibrato.cpp **** {
+  36:../Epiphyte/vibrato.cpp ****     depth = fclamp(depth, 0.f, .93f);
+  37:../Epiphyte/vibrato.cpp ****     lfo_amp_ = depth * delay_;
+  38:../Epiphyte/vibrato.cpp **** }
+  39:../Epiphyte/vibrato.cpp **** 
+  40:../Epiphyte/vibrato.cpp **** void VibratoEngine::SetLfoFreq(float freq)
+  41:../Epiphyte/vibrato.cpp **** {
+  42:../Epiphyte/vibrato.cpp ****     freq = 4.f * freq / sample_rate_;
+  86              		.loc 1 42 10 view .LVU14
+  87 001a 9FED206A 		vldr.32	s12, .L7+4
+  88              	.LBE183:
+  89              	.LBE182:
+  90              	.LBB207:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 4
+
+
+  91              	.LBB208:
+  92              	.LBB209:
+  93              	.LBB210:
+  94              	.LBB211:
+  95              		.file 3 "../Epiphyte/../DaisySP/Source/Utility/dsp.h"
+   1:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** /** Helpful defines, functions, and other utilities for use in/with daisysp modules.
+   2:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** */
+   3:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #pragma once
+   4:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifndef DSY_CORE_DSP
+   5:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #define DSY_CORE_DSP
+   6:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #include <cassert>
+   7:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #include <cstdint>
+   8:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #include <random>
+   9:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #include <cmath>
+  10:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** 
+  11:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** /** PIs
+  12:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** */
+  13:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #define PI_F 3.1415927410125732421875f
+  14:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #define TWOPI_F (2.0f * PI_F)
+  15:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #define HALFPI_F (PI_F * 0.5f)
+  16:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #define DSY_MIN(in, mn) (in < mn ? in : mn)
+  17:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #define DSY_MAX(in, mx) (in > mx ? in : mx)
+  18:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #define DSY_CLAMP(in, mn, mx) (DSY_MIN(DSY_MAX(in, mn), mx))
+  19:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #define DSY_COUNTOF(_arr) (sizeof(_arr) / sizeof(_arr[0]))
+  20:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** 
+  21:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** namespace daisysp
+  22:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+  23:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** //Avoids division for random floats. e.g. rand() * kRandFrac
+  24:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** static constexpr float kRandFrac = 1.f / (float)RAND_MAX;
+  25:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** 
+  26:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** //Convert from semitones to other units. e.g. 2 ^ (kOneTwelfth * x)
+  27:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** static constexpr float kOneTwelfth = 1.f / 12.f;
+  28:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** 
+  29:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** /** efficient floating point min/max
+  30:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** c/o stephen mccaul
+  31:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** */
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** inline float fmax(float a, float b)
+  33:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h ****     float r;
+  35:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h ****     asm("vmaxnm.f32 %[d], %[n], %[m]" : [d] "=t"(r) : [n] "t"(a), [m] "t"(b) :);
+  96              		.loc 3 36 5 view .LVU15
+  97 001e DFED206A 		vldr.32	s13, .L7+8
+  98              	.LBE211:
+  99              	.LBE210:
+ 100              	.LBE209:
+ 101              	.LBE208:
+ 102              	.LBE207:
+ 103              	.LBB234:
+ 104              	.LBB178:
+ 105              	.LBB174:
+  35:../DaisySP/Source/Utility/delayline.h ****         }
+  36:../DaisySP/Source/Utility/delayline.h ****         write_ptr_ = 0;
+ 106              		.loc 2 36 20 view .LVU16
+ 107 0022 0020     		movs	r0, #0
+ 108              	.LBE174:
+ 109              	.LBE178:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 5
+
+
+ 110              	.LBE234:
+ 111              	.LBB235:
+ 112              	.LBB227:
+ 113              	.LBB220:
+ 114              	.LBB215:
+ 115              	.LBB212:
+ 116              		.loc 3 36 5 view .LVU17
+ 117 0024 DFED1F7A 		vldr.32	s15, .L7+12
+ 118              	.LBE212:
+ 119              	.LBE215:
+ 120              	.LBE220:
+ 121              	.LBE227:
+ 122              	.LBE235:
+ 123              	.LBB236:
+ 124              	.LBB179:
+ 125              	.LBB175:
+  37:../DaisySP/Source/Utility/delayline.h ****         delay_     = 1;
+ 126              		.loc 2 37 20 view .LVU18
+ 127 0028 0121     		movs	r1, #1
+ 128              	.LBE175:
+ 129              	.LBE179:
+ 130              	.LBE236:
+ 131              	.LBB237:
+ 132              	.LBB228:
+ 133              	.LBB221:
+ 134              	.LBB216:
+ 135              	.LBB213:
+ 136              		.loc 3 36 5 view .LVU19
+ 137              		.syntax unified
+ 138              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 139 002a C7FEA67A 		vmaxnm.f32 s15, s15, s13
+ 140              	@ 0 "" 2
+ 141              		.thumb
+ 142              		.syntax unified
+ 143              	.LBE213:
+ 144              	.LBE216:
+ 145              	.LBE221:
+ 146              	.LBE228:
+ 147              	.LBE237:
+ 148              	.LBB238:
+ 149              	.LBB199:
+ 150              		.loc 1 42 10 view .LVU20
+ 151 002e C6EE086A 		vdiv.f32	s13, s12, s16
+ 152              	.LBE199:
+ 153              	.LBE238:
+ 154              	.LBB239:
+ 155              	.LBB229:
+ 156              	.LBB222:
+  43:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+  44:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+  45:../Epiphyte/vibrato.cpp **** }
+  46:../Epiphyte/vibrato.cpp **** 
+  47:../Epiphyte/vibrato.cpp **** void VibratoEngine::SetDelay(float delay)
+  48:../Epiphyte/vibrato.cpp **** {
+  49:../Epiphyte/vibrato.cpp ****     delay = (.1f + delay * 7.9f); //.1 to 8 ms
+  50:../Epiphyte/vibrato.cpp ****     SetDelayMs(delay);
+  51:../Epiphyte/vibrato.cpp **** }
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 6
+
+
+  52:../Epiphyte/vibrato.cpp **** 
+  53:../Epiphyte/vibrato.cpp **** void VibratoEngine::SetDelayMs(float ms)
+  54:../Epiphyte/vibrato.cpp **** {
+  55:../Epiphyte/vibrato.cpp ****     ms = fmax(.1f, ms);
+  56:../Epiphyte/vibrato.cpp ****     delay_ = ms * .001f * sample_rate_; //ms to samples
+ 157              		.loc 1 56 17 view .LVU21
+ 158 0032 9FED1D7A 		vldr.32	s14, .L7+16
+ 159              	.LBE222:
+ 160              	.LBE229:
+ 161              	.LBE239:
+ 162              	.LBB240:
+ 163              	.LBB241:
+ 164              	.LBB242:
+ 165              	.LBB243:
+ 166              	.LBB244:
+  37:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+  38:../Epiphyte/../DaisySP/Source/Utility/dsp.h ****     r = (a > b) ? a : b;
+  39:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #endif // __arm__
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h ****     return r;
+  41:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+  42:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** 
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** inline float fmin(float a, float b)
+  44:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h ****     float r;
+  46:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h ****     asm("vminnm.f32 %[d], %[n], %[m]" : [d] "=t"(r) : [n] "t"(a), [m] "t"(b) :);
+ 167              		.loc 3 47 5 view .LVU22
+ 168 0036 9FED1D6A 		vldr.32	s12, .L7+20
+ 169              	.LBE244:
+ 170              	.LBE243:
+ 171              	.LBE242:
+ 172              	.LBE241:
+ 173              	.LBE240:
+  17:../Epiphyte/vibrato.cpp ****     SetLfoFreq(.3f);
+ 174              		.loc 1 17 16 view .LVU23
+ 175 003a 0023     		movs	r3, #0
+ 176              	.LBB271:
+ 177              	.LBB263:
+ 178              	.LBB257:
+ 179              	.LBB247:
+ 180              	.LBB248:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 181              		.loc 3 36 5 view .LVU24
+ 182 003c 9FED1C5A 		vldr.32	s10, .L7+24
+ 183              	.LBE248:
+ 184              	.LBE247:
+ 185              	.LBE257:
+ 186              	.LBE263:
+ 187              	.LBE271:
+  14:../Epiphyte/vibrato.cpp ****     SetDelay(.75);
+ 188              		.loc 1 14 15 view .LVU25
+ 189 0040 1C4A     		ldr	r2, .L7+28
+  17:../Epiphyte/vibrato.cpp ****     SetLfoFreq(.3f);
+ 190              		.loc 1 17 16 view .LVU26
+ 191 0042 6360     		str	r3, [r4, #4]	@ float
+ 192              	.LBB272:
+ 193              	.LBB230:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 7
+
+
+ 194              	.LBB223:
+ 195              		.loc 1 56 17 view .LVU27
+ 196 0044 67EE877A 		vmul.f32	s15, s15, s14
+ 197              	.LBE223:
+ 198              	.LBE230:
+ 199              	.LBE272:
+ 200              	.LBB273:
+ 201              	.LBB200:
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 202              		.loc 1 43 29 view .LVU28
+ 203 0048 94ED027A 		vldr.32	s14, [r4, #8]
+ 204              	.LBB184:
+ 205              	.LBB185:
+ 206              	.LBB186:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 207              		.loc 3 36 5 view .LVU29
+ 208 004c FDEE005A 		vmov.f32	s11, #-2.5e-1
+ 209              	.LBE186:
+ 210              	.LBE185:
+ 211              	.LBE184:
+ 212              	.LBE200:
+ 213              	.LBE273:
+  14:../Epiphyte/vibrato.cpp ****     SetDelay(.75);
+ 214              		.loc 1 14 15 view .LVU30
+ 215 0050 2261     		str	r2, [r4, #16]	@ float
+ 216              	.LBB274:
+ 217              	.LBB201:
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 218              		.loc 1 43 29 view .LVU31
+ 219 0052 B5EEC07A 		vcmpe.f32	s14, #0
+ 220              	.LBE201:
+ 221              	.LBE274:
+ 222              	.LBB275:
+ 223              	.LBB264:
+ 224              	.LBB258:
+ 225              	.LBB252:
+ 226              	.LBB249:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 227              		.loc 3 36 5 view .LVU32
+ 228 0056 9FED187A 		vldr.32	s14, .L7+32
+ 229              	.LBE249:
+ 230              	.LBE252:
+ 231              	.LBE258:
+ 232              	.LBE264:
+ 233              	.LBE275:
+ 234              	.LBB276:
+ 235              	.LBB231:
+ 236              	.LBB224:
+ 237              		.loc 1 56 25 view .LVU33
+ 238 005a 67EE887A 		vmul.f32	s15, s15, s16
+ 239              	.LBE224:
+ 240              	.LBE231:
+ 241              	.LBE276:
+ 242              	.LBB277:
+ 243              	.LBB265:
+ 244              	.LBB259:
+ 245              	.LBB253:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 8
+
+
+ 246              	.LBB250:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 247              		.loc 3 36 5 view .LVU34
+ 248              		.syntax unified
+ 249              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 250 005e 87FE057A 		vmaxnm.f32 s14, s14, s10
+ 251              	@ 0 "" 2
+ 252              		.thumb
+ 253              		.syntax unified
+ 254              	.LBE250:
+ 255              	.LBE253:
+ 256              	.LBE259:
+ 257              	.LBE265:
+ 258              	.LBE277:
+ 259              	.LBB278:
+ 260              	.LBB202:
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 261              		.loc 1 43 29 view .LVU35
+ 262 0062 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 263              	.LBE202:
+ 264              	.LBE278:
+ 265              	.LBB279:
+ 266              	.LBB266:
+ 267              	.LBB260:
+ 268              	.LBB254:
+ 269              	.LBB245:
+ 270              		.loc 3 47 5 view .LVU36
+ 271              		.syntax unified
+ 272              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 273 0066 87FE467A 		vminnm.f32 s14, s14, s12
+ 274              	@ 0 "" 2
+ 275              		.thumb
+ 276              		.syntax unified
+ 277              	.LBE245:
+ 278              	.LBE254:
+ 279              	.LBE260:
+ 280              	.LBE266:
+ 281              	.LBE279:
+ 282              	.LBB280:
+ 283              	.LBB232:
+ 284              	.LBB225:
+ 285              		.loc 1 56 12 view .LVU37
+ 286 006a C4ED057A 		vstr.32	s15, [r4, #20]
+ 287              	.LBE225:
+ 288              	.LBE232:
+ 289              	.LBE280:
+ 290              	.LBB281:
+ 291              	.LBB267:
+  37:../Epiphyte/vibrato.cpp **** }
+ 292              		.loc 1 37 22 view .LVU38
+ 293 006e 67EE277A 		vmul.f32	s15, s14, s15
+ 294              	.LBE267:
+ 295              	.LBE281:
+ 296              	.LBB282:
+ 297              	.LBB203:
+ 298              	.LBB195:
+ 299              	.LBB189:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 9
+
+
+ 300              	.LBB190:
+ 301              		.loc 3 47 5 view .LVU39
+ 302 0072 B5EE006A 		vmov.f32	s12, #2.5e-1
+ 303              	.LBE190:
+ 304              	.LBE189:
+ 305              	.LBE195:
+ 306              	.LBE203:
+ 307              	.LBE282:
+  20:../Epiphyte/vibrato.cpp **** 
+ 308              		.loc 1 20 1 view .LVU40
+ 309 0076 BDEC028B 		vldm	sp!, {d8}
+ 310              		.cfi_restore 80
+ 311              		.cfi_restore 81
+ 312              		.cfi_def_cfa_offset 8
+ 313              	.LVL4:
+  20:../Epiphyte/vibrato.cpp **** 
+ 314              		.loc 1 20 1 view .LVU41
+ 315 007a 48BF     		it	mi
+ 316 007c F1EE666A 		vnegmi.f32	s13, s13
+ 317              	.LBB283:
+ 318              	.LBB268:
+  37:../Epiphyte/vibrato.cpp **** }
+ 319              		.loc 1 37 14 view .LVU42
+ 320 0080 C4ED037A 		vstr.32	s15, [r4, #12]
+ 321              	.LBE268:
+ 322              	.LBE283:
+ 323              	.LBB284:
+ 324              	.LBB204:
+ 325              	.LBB196:
+ 326              	.LBB192:
+ 327              	.LBB187:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 328              		.loc 3 36 5 view .LVU43
+ 329              		.syntax unified
+ 330              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 331 0084 86FEA57A 		vmaxnm.f32 s14, s13, s11
+ 332              	@ 0 "" 2
+ 333              		.thumb
+ 334              		.syntax unified
+ 335              	.LBE187:
+ 336              	.LBE192:
+ 337              	.LBE196:
+ 338              	.LBE204:
+ 339              	.LBE284:
+ 340              	.LBB285:
+ 341              	.LBB180:
+ 342              	.LBB176:
+ 343              		.loc 2 37 20 view .LVU44
+ 344 0088 C4E90701 		strd	r0, r1, [r4, #28]
+ 345              	.LVL5:
+ 346              		.loc 2 37 20 view .LVU45
+ 347              	.LBE176:
+ 348              	.LBE180:
+ 349              	.LBE285:
+  13:../Epiphyte/vibrato.cpp ****     feedback_ = .2f;
+ 350              		.loc 1 13 5 is_stmt 1 view .LVU46
+  14:../Epiphyte/vibrato.cpp ****     SetDelay(.75);
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 10
+
+
+ 351              		.loc 1 14 5 view .LVU47
+  15:../Epiphyte/vibrato.cpp **** 
+ 352              		.loc 1 15 5 view .LVU48
+ 353              	.LBB286:
+ 354              	.LBI207:
+  47:../Epiphyte/vibrato.cpp **** {
+ 355              		.loc 1 47 6 view .LVU49
+ 356              	.LBE286:
+  49:../Epiphyte/vibrato.cpp ****     SetDelayMs(delay);
+ 357              		.loc 1 49 5 view .LVU50
+  50:../Epiphyte/vibrato.cpp **** }
+ 358              		.loc 1 50 5 view .LVU51
+ 359              	.LBB287:
+ 360              	.LBB233:
+ 361              	.LBI208:
+  53:../Epiphyte/vibrato.cpp **** {
+ 362              		.loc 1 53 6 view .LVU52
+ 363              	.LBB226:
+  55:../Epiphyte/vibrato.cpp ****     delay_ = ms * .001f * sample_rate_; //ms to samples
+ 364              		.loc 1 55 5 view .LVU53
+ 365              	.LBB217:
+ 366              	.LBI210:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 367              		.loc 3 32 14 view .LVU54
+ 368              	.LBB214:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 369              		.loc 3 34 5 view .LVU55
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 370              		.loc 3 36 5 view .LVU56
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 371              		.loc 3 40 5 view .LVU57
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 372              		.loc 3 40 5 is_stmt 0 view .LVU58
+ 373              	.LBE214:
+ 374              	.LBE217:
+ 375              		.loc 1 56 5 is_stmt 1 view .LVU59
+  57:../Epiphyte/vibrato.cpp **** 
+  58:../Epiphyte/vibrato.cpp ****     lfo_amp_ = fmin(lfo_amp_, delay_); //clip this if needed
+ 376              		.loc 1 58 5 view .LVU60
+ 377              	.LBB218:
+ 378              	.LBI218:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 379              		.loc 3 43 14 view .LVU61
+ 380              	.LBB219:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 381              		.loc 3 45 5 view .LVU62
+ 382              		.loc 3 47 5 view .LVU63
+  48:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+  49:../Epiphyte/../DaisySP/Source/Utility/dsp.h ****     r = (a < b) ? a : b;
+  50:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #endif // __arm__
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h ****     return r;
+ 383              		.loc 3 51 5 view .LVU64
+ 384              		.loc 3 51 5 is_stmt 0 view .LVU65
+ 385              	.LBE219:
+ 386              	.LBE218:
+ 387              	.LBE226:
+ 388              	.LBE233:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 11
+
+
+ 389              	.LBE287:
+  17:../Epiphyte/vibrato.cpp ****     SetLfoFreq(.3f);
+ 390              		.loc 1 17 5 is_stmt 1 view .LVU66
+  18:../Epiphyte/vibrato.cpp ****     SetLfoDepth(.9f);
+ 391              		.loc 1 18 5 view .LVU67
+ 392              	.LBB288:
+ 393              	.LBI182:
+  40:../Epiphyte/vibrato.cpp **** {
+ 394              		.loc 1 40 6 view .LVU68
+ 395              	.LBB205:
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 396              		.loc 1 42 5 view .LVU69
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 397              		.loc 1 43 5 view .LVU70
+  44:../Epiphyte/vibrato.cpp **** }
+ 398              		.loc 1 44 5 view .LVU71
+ 399              	.LBB197:
+ 400              	.LBI184:
+  52:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+  53:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** 
+  54:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** /** quick fp clamp
+  55:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** */
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** inline float fclamp(float in, float min, float max)
+ 401              		.loc 3 56 14 view .LVU72
+ 402              	.LBE197:
+ 403              	.LBE205:
+ 404              	.LBE288:
+  57:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+  58:../Epiphyte/../DaisySP/Source/Utility/dsp.h ****     return fmin(fmax(in, min), max);
+ 405              		.loc 3 58 5 view .LVU73
+ 406              	.LBB289:
+ 407              	.LBB206:
+ 408              	.LBB198:
+ 409              	.LBB193:
+ 410              	.LBI185:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 411              		.loc 3 32 14 view .LVU74
+ 412              	.LBB188:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 413              		.loc 3 34 5 view .LVU75
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 414              		.loc 3 36 5 view .LVU76
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 415              		.loc 3 40 5 view .LVU77
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 416              		.loc 3 40 5 is_stmt 0 view .LVU78
+ 417              	.LBE188:
+ 418              	.LBE193:
+ 419              	.LBB194:
+ 420              	.LBI189:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 421              		.loc 3 43 14 is_stmt 1 view .LVU79
+ 422              	.LBB191:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 423              		.loc 3 45 5 view .LVU80
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 424              		.loc 3 47 5 view .LVU81
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 12
+
+
+ 425              		.syntax unified
+ 426              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 427 008c 87FE467A 		vminnm.f32 s14, s14, s12
+ 428              	@ 0 "" 2
+ 429              	.LVL6:
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 430              		.loc 3 51 5 view .LVU82
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 431              		.loc 3 51 5 is_stmt 0 view .LVU83
+ 432              		.thumb
+ 433              		.syntax unified
+ 434              	.LBE191:
+ 435              	.LBE194:
+ 436              	.LBE198:
+  44:../Epiphyte/vibrato.cpp **** }
+ 437              		.loc 1 44 15 view .LVU84
+ 438 0090 84ED027A 		vstr.32	s14, [r4, #8]
+ 439              	.LVL7:
+  44:../Epiphyte/vibrato.cpp **** }
+ 440              		.loc 1 44 15 view .LVU85
+ 441              	.LBE206:
+ 442              	.LBE289:
+  19:../Epiphyte/vibrato.cpp **** }
+ 443              		.loc 1 19 5 is_stmt 1 view .LVU86
+ 444              	.LBB290:
+ 445              	.LBI240:
+  34:../Epiphyte/vibrato.cpp **** {
+ 446              		.loc 1 34 6 view .LVU87
+ 447              	.LBB269:
+  36:../Epiphyte/vibrato.cpp ****     lfo_amp_ = depth * delay_;
+ 448              		.loc 1 36 5 view .LVU88
+ 449              	.LBB261:
+ 450              	.LBI242:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 451              		.loc 3 56 14 view .LVU89
+ 452              	.LBE261:
+ 453              	.LBE269:
+ 454              	.LBE290:
+ 455              		.loc 3 58 5 view .LVU90
+ 456              	.LBB291:
+ 457              	.LBB270:
+ 458              	.LBB262:
+ 459              	.LBB255:
+ 460              	.LBI247:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 461              		.loc 3 32 14 view .LVU91
+ 462              	.LBB251:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 463              		.loc 3 34 5 view .LVU92
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 464              		.loc 3 36 5 view .LVU93
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 465              		.loc 3 40 5 view .LVU94
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 466              		.loc 3 40 5 is_stmt 0 view .LVU95
+ 467              	.LBE251:
+ 468              	.LBE255:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 13
+
+
+ 469              	.LBB256:
+ 470              	.LBI243:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 471              		.loc 3 43 14 is_stmt 1 view .LVU96
+ 472              	.LBB246:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 473              		.loc 3 45 5 view .LVU97
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 474              		.loc 3 47 5 view .LVU98
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 475              		.loc 3 51 5 view .LVU99
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 476              		.loc 3 51 5 is_stmt 0 view .LVU100
+ 477              	.LBE246:
+ 478              	.LBE256:
+ 479              	.LBE262:
+  37:../Epiphyte/vibrato.cpp **** }
+ 480              		.loc 1 37 5 is_stmt 1 view .LVU101
+  37:../Epiphyte/vibrato.cpp **** }
+ 481              		.loc 1 37 5 is_stmt 0 view .LVU102
+ 482              	.LBE270:
+ 483              	.LBE291:
+  20:../Epiphyte/vibrato.cpp **** 
+ 484              		.loc 1 20 1 view .LVU103
+ 485 0094 10BD     		pop	{r4, pc}
+ 486              	.LVL8:
+ 487              	.L8:
+  20:../Epiphyte/vibrato.cpp **** 
+ 488              		.loc 1 20 1 view .LVU104
+ 489 0096 00BF     		.align	2
+ 490              	.L7:
+ 491 0098 00710200 		.word	160000
+ 492 009c 9A99993F 		.word	1067030938
+ 493 00a0 CDCCC040 		.word	1086377165
+ 494 00a4 CDCCCC3D 		.word	1036831949
+ 495 00a8 6F12833A 		.word	981668463
+ 496 00ac 7B146E3F 		.word	1064178811
+ 497 00b0 00000000 		.word	0
+ 498 00b4 CDCC4C3E 		.word	1045220557
+ 499 00b8 6666663F 		.word	1063675494
+ 500              		.cfi_endproc
+ 501              	.LFE3674:
+ 503              		.section	.text._ZN7daisysp13VibratoEngine7ProcessEf,"ax",%progbits
+ 504              		.align	1
+ 505              		.p2align 2,,3
+ 506              		.global	_ZN7daisysp13VibratoEngine7ProcessEf
+ 507              		.syntax unified
+ 508              		.thumb
+ 509              		.thumb_func
+ 510              		.fpu fpv5-d16
+ 512              	_ZN7daisysp13VibratoEngine7ProcessEf:
+ 513              	.LVL9:
+ 514              	.LFB3675:
+  23:../Epiphyte/vibrato.cpp ****     float lfo_sig = ProcessLfo();
+ 515              		.loc 1 23 1 is_stmt 1 view -0
+ 516              		.cfi_startproc
+ 517              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 14
+
+
+ 518              		@ frame_needed = 0, uses_anonymous_args = 0
+  24:../Epiphyte/vibrato.cpp ****     del_.SetDelay(lfo_sig + delay_);
+ 519              		.loc 1 24 5 view .LVU106
+ 520              	.LBB300:
+ 521              	.LBB301:
+  59:../Epiphyte/vibrato.cpp **** }
+  60:../Epiphyte/vibrato.cpp **** 
+  61:../Epiphyte/vibrato.cpp **** void VibratoEngine::SetFeedback(float feedback)
+  62:../Epiphyte/vibrato.cpp **** {
+  63:../Epiphyte/vibrato.cpp ****     feedback_ = fclamp(feedback, 0.f, 1.f);
+  64:../Epiphyte/vibrato.cpp **** }
+  65:../Epiphyte/vibrato.cpp **** 
+  66:../Epiphyte/vibrato.cpp **** float VibratoEngine::ProcessLfo()
+  67:../Epiphyte/vibrato.cpp **** {
+  68:../Epiphyte/vibrato.cpp ****     lfo_phase_ += lfo_freq_;
+ 522              		.loc 1 68 19 is_stmt 0 view .LVU107
+ 523 0000 90ED027A 		vldr.32	s14, [r0, #8]
+  69:../Epiphyte/vibrato.cpp **** 
+  70:../Epiphyte/vibrato.cpp ****     //wrap around and flip direction
+  71:../Epiphyte/vibrato.cpp ****     if (lfo_phase_ > 1.f)
+ 524              		.loc 1 71 5 view .LVU108
+ 525 0004 F7EE006A 		vmov.f32	s13, #1.0e+0
+ 526              	.LVL10:
+ 527              		.loc 1 71 5 view .LVU109
+ 528              	.LBE301:
+ 529              	.LBI300:
+  66:../Epiphyte/vibrato.cpp **** {
+ 530              		.loc 1 66 7 is_stmt 1 view .LVU110
+ 531              	.LBB302:
+  68:../Epiphyte/vibrato.cpp **** 
+ 532              		.loc 1 68 5 view .LVU111
+  68:../Epiphyte/vibrato.cpp **** 
+ 533              		.loc 1 68 16 is_stmt 0 view .LVU112
+ 534 0008 D0ED017A 		vldr.32	s15, [r0, #4]
+ 535 000c 77EE277A 		vadd.f32	s15, s14, s15
+ 536              		.loc 1 71 5 is_stmt 1 view .LVU113
+ 537              	.LBE302:
+ 538              	.LBE300:
+  23:../Epiphyte/vibrato.cpp ****     float lfo_sig = ProcessLfo();
+ 539              		.loc 1 23 1 is_stmt 0 view .LVU114
+ 540 0010 70B5     		push	{r4, r5, r6, lr}
+ 541              		.cfi_def_cfa_offset 16
+ 542              		.cfi_offset 4, -16
+ 543              		.cfi_offset 5, -12
+ 544              		.cfi_offset 6, -8
+ 545              		.cfi_offset 14, -4
+ 546              	.LBB305:
+ 547              	.LBB303:
+ 548              		.loc 1 71 5 view .LVU115
+ 549 0012 F4EEE67A 		vcmpe.f32	s15, s13
+ 550 0016 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 551 001a 50DD     		ble	.L15
+  72:../Epiphyte/vibrato.cpp ****     {
+  73:../Epiphyte/vibrato.cpp ****         lfo_phase_ = 1.f - (lfo_phase_ - 1.f);
+ 552              		.loc 1 73 9 is_stmt 1 view .LVU116
+ 553              		.loc 1 73 40 is_stmt 0 view .LVU117
+ 554 001c 77EEE67A 		vsub.f32	s15, s15, s13
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 15
+
+
+  74:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 555              		.loc 1 74 19 view .LVU118
+ 556 0020 B1EE477A 		vneg.f32	s14, s14
+  73:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 557              		.loc 1 73 26 view .LVU119
+ 558 0024 76EEE77A 		vsub.f32	s15, s13, s15
+ 559              		.loc 1 74 19 view .LVU120
+ 560 0028 80ED027A 		vstr.32	s14, [r0, #8]
+  73:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 561              		.loc 1 73 20 view .LVU121
+ 562 002c C0ED017A 		vstr.32	s15, [r0, #4]
+ 563              		.loc 1 74 9 is_stmt 1 view .LVU122
+ 564              	.L12:
+  75:../Epiphyte/vibrato.cpp ****     }
+  76:../Epiphyte/vibrato.cpp ****     else if (lfo_phase_ < -1.f)
+  77:../Epiphyte/vibrato.cpp ****     {
+  78:../Epiphyte/vibrato.cpp ****         lfo_phase_ = -1.f - (lfo_phase_ + 1.f);
+  79:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+  80:../Epiphyte/vibrato.cpp ****     }
+  81:../Epiphyte/vibrato.cpp **** 
+  82:../Epiphyte/vibrato.cpp ****     return lfo_phase_ * lfo_amp_;
+ 565              		.loc 1 82 5 view .LVU123
+ 566              	.LVL11:
+ 567              		.loc 1 82 5 is_stmt 0 view .LVU124
+ 568              	.LBE303:
+ 569              	.LBE305:
+  25:../Epiphyte/vibrato.cpp **** 
+ 570              		.loc 1 25 5 is_stmt 1 view .LVU125
+  25:../Epiphyte/vibrato.cpp **** 
+ 571              		.loc 1 25 18 is_stmt 0 view .LVU126
+ 572 0030 D0ED036A 		vldr.32	s13, [r0, #12]
+ 573              	.LBB306:
+ 574              	.LBB307:
+  38:../DaisySP/Source/Utility/delayline.h ****     }
+  39:../DaisySP/Source/Utility/delayline.h **** 
+  40:../DaisySP/Source/Utility/delayline.h ****     /** sets the delay time in samples
+  41:../DaisySP/Source/Utility/delayline.h ****         If a float is passed in, a fractional component will be calculated for interpolating the de
+  42:../DaisySP/Source/Utility/delayline.h ****     */
+  43:../DaisySP/Source/Utility/delayline.h ****     inline void SetDelay(size_t delay)
+  44:../DaisySP/Source/Utility/delayline.h ****     {
+  45:../DaisySP/Source/Utility/delayline.h ****         frac_  = 0.0f;
+  46:../DaisySP/Source/Utility/delayline.h ****         delay_ = delay < max_size ? delay : max_size - 1;
+  47:../DaisySP/Source/Utility/delayline.h ****     }
+  48:../DaisySP/Source/Utility/delayline.h **** 
+  49:../DaisySP/Source/Utility/delayline.h ****     /** sets the delay time in samples
+  50:../DaisySP/Source/Utility/delayline.h ****         If a float is passed in, a fractional component will be calculated for interpolating the de
+  51:../DaisySP/Source/Utility/delayline.h ****     */
+  52:../DaisySP/Source/Utility/delayline.h ****     inline void SetDelay(float delay)
+  53:../DaisySP/Source/Utility/delayline.h ****     {
+  54:../DaisySP/Source/Utility/delayline.h ****         int32_t int_delay = static_cast<int32_t>(delay);
+  55:../DaisySP/Source/Utility/delayline.h ****         frac_             = delay - static_cast<float>(int_delay);
+  56:../DaisySP/Source/Utility/delayline.h ****         delay_ = static_cast<size_t>(int_delay) < max_size ? int_delay
+ 575              		.loc 2 56 60 view .LVU127
+ 576 0034 49F63F41 		movw	r1, #39999
+ 577              	.LBE307:
+ 578              	.LBE306:
+  25:../Epiphyte/vibrato.cpp **** 
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 16
+
+
+ 579              		.loc 1 25 18 view .LVU128
+ 580 0038 90ED057A 		vldr.32	s14, [r0, #20]
+ 581              	.LBB311:
+ 582              	.LBB312:
+  57:../DaisySP/Source/Utility/delayline.h ****                                                            : max_size - 1;
+  58:../DaisySP/Source/Utility/delayline.h ****     }
+  59:../DaisySP/Source/Utility/delayline.h **** 
+  60:../DaisySP/Source/Utility/delayline.h ****     /** writes the sample of type T to the delay line, and advances the write ptr
+  61:../DaisySP/Source/Utility/delayline.h ****     */
+  62:../DaisySP/Source/Utility/delayline.h ****     inline void Write(const T sample)
+  63:../DaisySP/Source/Utility/delayline.h ****     {
+  64:../DaisySP/Source/Utility/delayline.h ****         line_[write_ptr_] = sample;
+  65:../DaisySP/Source/Utility/delayline.h ****         write_ptr_        = (write_ptr_ - 1 + max_size) % max_size;
+  66:../DaisySP/Source/Utility/delayline.h ****     }
+  67:../DaisySP/Source/Utility/delayline.h **** 
+  68:../DaisySP/Source/Utility/delayline.h ****     /** returns the next sample of type T in the delay line, interpolated if necessary.
+  69:../DaisySP/Source/Utility/delayline.h ****     */
+  70:../DaisySP/Source/Utility/delayline.h ****     inline const T Read() const
+  71:../DaisySP/Source/Utility/delayline.h ****     {
+  72:../DaisySP/Source/Utility/delayline.h ****         T a = line_[(write_ptr_ + delay_) % max_size];
+ 583              		.loc 2 72 43 view .LVU129
+ 584 003c 49F64044 		movw	r4, #40000
+ 585              		.loc 2 72 22 view .LVU130
+ 586 0040 C369     		ldr	r3, [r0, #28]
+ 587              	.LBE312:
+ 588              	.LBE311:
+  25:../Epiphyte/vibrato.cpp **** 
+ 589              		.loc 1 25 18 view .LVU131
+ 590 0042 A6EEA77A 		vfma.f32	s14, s13, s15
+ 591              	.LVL12:
+ 592              	.LBB318:
+ 593              	.LBI306:
+  52:../DaisySP/Source/Utility/delayline.h ****     {
+ 594              		.loc 2 52 17 is_stmt 1 view .LVU132
+ 595              	.LBE318:
+  28:../Epiphyte/vibrato.cpp **** 
+ 596              		.loc 1 28 15 is_stmt 0 view .LVU133
+ 597 0046 90ED046A 		vldr.32	s12, [r0, #16]
+ 598              	.LBB319:
+ 599              	.LBB320:
+  65:../DaisySP/Source/Utility/delayline.h ****     }
+ 600              		.loc 2 65 45 view .LVU134
+ 601 004a 03EB010E 		add	lr, r3, r1
+  64:../DaisySP/Source/Utility/delayline.h ****         write_ptr_        = (write_ptr_ - 1 + max_size) % max_size;
+ 602              		.loc 2 64 27 view .LVU135
+ 603 004e 00EB830C 		add	ip, r0, r3, lsl #2
+ 604              	.LBE320:
+ 605              	.LBE319:
+ 606              	.LBB325:
+ 607              	.LBB308:
+  54:../DaisySP/Source/Utility/delayline.h ****         frac_             = delay - static_cast<float>(int_delay);
+ 608              		.loc 2 54 17 view .LVU136
+ 609 0052 FDEEC77A 		vcvt.s32.f32	s15, s14
+ 610              	.LVL13:
+  56:../DaisySP/Source/Utility/delayline.h ****                                                            : max_size - 1;
+ 611              		.loc 2 56 60 view .LVU137
+ 612 0056 17EE902A 		vmov	r2, s15	@ int
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 17
+
+
+  55:../DaisySP/Source/Utility/delayline.h ****         delay_ = static_cast<size_t>(int_delay) < max_size ? int_delay
+ 613              		.loc 2 55 37 view .LVU138
+ 614 005a F8EEE77A 		vcvt.f32.s32	s15, s15
+ 615              	.LVL14:
+  56:../DaisySP/Source/Utility/delayline.h ****                                                            : max_size - 1;
+ 616              		.loc 2 56 60 view .LVU139
+ 617 005e 9142     		cmp	r1, r2
+  55:../DaisySP/Source/Utility/delayline.h ****         delay_ = static_cast<size_t>(int_delay) < max_size ? int_delay
+ 618              		.loc 2 55 35 view .LVU140
+ 619 0060 77EE677A 		vsub.f32	s15, s14, s15
+  56:../DaisySP/Source/Utility/delayline.h ****                                                            : max_size - 1;
+ 620              		.loc 2 56 60 view .LVU141
+ 621 0064 28BF     		it	cs
+ 622 0066 1146     		movcs	r1, r2
+ 623              	.LBE308:
+ 624              	.LBE325:
+ 625              	.LBB326:
+ 626              	.LBB313:
+ 627              		.loc 2 72 43 view .LVU142
+ 628 0068 1E4A     		ldr	r2, .L18
+ 629              	.LVL15:
+ 630              		.loc 2 72 33 view .LVU143
+ 631 006a 0B44     		add	r3, r3, r1
+ 632              	.LBE313:
+ 633              	.LBE326:
+ 634              	.LBB327:
+ 635              	.LBB309:
+  56:../DaisySP/Source/Utility/delayline.h ****                                                            : max_size - 1;
+ 636              		.loc 2 56 16 view .LVU144
+ 637 006c 0162     		str	r1, [r0, #32]
+ 638              	.LVL16:
+  56:../DaisySP/Source/Utility/delayline.h ****                                                            : max_size - 1;
+ 639              		.loc 2 56 16 view .LVU145
+ 640              	.LBE309:
+ 641              	.LBE327:
+  27:../Epiphyte/vibrato.cpp ****     del_.Write(in + out * feedback_);
+ 642              		.loc 1 27 5 is_stmt 1 view .LVU146
+ 643              	.LBB328:
+ 644              	.LBI311:
+  70:../DaisySP/Source/Utility/delayline.h ****     {
+ 645              		.loc 2 70 20 view .LVU147
+ 646              	.LBE328:
+ 647              	.LBB329:
+ 648              	.LBB310:
+  55:../DaisySP/Source/Utility/delayline.h ****         delay_ = static_cast<size_t>(int_delay) < max_size ? int_delay
+ 649              		.loc 2 55 27 is_stmt 0 view .LVU148
+ 650 006e C0ED067A 		vstr.32	s15, [r0, #24]
+ 651              	.LBE310:
+ 652              	.LBE329:
+ 653              	.LBB330:
+ 654              	.LBB314:
+ 655              		.loc 2 72 43 view .LVU149
+ 656 0072 A2FB0365 		umull	r6, r5, r2, r3
+  73:../DaisySP/Source/Utility/delayline.h ****         T b = line_[(write_ptr_ + delay_ + 1) % max_size];
+ 657              		.loc 2 73 42 view .LVU150
+ 658 0076 591C     		adds	r1, r3, #1
+  72:../DaisySP/Source/Utility/delayline.h ****         T b = line_[(write_ptr_ + delay_ + 1) % max_size];
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 18
+
+
+ 659              		.loc 2 72 43 view .LVU151
+ 660 0078 ED0B     		lsrs	r5, r5, #15
+ 661 007a 04FB1533 		mls	r3, r4, r5, r3
+  72:../DaisySP/Source/Utility/delayline.h ****         T b = line_[(write_ptr_ + delay_ + 1) % max_size];
+ 662              		.loc 2 72 11 view .LVU152
+ 663 007e 00EB8303 		add	r3, r0, r3, lsl #2
+ 664 0082 93ED097A 		vldr.32	s14, [r3, #36]
+ 665              	.LVL17:
+ 666              		.loc 2 73 47 view .LVU153
+ 667 0086 A2FB0153 		umull	r5, r3, r2, r1
+ 668              	.LBE314:
+ 669              	.LBE330:
+ 670              	.LBB331:
+ 671              	.LBB321:
+  65:../DaisySP/Source/Utility/delayline.h ****     }
+ 672              		.loc 2 65 57 view .LVU154
+ 673 008a A2FB0E52 		umull	r5, r2, r2, lr
+ 674              	.LBE321:
+ 675              	.LBE331:
+ 676              	.LBB332:
+ 677              	.LBB315:
+ 678              		.loc 2 73 47 view .LVU155
+ 679 008e DB0B     		lsrs	r3, r3, #15
+ 680              	.LBE315:
+ 681              	.LBE332:
+ 682              	.LBB333:
+ 683              	.LBB322:
+  65:../DaisySP/Source/Utility/delayline.h ****     }
+ 684              		.loc 2 65 57 view .LVU156
+ 685 0090 D20B     		lsrs	r2, r2, #15
+ 686              	.LBE322:
+ 687              	.LBE333:
+ 688              	.LBB334:
+ 689              	.LBB316:
+ 690              		.loc 2 73 47 view .LVU157
+ 691 0092 04FB1311 		mls	r1, r4, r3, r1
+ 692              	.LVL18:
+ 693              		.loc 2 73 47 view .LVU158
+ 694              	.LBE316:
+ 695              	.LBE334:
+ 696              	.LBB335:
+ 697              	.LBB323:
+  65:../DaisySP/Source/Utility/delayline.h ****     }
+ 698              		.loc 2 65 57 view .LVU159
+ 699 0096 04FB12E2 		mls	r2, r4, r2, lr
+ 700              	.LBE323:
+ 701              	.LBE335:
+ 702              	.LBB336:
+ 703              	.LBB317:
+ 704              		.loc 2 73 11 view .LVU160
+ 705 009a 00EB8101 		add	r1, r0, r1, lsl #2
+  74:../DaisySP/Source/Utility/delayline.h ****         return a + (b - a) * frac_;
+ 706              		.loc 2 74 23 view .LVU161
+ 707 009e D1ED096A 		vldr.32	s13, [r1, #36]
+ 708 00a2 76EEC76A 		vsub.f32	s13, s13, s14
+ 709              		.loc 2 74 30 view .LVU162
+ 710 00a6 A7EEA67A 		vfma.f32	s14, s15, s13
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 19
+
+
+ 711              	.LVL19:
+ 712              		.loc 2 74 30 view .LVU163
+ 713              	.LBE317:
+ 714              	.LBE336:
+  28:../Epiphyte/vibrato.cpp **** 
+ 715              		.loc 1 28 5 is_stmt 1 view .LVU164
+  28:../Epiphyte/vibrato.cpp **** 
+ 716              		.loc 1 28 15 is_stmt 0 view .LVU165
+ 717 00aa F0EE407A 		vmov.f32	s15, s0
+ 718 00ae E6EE077A 		vfma.f32	s15, s12, s14
+ 719              	.LVL20:
+ 720              	.LBB337:
+ 721              	.LBI319:
+  62:../DaisySP/Source/Utility/delayline.h ****     {
+ 722              		.loc 2 62 17 is_stmt 1 view .LVU166
+ 723              	.LBE337:
+  32:../Epiphyte/vibrato.cpp **** 
+ 724              		.loc 1 32 1 is_stmt 0 view .LVU167
+ 725 00b2 B0EE470A 		vmov.f32	s0, s14
+ 726              	.LVL21:
+ 727              	.LBB338:
+ 728              	.LBB324:
+  64:../DaisySP/Source/Utility/delayline.h ****         write_ptr_        = (write_ptr_ - 1 + max_size) % max_size;
+ 729              		.loc 2 64 27 view .LVU168
+ 730 00b6 CCED097A 		vstr.32	s15, [ip, #36]
+  65:../DaisySP/Source/Utility/delayline.h ****     }
+ 731              		.loc 2 65 27 view .LVU169
+ 732 00ba C261     		str	r2, [r0, #28]
+ 733              	.LVL22:
+  65:../DaisySP/Source/Utility/delayline.h ****     }
+ 734              		.loc 2 65 27 view .LVU170
+ 735              	.LBE324:
+ 736              	.LBE338:
+  31:../Epiphyte/vibrato.cpp **** }
+ 737              		.loc 1 31 5 is_stmt 1 view .LVU171
+  32:../Epiphyte/vibrato.cpp **** 
+ 738              		.loc 1 32 1 is_stmt 0 view .LVU172
+ 739 00bc 70BD     		pop	{r4, r5, r6, pc}
+ 740              	.LVL23:
+ 741              	.L15:
+ 742              	.LBB339:
+ 743              	.LBB304:
+  76:../Epiphyte/vibrato.cpp ****     {
+ 744              		.loc 1 76 10 is_stmt 1 view .LVU173
+ 745 00be BFEE006A 		vmov.f32	s12, #-1.0e+0
+ 746 00c2 F4EEC67A 		vcmpe.f32	s15, s12
+ 747 00c6 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 748 00ca 07D5     		bpl	.L17
+  78:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 749              		.loc 1 78 9 view .LVU174
+  78:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 750              		.loc 1 78 41 is_stmt 0 view .LVU175
+ 751 00cc 77EEA67A 		vadd.f32	s15, s15, s13
+  79:../Epiphyte/vibrato.cpp ****     }
+ 752              		.loc 1 79 19 view .LVU176
+ 753 00d0 B1EE477A 		vneg.f32	s14, s14
+  78:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 20
+
+
+ 754              		.loc 1 78 27 view .LVU177
+ 755 00d4 76EE677A 		vsub.f32	s15, s12, s15
+  79:../Epiphyte/vibrato.cpp ****     }
+ 756              		.loc 1 79 19 view .LVU178
+ 757 00d8 80ED027A 		vstr.32	s14, [r0, #8]
+ 758              	.L17:
+  78:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 759              		.loc 1 78 20 view .LVU179
+ 760 00dc C0ED017A 		vstr.32	s15, [r0, #4]
+  79:../Epiphyte/vibrato.cpp ****     }
+ 761              		.loc 1 79 9 is_stmt 1 view .LVU180
+ 762 00e0 A6E7     		b	.L12
+ 763              	.L19:
+ 764 00e2 00BF     		.align	2
+ 765              	.L18:
+ 766 00e4 5917B7D1 		.word	-776530087
+ 767              	.LBE304:
+ 768              	.LBE339:
+ 769              		.cfi_endproc
+ 770              	.LFE3675:
+ 772              		.section	.text._ZN7daisysp13VibratoEngine11SetLfoDepthEf,"ax",%progbits
+ 773              		.align	1
+ 774              		.p2align 2,,3
+ 775              		.global	_ZN7daisysp13VibratoEngine11SetLfoDepthEf
+ 776              		.syntax unified
+ 777              		.thumb
+ 778              		.thumb_func
+ 779              		.fpu fpv5-d16
+ 781              	_ZN7daisysp13VibratoEngine11SetLfoDepthEf:
+ 782              	.LVL24:
+ 783              	.LFB3676:
+  35:../Epiphyte/vibrato.cpp ****     depth = fclamp(depth, 0.f, .93f);
+ 784              		.loc 1 35 1 view -0
+ 785              		.cfi_startproc
+ 786              		@ args = 0, pretend = 0, frame = 0
+ 787              		@ frame_needed = 0, uses_anonymous_args = 0
+ 788              		@ link register save eliminated.
+  36:../Epiphyte/vibrato.cpp ****     lfo_amp_ = depth * delay_;
+ 789              		.loc 1 36 5 view .LVU182
+ 790              	.LBB340:
+ 791              	.LBI340:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 792              		.loc 3 56 14 view .LVU183
+ 793              	.LBE340:
+ 794              		.loc 3 58 5 view .LVU184
+ 795              	.LBB347:
+ 796              	.LBB341:
+ 797              	.LBI341:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 798              		.loc 3 32 14 view .LVU185
+ 799              	.LBB342:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 800              		.loc 3 34 5 view .LVU186
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 801              		.loc 3 36 5 view .LVU187
+ 802 0000 DFED077A 		vldr.32	s15, .L21
+ 803              		.syntax unified
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 21
+
+
+ 804              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 805 0004 80FE270A 		vmaxnm.f32 s0, s0, s15
+ 806              	@ 0 "" 2
+ 807              	.LVL25:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 808              		.loc 3 40 5 view .LVU188
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 809              		.loc 3 40 5 is_stmt 0 view .LVU189
+ 810              		.thumb
+ 811              		.syntax unified
+ 812              	.LBE342:
+ 813              	.LBE341:
+ 814              	.LBB343:
+ 815              	.LBI343:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 816              		.loc 3 43 14 is_stmt 1 view .LVU190
+ 817              	.LBB344:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 818              		.loc 3 45 5 view .LVU191
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 819              		.loc 3 47 5 view .LVU192
+ 820              	.LBE344:
+ 821              	.LBE343:
+ 822              	.LBE347:
+  37:../Epiphyte/vibrato.cpp **** }
+ 823              		.loc 1 37 22 is_stmt 0 view .LVU193
+ 824 0008 D0ED057A 		vldr.32	s15, [r0, #20]
+ 825              	.LBB348:
+ 826              	.LBB346:
+ 827              	.LBB345:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 828              		.loc 3 47 5 view .LVU194
+ 829 000c 9FED057A 		vldr.32	s14, .L21+4
+ 830              		.syntax unified
+ 831              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 832 0010 80FE470A 		vminnm.f32 s0, s0, s14
+ 833              	@ 0 "" 2
+ 834              	.LVL26:
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 835              		.loc 3 51 5 is_stmt 1 view .LVU195
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 836              		.loc 3 51 5 is_stmt 0 view .LVU196
+ 837              		.thumb
+ 838              		.syntax unified
+ 839              	.LBE345:
+ 840              	.LBE346:
+ 841              	.LBE348:
+  37:../Epiphyte/vibrato.cpp **** }
+ 842              		.loc 1 37 5 is_stmt 1 view .LVU197
+  37:../Epiphyte/vibrato.cpp **** }
+ 843              		.loc 1 37 22 is_stmt 0 view .LVU198
+ 844 0014 27EE800A 		vmul.f32	s0, s15, s0
+ 845              	.LVL27:
+  37:../Epiphyte/vibrato.cpp **** }
+ 846              		.loc 1 37 14 view .LVU199
+ 847 0018 80ED030A 		vstr.32	s0, [r0, #12]
+  38:../Epiphyte/vibrato.cpp **** 
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 22
+
+
+ 848              		.loc 1 38 1 view .LVU200
+ 849 001c 7047     		bx	lr
+ 850              	.L22:
+ 851 001e 00BF     		.align	2
+ 852              	.L21:
+ 853 0020 00000000 		.word	0
+ 854 0024 7B146E3F 		.word	1064178811
+ 855              		.cfi_endproc
+ 856              	.LFE3676:
+ 858              		.section	.text._ZN7daisysp13VibratoEngine10SetLfoFreqEf,"ax",%progbits
+ 859              		.align	1
+ 860              		.p2align 2,,3
+ 861              		.global	_ZN7daisysp13VibratoEngine10SetLfoFreqEf
+ 862              		.syntax unified
+ 863              		.thumb
+ 864              		.thumb_func
+ 865              		.fpu fpv5-d16
+ 867              	_ZN7daisysp13VibratoEngine10SetLfoFreqEf:
+ 868              	.LVL28:
+ 869              	.LFB3677:
+  41:../Epiphyte/vibrato.cpp ****     freq = 4.f * freq / sample_rate_;
+ 870              		.loc 1 41 1 is_stmt 1 view -0
+ 871              		.cfi_startproc
+ 872              		@ args = 0, pretend = 0, frame = 0
+ 873              		@ frame_needed = 0, uses_anonymous_args = 0
+ 874              		@ link register save eliminated.
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 875              		.loc 1 42 5 view .LVU202
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 876              		.loc 1 42 16 is_stmt 0 view .LVU203
+ 877 0000 F1EE007A 		vmov.f32	s15, #4.0e+0
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 878              		.loc 1 42 10 view .LVU204
+ 879 0004 D0ED006A 		vldr.32	s13, [r0]
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 880              		.loc 1 43 29 view .LVU205
+ 881 0008 90ED027A 		vldr.32	s14, [r0, #8]
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 882              		.loc 1 42 16 view .LVU206
+ 883 000c 20EE270A 		vmul.f32	s0, s0, s15
+ 884              	.LVL29:
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 885              		.loc 1 43 29 view .LVU207
+ 886 0010 B5EEC07A 		vcmpe.f32	s14, #0
+ 887              	.LBB349:
+ 888              	.LBB350:
+ 889              	.LBB351:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 890              		.loc 3 47 5 view .LVU208
+ 891 0014 B5EE007A 		vmov.f32	s14, #2.5e-1
+ 892              	.LBE351:
+ 893              	.LBE350:
+ 894              	.LBE349:
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 895              		.loc 1 42 10 view .LVU209
+ 896 0018 C0EE267A 		vdiv.f32	s15, s0, s13
+ 897              	.LVL30:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 23
+
+
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 898              		.loc 1 43 5 is_stmt 1 view .LVU210
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 899              		.loc 1 43 29 is_stmt 0 view .LVU211
+ 900 001c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 901              	.LBB358:
+ 902              	.LBB353:
+ 903              	.LBB354:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 904              		.loc 3 36 5 view .LVU212
+ 905 0020 FDEE006A 		vmov.f32	s13, #-2.5e-1
+ 906 0024 48BF     		it	mi
+ 907 0026 F1EE677A 		vnegmi.f32	s15, s15
+ 908              	.LVL31:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 909              		.loc 3 36 5 view .LVU213
+ 910              	.LBE354:
+ 911              	.LBE353:
+ 912              	.LBE358:
+  44:../Epiphyte/vibrato.cpp **** }
+ 913              		.loc 1 44 5 is_stmt 1 view .LVU214
+ 914              	.LBB359:
+ 915              	.LBI349:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 916              		.loc 3 56 14 view .LVU215
+ 917              	.LBE359:
+ 918              		.loc 3 58 5 view .LVU216
+ 919              	.LBB360:
+ 920              	.LBB356:
+ 921              	.LBI353:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 922              		.loc 3 32 14 view .LVU217
+ 923              	.LBB355:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 924              		.loc 3 34 5 view .LVU218
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 925              		.loc 3 36 5 view .LVU219
+ 926              		.syntax unified
+ 927              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 928 002a C7FEA67A 		vmaxnm.f32 s15, s15, s13
+ 929              	@ 0 "" 2
+ 930              	.LVL32:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 931              		.loc 3 40 5 view .LVU220
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 932              		.loc 3 40 5 is_stmt 0 view .LVU221
+ 933              		.thumb
+ 934              		.syntax unified
+ 935              	.LBE355:
+ 936              	.LBE356:
+ 937              	.LBB357:
+ 938              	.LBI350:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 939              		.loc 3 43 14 is_stmt 1 view .LVU222
+ 940              	.LBB352:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 941              		.loc 3 45 5 view .LVU223
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 24
+
+
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 942              		.loc 3 47 5 view .LVU224
+ 943              		.syntax unified
+ 944              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 945 002e C7FEC77A 		vminnm.f32 s15, s15, s14
+ 946              	@ 0 "" 2
+ 947              	.LVL33:
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 948              		.loc 3 51 5 view .LVU225
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 949              		.loc 3 51 5 is_stmt 0 view .LVU226
+ 950              		.thumb
+ 951              		.syntax unified
+ 952              	.LBE352:
+ 953              	.LBE357:
+ 954              	.LBE360:
+  44:../Epiphyte/vibrato.cpp **** }
+ 955              		.loc 1 44 15 view .LVU227
+ 956 0032 C0ED027A 		vstr.32	s15, [r0, #8]
+  45:../Epiphyte/vibrato.cpp **** 
+ 957              		.loc 1 45 1 view .LVU228
+ 958 0036 7047     		bx	lr
+ 959              		.cfi_endproc
+ 960              	.LFE3677:
+ 962              		.section	.text._ZN7daisysp13VibratoEngine8SetDelayEf,"ax",%progbits
+ 963              		.align	1
+ 964              		.p2align 2,,3
+ 965              		.global	_ZN7daisysp13VibratoEngine8SetDelayEf
+ 966              		.syntax unified
+ 967              		.thumb
+ 968              		.thumb_func
+ 969              		.fpu fpv5-d16
+ 971              	_ZN7daisysp13VibratoEngine8SetDelayEf:
+ 972              	.LVL34:
+ 973              	.LFB3678:
+  48:../Epiphyte/vibrato.cpp ****     delay = (.1f + delay * 7.9f); //.1 to 8 ms
+ 974              		.loc 1 48 1 is_stmt 1 view -0
+ 975              		.cfi_startproc
+ 976              		@ args = 0, pretend = 0, frame = 0
+ 977              		@ frame_needed = 0, uses_anonymous_args = 0
+ 978              		@ link register save eliminated.
+  49:../Epiphyte/vibrato.cpp ****     SetDelayMs(delay);
+ 979              		.loc 1 49 5 view .LVU230
+  49:../Epiphyte/vibrato.cpp ****     SetDelayMs(delay);
+ 980              		.loc 1 49 11 is_stmt 0 view .LVU231
+ 981 0000 DFED0D7A 		vldr.32	s15, .L28
+ 982              	.LBB367:
+ 983              	.LBB368:
+  56:../Epiphyte/vibrato.cpp **** 
+ 984              		.loc 1 56 17 view .LVU232
+ 985 0004 9FED0D7A 		vldr.32	s14, .L28+4
+ 986              	.LBE368:
+ 987              	.LBE367:
+  49:../Epiphyte/vibrato.cpp ****     SetDelayMs(delay);
+ 988              		.loc 1 49 11 view .LVU233
+ 989 0008 F0EE676A 		vmov.f32	s13, s15
+ 990 000c 9FED0C6A 		vldr.32	s12, .L28+8
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 25
+
+
+ 991 0010 E0EE066A 		vfma.f32	s13, s0, s12
+ 992              	.LVL35:
+  50:../Epiphyte/vibrato.cpp **** }
+ 993              		.loc 1 50 5 is_stmt 1 view .LVU234
+ 994              	.LBB378:
+ 995              	.LBI367:
+  53:../Epiphyte/vibrato.cpp **** {
+ 996              		.loc 1 53 6 view .LVU235
+ 997              	.LBB377:
+  55:../Epiphyte/vibrato.cpp ****     delay_ = ms * .001f * sample_rate_; //ms to samples
+ 998              		.loc 1 55 5 view .LVU236
+ 999              	.LBB369:
+ 1000              	.LBI369:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1001              		.loc 3 32 14 view .LVU237
+ 1002              	.LBB370:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1003              		.loc 3 34 5 view .LVU238
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1004              		.loc 3 36 5 view .LVU239
+ 1005              		.syntax unified
+ 1006              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1007 0014 C7FEA67A 		vmaxnm.f32 s15, s15, s13
+ 1008              	@ 0 "" 2
+ 1009              	.LVL36:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1010              		.loc 3 40 5 view .LVU240
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1011              		.loc 3 40 5 is_stmt 0 view .LVU241
+ 1012              		.thumb
+ 1013              		.syntax unified
+ 1014              	.LBE370:
+ 1015              	.LBE369:
+  56:../Epiphyte/vibrato.cpp **** 
+ 1016              		.loc 1 56 5 is_stmt 1 view .LVU242
+  56:../Epiphyte/vibrato.cpp **** 
+ 1017              		.loc 1 56 17 is_stmt 0 view .LVU243
+ 1018 0018 67EE877A 		vmul.f32	s15, s15, s14
+ 1019              	.LVL37:
+  56:../Epiphyte/vibrato.cpp **** 
+ 1020              		.loc 1 56 25 view .LVU244
+ 1021 001c D0ED006A 		vldr.32	s13, [r0]
+ 1022              	.LVL38:
+ 1023              	.LBB371:
+ 1024              	.LBB372:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1025              		.loc 3 47 5 view .LVU245
+ 1026 0020 90ED037A 		vldr.32	s14, [r0, #12]
+ 1027              	.LBE372:
+ 1028              	.LBE371:
+  56:../Epiphyte/vibrato.cpp **** 
+ 1029              		.loc 1 56 25 view .LVU246
+ 1030 0024 67EEA67A 		vmul.f32	s15, s15, s13
+ 1031              	.LBB375:
+ 1032              	.LBB373:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1033              		.loc 3 47 5 view .LVU247
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 26
+
+
+ 1034              		.syntax unified
+ 1035              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1036 0028 87FE677A 		vminnm.f32 s14, s14, s15
+ 1037              	@ 0 "" 2
+ 1038              		.thumb
+ 1039              		.syntax unified
+ 1040              	.LBE373:
+ 1041              	.LBE375:
+  58:../Epiphyte/vibrato.cpp **** }
+ 1042              		.loc 1 58 14 view .LVU248
+ 1043 002c 80ED037A 		vstr.32	s14, [r0, #12]
+  56:../Epiphyte/vibrato.cpp **** 
+ 1044              		.loc 1 56 12 view .LVU249
+ 1045 0030 C0ED057A 		vstr.32	s15, [r0, #20]
+  58:../Epiphyte/vibrato.cpp **** }
+ 1046              		.loc 1 58 5 is_stmt 1 view .LVU250
+ 1047              	.LVL39:
+ 1048              	.LBB376:
+ 1049              	.LBI371:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1050              		.loc 3 43 14 view .LVU251
+ 1051              	.LBB374:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1052              		.loc 3 45 5 view .LVU252
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1053              		.loc 3 47 5 view .LVU253
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1054              		.loc 3 51 5 view .LVU254
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1055              		.loc 3 51 5 is_stmt 0 view .LVU255
+ 1056              	.LBE374:
+ 1057              	.LBE376:
+ 1058              	.LBE377:
+ 1059              	.LBE378:
+  51:../Epiphyte/vibrato.cpp **** 
+ 1060              		.loc 1 51 1 view .LVU256
+ 1061 0034 7047     		bx	lr
+ 1062              	.L29:
+ 1063 0036 00BF     		.align	2
+ 1064              	.L28:
+ 1065 0038 CDCCCC3D 		.word	1036831949
+ 1066 003c 6F12833A 		.word	981668463
+ 1067 0040 CDCCFC40 		.word	1090309325
+ 1068              		.cfi_endproc
+ 1069              	.LFE3678:
+ 1071              		.section	.text._ZN7daisysp13VibratoEngine10SetDelayMsEf,"ax",%progbits
+ 1072              		.align	1
+ 1073              		.p2align 2,,3
+ 1074              		.global	_ZN7daisysp13VibratoEngine10SetDelayMsEf
+ 1075              		.syntax unified
+ 1076              		.thumb
+ 1077              		.thumb_func
+ 1078              		.fpu fpv5-d16
+ 1080              	_ZN7daisysp13VibratoEngine10SetDelayMsEf:
+ 1081              	.LVL40:
+ 1082              	.LFB3679:
+  54:../Epiphyte/vibrato.cpp ****     ms = fmax(.1f, ms);
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 27
+
+
+ 1083              		.loc 1 54 1 is_stmt 1 view -0
+ 1084              		.cfi_startproc
+ 1085              		@ args = 0, pretend = 0, frame = 0
+ 1086              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1087              		@ link register save eliminated.
+  55:../Epiphyte/vibrato.cpp ****     delay_ = ms * .001f * sample_rate_; //ms to samples
+ 1088              		.loc 1 55 5 view .LVU258
+  56:../Epiphyte/vibrato.cpp **** 
+ 1089              		.loc 1 56 17 is_stmt 0 view .LVU259
+ 1090 0000 9FED0A7A 		vldr.32	s14, .L31
+ 1091              	.LVL41:
+ 1092              	.LBB383:
+ 1093              	.LBI383:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1094              		.loc 3 32 14 is_stmt 1 view .LVU260
+ 1095              	.LBB384:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1096              		.loc 3 34 5 view .LVU261
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1097              		.loc 3 36 5 view .LVU262
+ 1098 0004 DFED0A7A 		vldr.32	s15, .L31+4
+ 1099              		.syntax unified
+ 1100              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1101 0008 87FE800A 		vmaxnm.f32 s0, s15, s0
+ 1102              	@ 0 "" 2
+ 1103              	.LVL42:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1104              		.loc 3 40 5 view .LVU263
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1105              		.loc 3 40 5 is_stmt 0 view .LVU264
+ 1106              		.thumb
+ 1107              		.syntax unified
+ 1108              	.LBE384:
+ 1109              	.LBE383:
+  56:../Epiphyte/vibrato.cpp **** 
+ 1110              		.loc 1 56 5 is_stmt 1 view .LVU265
+  56:../Epiphyte/vibrato.cpp **** 
+ 1111              		.loc 1 56 17 is_stmt 0 view .LVU266
+ 1112 000c 20EE070A 		vmul.f32	s0, s0, s14
+ 1113              	.LVL43:
+  56:../Epiphyte/vibrato.cpp **** 
+ 1114              		.loc 1 56 25 view .LVU267
+ 1115 0010 90ED007A 		vldr.32	s14, [r0]
+ 1116              	.LBB385:
+ 1117              	.LBB386:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1118              		.loc 3 47 5 view .LVU268
+ 1119 0014 D0ED037A 		vldr.32	s15, [r0, #12]
+ 1120              	.LBE386:
+ 1121              	.LBE385:
+  56:../Epiphyte/vibrato.cpp **** 
+ 1122              		.loc 1 56 25 view .LVU269
+ 1123 0018 20EE070A 		vmul.f32	s0, s0, s14
+ 1124              	.LBB389:
+ 1125              	.LBB387:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1126              		.loc 3 47 5 view .LVU270
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 28
+
+
+ 1127              		.syntax unified
+ 1128              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1129 001c C7FEC07A 		vminnm.f32 s15, s15, s0
+ 1130              	@ 0 "" 2
+ 1131              		.thumb
+ 1132              		.syntax unified
+ 1133              	.LBE387:
+ 1134              	.LBE389:
+  58:../Epiphyte/vibrato.cpp **** }
+ 1135              		.loc 1 58 14 view .LVU271
+ 1136 0020 C0ED037A 		vstr.32	s15, [r0, #12]
+  56:../Epiphyte/vibrato.cpp **** 
+ 1137              		.loc 1 56 12 view .LVU272
+ 1138 0024 80ED050A 		vstr.32	s0, [r0, #20]
+  58:../Epiphyte/vibrato.cpp **** }
+ 1139              		.loc 1 58 5 is_stmt 1 view .LVU273
+ 1140              	.LVL44:
+ 1141              	.LBB390:
+ 1142              	.LBI385:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1143              		.loc 3 43 14 view .LVU274
+ 1144              	.LBB388:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1145              		.loc 3 45 5 view .LVU275
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1146              		.loc 3 47 5 view .LVU276
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1147              		.loc 3 51 5 view .LVU277
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1148              		.loc 3 51 5 is_stmt 0 view .LVU278
+ 1149              	.LBE388:
+ 1150              	.LBE390:
+  59:../Epiphyte/vibrato.cpp **** 
+ 1151              		.loc 1 59 1 view .LVU279
+ 1152 0028 7047     		bx	lr
+ 1153              	.L32:
+ 1154 002a 00BF     		.align	2
+ 1155              	.L31:
+ 1156 002c 6F12833A 		.word	981668463
+ 1157 0030 CDCCCC3D 		.word	1036831949
+ 1158              		.cfi_endproc
+ 1159              	.LFE3679:
+ 1161              		.section	.text._ZN7daisysp13VibratoEngine11SetFeedbackEf,"ax",%progbits
+ 1162              		.align	1
+ 1163              		.p2align 2,,3
+ 1164              		.global	_ZN7daisysp13VibratoEngine11SetFeedbackEf
+ 1165              		.syntax unified
+ 1166              		.thumb
+ 1167              		.thumb_func
+ 1168              		.fpu fpv5-d16
+ 1170              	_ZN7daisysp13VibratoEngine11SetFeedbackEf:
+ 1171              	.LVL45:
+ 1172              	.LFB3680:
+  62:../Epiphyte/vibrato.cpp ****     feedback_ = fclamp(feedback, 0.f, 1.f);
+ 1173              		.loc 1 62 1 is_stmt 1 view -0
+ 1174              		.cfi_startproc
+ 1175              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 29
+
+
+ 1176              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1177              		@ link register save eliminated.
+  63:../Epiphyte/vibrato.cpp **** }
+ 1178              		.loc 1 63 5 view .LVU281
+ 1179              	.LBB396:
+ 1180              	.LBI396:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1181              		.loc 3 56 14 view .LVU282
+ 1182              	.LBE396:
+ 1183              		.loc 3 58 5 view .LVU283
+ 1184              	.LBB405:
+ 1185              	.LBB397:
+ 1186              	.LBI397:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1187              		.loc 3 32 14 view .LVU284
+ 1188              	.LBB398:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1189              		.loc 3 34 5 view .LVU285
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1190              		.loc 3 36 5 view .LVU286
+ 1191              	.LBE398:
+ 1192              	.LBE397:
+ 1193              	.LBB400:
+ 1194              	.LBB401:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1195              		.loc 3 47 5 is_stmt 0 view .LVU287
+ 1196 0000 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 1197              	.LBE401:
+ 1198              	.LBE400:
+ 1199              	.LBB403:
+ 1200              	.LBB399:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1201              		.loc 3 36 5 view .LVU288
+ 1202 0004 9FED047A 		vldr.32	s14, .L34
+ 1203              		.syntax unified
+ 1204              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1205 0008 80FE070A 		vmaxnm.f32 s0, s0, s14
+ 1206              	@ 0 "" 2
+ 1207              	.LVL46:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1208              		.loc 3 40 5 is_stmt 1 view .LVU289
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1209              		.loc 3 40 5 is_stmt 0 view .LVU290
+ 1210              		.thumb
+ 1211              		.syntax unified
+ 1212              	.LBE399:
+ 1213              	.LBE403:
+ 1214              	.LBB404:
+ 1215              	.LBI400:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1216              		.loc 3 43 14 is_stmt 1 view .LVU291
+ 1217              	.LBB402:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1218              		.loc 3 45 5 view .LVU292
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1219              		.loc 3 47 5 view .LVU293
+ 1220              		.syntax unified
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 30
+
+
+ 1221              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1222 000c 80FE670A 		vminnm.f32 s0, s0, s15
+ 1223              	@ 0 "" 2
+ 1224              	.LVL47:
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1225              		.loc 3 51 5 view .LVU294
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1226              		.loc 3 51 5 is_stmt 0 view .LVU295
+ 1227              		.thumb
+ 1228              		.syntax unified
+ 1229              	.LBE402:
+ 1230              	.LBE404:
+ 1231              	.LBE405:
+  63:../Epiphyte/vibrato.cpp **** }
+ 1232              		.loc 1 63 15 view .LVU296
+ 1233 0010 80ED040A 		vstr.32	s0, [r0, #16]
+  64:../Epiphyte/vibrato.cpp **** 
+ 1234              		.loc 1 64 1 view .LVU297
+ 1235 0014 7047     		bx	lr
+ 1236              	.L35:
+ 1237 0016 00BF     		.align	2
+ 1238              	.L34:
+ 1239 0018 00000000 		.word	0
+ 1240              		.cfi_endproc
+ 1241              	.LFE3680:
+ 1243              		.section	.text._ZN7daisysp13VibratoEngine10ProcessLfoEv,"ax",%progbits
+ 1244              		.align	1
+ 1245              		.p2align 2,,3
+ 1246              		.global	_ZN7daisysp13VibratoEngine10ProcessLfoEv
+ 1247              		.syntax unified
+ 1248              		.thumb
+ 1249              		.thumb_func
+ 1250              		.fpu fpv5-d16
+ 1252              	_ZN7daisysp13VibratoEngine10ProcessLfoEv:
+ 1253              	.LVL48:
+ 1254              	.LFB3681:
+  67:../Epiphyte/vibrato.cpp ****     lfo_phase_ += lfo_freq_;
+ 1255              		.loc 1 67 1 is_stmt 1 view -0
+ 1256              		.cfi_startproc
+ 1257              		@ args = 0, pretend = 0, frame = 0
+ 1258              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1259              		@ link register save eliminated.
+  68:../Epiphyte/vibrato.cpp **** 
+ 1260              		.loc 1 68 5 view .LVU299
+  68:../Epiphyte/vibrato.cpp **** 
+ 1261              		.loc 1 68 19 is_stmt 0 view .LVU300
+ 1262 0000 90ED027A 		vldr.32	s14, [r0, #8]
+  71:../Epiphyte/vibrato.cpp ****     {
+ 1263              		.loc 1 71 5 view .LVU301
+ 1264 0004 B7EE000A 		vmov.f32	s0, #1.0e+0
+  68:../Epiphyte/vibrato.cpp **** 
+ 1265              		.loc 1 68 16 view .LVU302
+ 1266 0008 D0ED017A 		vldr.32	s15, [r0, #4]
+ 1267 000c 77EE277A 		vadd.f32	s15, s14, s15
+  71:../Epiphyte/vibrato.cpp ****     {
+ 1268              		.loc 1 71 5 is_stmt 1 view .LVU303
+ 1269 0010 F4EEC07A 		vcmpe.f32	s15, s0
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 31
+
+
+ 1270 0014 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 1271 0018 0EDD     		ble	.L42
+  73:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 1272              		.loc 1 73 9 view .LVU304
+  73:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 1273              		.loc 1 73 40 is_stmt 0 view .LVU305
+ 1274 001a 77EEC07A 		vsub.f32	s15, s15, s0
+  74:../Epiphyte/vibrato.cpp ****     }
+ 1275              		.loc 1 74 19 view .LVU306
+ 1276 001e B1EE477A 		vneg.f32	s14, s14
+  73:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 1277              		.loc 1 73 26 view .LVU307
+ 1278 0022 70EE677A 		vsub.f32	s15, s0, s15
+ 1279              		.loc 1 82 25 view .LVU308
+ 1280 0026 90ED030A 		vldr.32	s0, [r0, #12]
+  74:../Epiphyte/vibrato.cpp ****     }
+ 1281              		.loc 1 74 19 view .LVU309
+ 1282 002a 80ED027A 		vstr.32	s14, [r0, #8]
+  83:../Epiphyte/vibrato.cpp **** }
+ 1283              		.loc 1 83 1 view .LVU310
+ 1284 002e 27EE800A 		vmul.f32	s0, s15, s0
+  73:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 1285              		.loc 1 73 20 view .LVU311
+ 1286 0032 C0ED017A 		vstr.32	s15, [r0, #4]
+  74:../Epiphyte/vibrato.cpp ****     }
+ 1287              		.loc 1 74 9 is_stmt 1 view .LVU312
+  82:../Epiphyte/vibrato.cpp **** }
+ 1288              		.loc 1 82 5 view .LVU313
+ 1289              		.loc 1 83 1 is_stmt 0 view .LVU314
+ 1290 0036 7047     		bx	lr
+ 1291              	.L42:
+  76:../Epiphyte/vibrato.cpp ****     {
+ 1292              		.loc 1 76 10 is_stmt 1 view .LVU315
+ 1293 0038 FFEE006A 		vmov.f32	s13, #-1.0e+0
+ 1294 003c F4EEE67A 		vcmpe.f32	s15, s13
+ 1295 0040 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 1296 0044 07D5     		bpl	.L43
+  78:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 1297              		.loc 1 78 9 view .LVU316
+  78:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 1298              		.loc 1 78 41 is_stmt 0 view .LVU317
+ 1299 0046 77EE807A 		vadd.f32	s15, s15, s0
+  79:../Epiphyte/vibrato.cpp ****     }
+ 1300              		.loc 1 79 19 view .LVU318
+ 1301 004a B1EE477A 		vneg.f32	s14, s14
+  78:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 1302              		.loc 1 78 27 view .LVU319
+ 1303 004e 76EEE77A 		vsub.f32	s15, s13, s15
+  79:../Epiphyte/vibrato.cpp ****     }
+ 1304              		.loc 1 79 19 view .LVU320
+ 1305 0052 80ED027A 		vstr.32	s14, [r0, #8]
+ 1306              	.L43:
+  82:../Epiphyte/vibrato.cpp **** }
+ 1307              		.loc 1 82 25 view .LVU321
+ 1308 0056 90ED030A 		vldr.32	s0, [r0, #12]
+  78:../Epiphyte/vibrato.cpp ****         lfo_freq_ *= -1.f;
+ 1309              		.loc 1 78 20 view .LVU322
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 32
+
+
+ 1310 005a C0ED017A 		vstr.32	s15, [r0, #4]
+  79:../Epiphyte/vibrato.cpp ****     }
+ 1311              		.loc 1 79 9 is_stmt 1 view .LVU323
+  82:../Epiphyte/vibrato.cpp **** }
+ 1312              		.loc 1 82 5 view .LVU324
+ 1313              		.loc 1 83 1 is_stmt 0 view .LVU325
+ 1314 005e 27EE800A 		vmul.f32	s0, s15, s0
+ 1315 0062 7047     		bx	lr
+ 1316              		.cfi_endproc
+ 1317              	.LFE3681:
+ 1319              		.section	.text._ZN7daisysp7Vibrato4InitEf,"ax",%progbits
+ 1320              		.align	1
+ 1321              		.p2align 2,,3
+ 1322              		.global	_ZN7daisysp7Vibrato4InitEf
+ 1323              		.syntax unified
+ 1324              		.thumb
+ 1325              		.thumb_func
+ 1326              		.fpu fpv5-d16
+ 1328              	_ZN7daisysp7Vibrato4InitEf:
+ 1329              	.LVL49:
+ 1330              	.LFB3682:
+  84:../Epiphyte/vibrato.cpp **** 
+  85:../Epiphyte/vibrato.cpp **** //Vibrato Stuff
+  86:../Epiphyte/vibrato.cpp **** void Vibrato::Init(float sample_rate)
+  87:../Epiphyte/vibrato.cpp **** {
+ 1331              		.loc 1 87 1 is_stmt 1 view -0
+ 1332              		.cfi_startproc
+ 1333              		@ args = 0, pretend = 0, frame = 0
+ 1334              		@ frame_needed = 0, uses_anonymous_args = 0
+  88:../Epiphyte/vibrato.cpp ****     engines_[0].Init(sample_rate);
+ 1335              		.loc 1 88 5 view .LVU327
+  87:../Epiphyte/vibrato.cpp ****     engines_[0].Init(sample_rate);
+ 1336              		.loc 1 87 1 is_stmt 0 view .LVU328
+ 1337 0000 10B5     		push	{r4, lr}
+ 1338              		.cfi_def_cfa_offset 8
+ 1339              		.cfi_offset 4, -8
+ 1340              		.cfi_offset 14, -4
+  87:../Epiphyte/vibrato.cpp ****     engines_[0].Init(sample_rate);
+ 1341              		.loc 1 87 1 view .LVU329
+ 1342 0002 0446     		mov	r4, r0
+ 1343              		.loc 1 88 21 view .LVU330
+ 1344 0004 FFF7FEFF 		bl	_ZN7daisysp13VibratoEngine4InitEf
+ 1345              	.LVL50:
+  89:../Epiphyte/vibrato.cpp ****     SetPan(.25f, .75f);
+ 1346              		.loc 1 89 5 is_stmt 1 view .LVU331
+ 1347              	.LBB406:
+ 1348              	.LBI406:
+  90:../Epiphyte/vibrato.cpp **** 
+  91:../Epiphyte/vibrato.cpp ****     gain_frac_ = .5f;
+  92:../Epiphyte/vibrato.cpp ****     sigl_ = sigr_ = 0.f;
+  93:../Epiphyte/vibrato.cpp **** }
+  94:../Epiphyte/vibrato.cpp **** 
+  95:../Epiphyte/vibrato.cpp **** float Vibrato::Process(float in)
+  96:../Epiphyte/vibrato.cpp **** {
+  97:../Epiphyte/vibrato.cpp ****     sigl_ = 0.f;
+  98:../Epiphyte/vibrato.cpp ****     sigr_ = 0.f;
+  99:../Epiphyte/vibrato.cpp **** 
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 33
+
+
+ 100:../Epiphyte/vibrato.cpp ****     for (int i = 0; i < 1; i++)
+ 101:../Epiphyte/vibrato.cpp ****     {
+ 102:../Epiphyte/vibrato.cpp ****         float sig = engines_[i].Process(in);
+ 103:../Epiphyte/vibrato.cpp ****         sigl_ += (1.f - pan_[i]) * sig;
+ 104:../Epiphyte/vibrato.cpp ****         sigr_ += pan_[i] * sig;
+ 105:../Epiphyte/vibrato.cpp ****     }
+ 106:../Epiphyte/vibrato.cpp **** 
+ 107:../Epiphyte/vibrato.cpp ****     sigl_ *= gain_frac_;
+ 108:../Epiphyte/vibrato.cpp ****     sigr_ *= gain_frac_;
+ 109:../Epiphyte/vibrato.cpp **** 
+ 110:../Epiphyte/vibrato.cpp ****     return sigl_;
+ 111:../Epiphyte/vibrato.cpp **** }
+ 112:../Epiphyte/vibrato.cpp **** 
+ 113:../Epiphyte/vibrato.cpp **** float Vibrato::GetLeft()
+ 114:../Epiphyte/vibrato.cpp **** {
+ 115:../Epiphyte/vibrato.cpp ****     return sigl_;
+ 116:../Epiphyte/vibrato.cpp **** }
+ 117:../Epiphyte/vibrato.cpp **** 
+ 118:../Epiphyte/vibrato.cpp **** float Vibrato::GetRight()
+ 119:../Epiphyte/vibrato.cpp **** {
+ 120:../Epiphyte/vibrato.cpp ****     return sigr_;
+ 121:../Epiphyte/vibrato.cpp **** }
+ 122:../Epiphyte/vibrato.cpp **** 
+ 123:../Epiphyte/vibrato.cpp **** void Vibrato::SetPan(float panl, float panr)
+ 1349              		.loc 1 123 6 view .LVU332
+ 1350              	.LBB407:
+ 124:../Epiphyte/vibrato.cpp **** {
+ 125:../Epiphyte/vibrato.cpp ****     pan_[0] = fclamp(panl, 0.f, 1.f);
+ 1351              		.loc 1 125 5 view .LVU333
+ 1352              	.LBB408:
+ 1353              	.LBI408:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1354              		.loc 3 56 14 view .LVU334
+ 1355              	.LBE408:
+ 1356              	.LBE407:
+ 1357              	.LBE406:
+ 1358              		.loc 3 58 5 view .LVU335
+ 1359              	.LBB428:
+ 1360              	.LBB424:
+ 1361              	.LBB421:
+ 1362              	.LBB409:
+ 1363              	.LBI409:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1364              		.loc 3 32 14 view .LVU336
+ 1365              	.LBB410:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1366              		.loc 3 34 5 view .LVU337
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1367              		.loc 3 36 5 view .LVU338
+ 1368 0008 9FED0B7A 		vldr.32	s14, .L46
+ 1369              	.LBE410:
+ 1370              	.LBE409:
+ 1371              	.LBE421:
+ 1372              	.LBE424:
+ 1373              	.LBE428:
+  91:../Epiphyte/vibrato.cpp ****     sigl_ = sigr_ = 0.f;
+ 1374              		.loc 1 91 16 is_stmt 0 view .LVU339
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 34
+
+
+ 1375 000c 4FF07C53 		mov	r3, #1056964608
+ 1376              	.LBB429:
+ 1377              	.LBB425:
+ 1378              		.loc 1 125 13 view .LVU340
+ 1379 0010 04F51C30 		add	r0, r4, #159744
+ 1380              	.LBB422:
+ 1381              	.LBB413:
+ 1382              	.LBB411:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1383              		.loc 3 36 5 view .LVU341
+ 1384 0014 F5EE007A 		vmov.f32	s15, #2.5e-1
+ 1385              	.LBE411:
+ 1386              	.LBE413:
+ 1387              	.LBB414:
+ 1388              	.LBB415:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1389              		.loc 3 47 5 view .LVU342
+ 1390 0018 F7EE006A 		vmov.f32	s13, #1.0e+0
+ 1391              	.LBE415:
+ 1392              	.LBE414:
+ 1393              	.LBB418:
+ 1394              	.LBB412:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1395              		.loc 3 36 5 view .LVU343
+ 1396              		.syntax unified
+ 1397              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1398 001c C7FE877A 		vmaxnm.f32 s15, s15, s14
+ 1399              	@ 0 "" 2
+ 1400              	.LVL51:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1401              		.loc 3 40 5 is_stmt 1 view .LVU344
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1402              		.loc 3 40 5 is_stmt 0 view .LVU345
+ 1403              		.thumb
+ 1404              		.syntax unified
+ 1405              	.LBE412:
+ 1406              	.LBE418:
+ 1407              	.LBB419:
+ 1408              	.LBI414:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1409              		.loc 3 43 14 is_stmt 1 view .LVU346
+ 1410              	.LBB416:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1411              		.loc 3 45 5 view .LVU347
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1412              		.loc 3 47 5 view .LVU348
+ 1413              	.LBE416:
+ 1414              	.LBE419:
+ 1415              	.LBE422:
+ 1416              	.LBE425:
+ 1417              	.LBE429:
+  91:../Epiphyte/vibrato.cpp ****     sigl_ = sigr_ = 0.f;
+ 1418              		.loc 1 91 16 is_stmt 0 view .LVU349
+ 1419 0020 C0F82431 		str	r3, [r0, #292]	@ float
+ 1420              	.LBB430:
+ 1421              	.LBB426:
+ 1422              	.LBB423:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 35
+
+
+ 1423              	.LBB420:
+ 1424              	.LBB417:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1425              		.loc 3 47 5 view .LVU350
+ 1426              		.syntax unified
+ 1427              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1428 0024 C7FEE67A 		vminnm.f32 s15, s15, s13
+ 1429              	@ 0 "" 2
+ 1430              	.LVL52:
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1431              		.loc 3 51 5 is_stmt 1 view .LVU351
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1432              		.loc 3 51 5 is_stmt 0 view .LVU352
+ 1433              		.thumb
+ 1434              		.syntax unified
+ 1435              	.LBE417:
+ 1436              	.LBE420:
+ 1437              	.LBE423:
+ 1438              	.LBE426:
+ 1439              	.LBE430:
+  92:../Epiphyte/vibrato.cpp **** }
+ 1440              		.loc 1 92 19 view .LVU353
+ 1441 0028 80ED4C7A 		vstr.32	s14, [r0, #304]
+  92:../Epiphyte/vibrato.cpp **** }
+ 1442              		.loc 1 92 11 view .LVU354
+ 1443 002c 80ED4B7A 		vstr.32	s14, [r0, #300]
+ 1444              	.LBB431:
+ 1445              	.LBB427:
+ 1446              		.loc 1 125 13 view .LVU355
+ 1447 0030 C0ED4A7A 		vstr.32	s15, [r0, #296]
+ 1448              	.LVL53:
+ 1449              		.loc 1 125 13 view .LVU356
+ 1450              	.LBE427:
+ 1451              	.LBE431:
+  91:../Epiphyte/vibrato.cpp ****     sigl_ = sigr_ = 0.f;
+ 1452              		.loc 1 91 5 is_stmt 1 view .LVU357
+  92:../Epiphyte/vibrato.cpp **** }
+ 1453              		.loc 1 92 5 view .LVU358
+  93:../Epiphyte/vibrato.cpp **** 
+ 1454              		.loc 1 93 1 is_stmt 0 view .LVU359
+ 1455 0034 10BD     		pop	{r4, pc}
+ 1456              	.LVL54:
+ 1457              	.L47:
+  93:../Epiphyte/vibrato.cpp **** 
+ 1458              		.loc 1 93 1 view .LVU360
+ 1459 0036 00BF     		.align	2
+ 1460              	.L46:
+ 1461 0038 00000000 		.word	0
+ 1462              		.cfi_endproc
+ 1463              	.LFE3682:
+ 1465              		.section	.text._ZN7daisysp7Vibrato7ProcessEf,"ax",%progbits
+ 1466              		.align	1
+ 1467              		.p2align 2,,3
+ 1468              		.global	_ZN7daisysp7Vibrato7ProcessEf
+ 1469              		.syntax unified
+ 1470              		.thumb
+ 1471              		.thumb_func
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 36
+
+
+ 1472              		.fpu fpv5-d16
+ 1474              	_ZN7daisysp7Vibrato7ProcessEf:
+ 1475              	.LVL55:
+ 1476              	.LFB3683:
+  96:../Epiphyte/vibrato.cpp ****     sigl_ = 0.f;
+ 1477              		.loc 1 96 1 is_stmt 1 view -0
+ 1478              		.cfi_startproc
+ 1479              		@ args = 0, pretend = 0, frame = 0
+ 1480              		@ frame_needed = 0, uses_anonymous_args = 0
+  97:../Epiphyte/vibrato.cpp ****     sigr_ = 0.f;
+ 1481              		.loc 1 97 5 view .LVU362
+  96:../Epiphyte/vibrato.cpp ****     sigl_ = 0.f;
+ 1482              		.loc 1 96 1 is_stmt 0 view .LVU363
+ 1483 0000 10B5     		push	{r4, lr}
+ 1484              		.cfi_def_cfa_offset 8
+ 1485              		.cfi_offset 4, -8
+ 1486              		.cfi_offset 14, -4
+  97:../Epiphyte/vibrato.cpp ****     sigr_ = 0.f;
+ 1487              		.loc 1 97 11 view .LVU364
+ 1488 0002 0023     		movs	r3, #0
+ 1489 0004 00F51C34 		add	r4, r0, #159744
+ 1490 0008 C4F82C31 		str	r3, [r4, #300]	@ float
+  98:../Epiphyte/vibrato.cpp **** 
+ 1491              		.loc 1 98 5 is_stmt 1 view .LVU365
+  98:../Epiphyte/vibrato.cpp **** 
+ 1492              		.loc 1 98 11 is_stmt 0 view .LVU366
+ 1493 000c C4F83031 		str	r3, [r4, #304]	@ float
+ 100:../Epiphyte/vibrato.cpp ****     {
+ 1494              		.loc 1 100 5 is_stmt 1 view .LVU367
+ 1495              	.LVL56:
+ 1496              	.LBB432:
+ 100:../Epiphyte/vibrato.cpp ****     {
+ 1497              		.loc 1 100 23 view .LVU368
+ 1498              	.LBB433:
+ 102:../Epiphyte/vibrato.cpp ****         sigl_ += (1.f - pan_[i]) * sig;
+ 1499              		.loc 1 102 9 view .LVU369
+ 102:../Epiphyte/vibrato.cpp ****         sigl_ += (1.f - pan_[i]) * sig;
+ 1500              		.loc 1 102 40 is_stmt 0 view .LVU370
+ 1501 0010 FFF7FEFF 		bl	_ZN7daisysp13VibratoEngine7ProcessEf
+ 1502              	.LVL57:
+ 103:../Epiphyte/vibrato.cpp ****         sigr_ += pan_[i] * sig;
+ 1503              		.loc 1 103 23 view .LVU371
+ 1504 0014 F7EE006A 		vmov.f32	s13, #1.0e+0
+ 103:../Epiphyte/vibrato.cpp ****         sigr_ += pan_[i] * sig;
+ 1505              		.loc 1 103 31 view .LVU372
+ 1506 0018 D4ED4A5A 		vldr.32	s11, [r4, #296]
+ 1507              	.LVL58:
+ 103:../Epiphyte/vibrato.cpp ****         sigr_ += pan_[i] * sig;
+ 1508              		.loc 1 103 9 is_stmt 1 view .LVU373
+ 103:../Epiphyte/vibrato.cpp ****         sigr_ += pan_[i] * sig;
+ 1509              		.loc 1 103 15 is_stmt 0 view .LVU374
+ 1510 001c D4ED4B7A 		vldr.32	s15, [r4, #300]
+ 103:../Epiphyte/vibrato.cpp ****         sigr_ += pan_[i] * sig;
+ 1511              		.loc 1 103 23 view .LVU375
+ 1512 0020 76EEE56A 		vsub.f32	s13, s13, s11
+ 104:../Epiphyte/vibrato.cpp ****     }
+ 1513              		.loc 1 104 15 view .LVU376
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 37
+
+
+ 1514 0024 94ED4C7A 		vldr.32	s14, [r4, #304]
+ 1515              	.LBE433:
+ 1516              	.LBE432:
+ 107:../Epiphyte/vibrato.cpp ****     sigr_ *= gain_frac_;
+ 1517              		.loc 1 107 14 view .LVU377
+ 1518 0028 94ED496A 		vldr.32	s12, [r4, #292]
+ 1519              	.LBB435:
+ 1520              	.LBB434:
+ 104:../Epiphyte/vibrato.cpp ****     }
+ 1521              		.loc 1 104 15 view .LVU378
+ 1522 002c A5EE807A 		vfma.f32	s14, s11, s0
+ 103:../Epiphyte/vibrato.cpp ****         sigr_ += pan_[i] * sig;
+ 1523              		.loc 1 103 15 view .LVU379
+ 1524 0030 E6EE807A 		vfma.f32	s15, s13, s0
+ 104:../Epiphyte/vibrato.cpp ****     }
+ 1525              		.loc 1 104 9 is_stmt 1 view .LVU380
+ 1526              	.LBE434:
+ 100:../Epiphyte/vibrato.cpp ****     {
+ 1527              		.loc 1 100 5 view .LVU381
+ 1528              	.LVL59:
+ 100:../Epiphyte/vibrato.cpp ****     {
+ 1529              		.loc 1 100 23 view .LVU382
+ 1530              	.LBE435:
+ 107:../Epiphyte/vibrato.cpp ****     sigr_ *= gain_frac_;
+ 1531              		.loc 1 107 5 view .LVU383
+ 108:../Epiphyte/vibrato.cpp **** 
+ 1532              		.loc 1 108 11 is_stmt 0 view .LVU384
+ 1533 0034 27EE067A 		vmul.f32	s14, s14, s12
+ 107:../Epiphyte/vibrato.cpp ****     sigr_ *= gain_frac_;
+ 1534              		.loc 1 107 11 view .LVU385
+ 1535 0038 27EE860A 		vmul.f32	s0, s15, s12
+ 1536              	.LVL60:
+ 108:../Epiphyte/vibrato.cpp **** 
+ 1537              		.loc 1 108 11 view .LVU386
+ 1538 003c 84ED4C7A 		vstr.32	s14, [r4, #304]
+ 107:../Epiphyte/vibrato.cpp ****     sigr_ *= gain_frac_;
+ 1539              		.loc 1 107 11 view .LVU387
+ 1540 0040 84ED4B0A 		vstr.32	s0, [r4, #300]
+ 108:../Epiphyte/vibrato.cpp **** 
+ 1541              		.loc 1 108 5 is_stmt 1 view .LVU388
+ 110:../Epiphyte/vibrato.cpp **** }
+ 1542              		.loc 1 110 5 view .LVU389
+ 111:../Epiphyte/vibrato.cpp **** 
+ 1543              		.loc 1 111 1 is_stmt 0 view .LVU390
+ 1544 0044 10BD     		pop	{r4, pc}
+ 1545              		.cfi_endproc
+ 1546              	.LFE3683:
+ 1548 0046 00BF     		.section	.text._ZN7daisysp7Vibrato7GetLeftEv,"ax",%progbits
+ 1549              		.align	1
+ 1550              		.p2align 2,,3
+ 1551              		.global	_ZN7daisysp7Vibrato7GetLeftEv
+ 1552              		.syntax unified
+ 1553              		.thumb
+ 1554              		.thumb_func
+ 1555              		.fpu fpv5-d16
+ 1557              	_ZN7daisysp7Vibrato7GetLeftEv:
+ 1558              	.LVL61:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 38
+
+
+ 1559              	.LFB3684:
+ 114:../Epiphyte/vibrato.cpp ****     return sigl_;
+ 1560              		.loc 1 114 1 is_stmt 1 view -0
+ 1561              		.cfi_startproc
+ 1562              		@ args = 0, pretend = 0, frame = 0
+ 1563              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1564              		@ link register save eliminated.
+ 115:../Epiphyte/vibrato.cpp **** }
+ 1565              		.loc 1 115 5 view .LVU392
+ 115:../Epiphyte/vibrato.cpp **** }
+ 1566              		.loc 1 115 12 is_stmt 0 view .LVU393
+ 1567 0000 00F51C30 		add	r0, r0, #159744
+ 1568              	.LVL62:
+ 116:../Epiphyte/vibrato.cpp **** 
+ 1569              		.loc 1 116 1 view .LVU394
+ 1570 0004 90ED4B0A 		vldr.32	s0, [r0, #300]
+ 1571 0008 7047     		bx	lr
+ 1572              		.cfi_endproc
+ 1573              	.LFE3684:
+ 1575 000a 00BF     		.section	.text._ZN7daisysp7Vibrato8GetRightEv,"ax",%progbits
+ 1576              		.align	1
+ 1577              		.p2align 2,,3
+ 1578              		.global	_ZN7daisysp7Vibrato8GetRightEv
+ 1579              		.syntax unified
+ 1580              		.thumb
+ 1581              		.thumb_func
+ 1582              		.fpu fpv5-d16
+ 1584              	_ZN7daisysp7Vibrato8GetRightEv:
+ 1585              	.LVL63:
+ 1586              	.LFB3685:
+ 119:../Epiphyte/vibrato.cpp ****     return sigr_;
+ 1587              		.loc 1 119 1 is_stmt 1 view -0
+ 1588              		.cfi_startproc
+ 1589              		@ args = 0, pretend = 0, frame = 0
+ 1590              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1591              		@ link register save eliminated.
+ 120:../Epiphyte/vibrato.cpp **** }
+ 1592              		.loc 1 120 5 view .LVU396
+ 120:../Epiphyte/vibrato.cpp **** }
+ 1593              		.loc 1 120 12 is_stmt 0 view .LVU397
+ 1594 0000 00F51C30 		add	r0, r0, #159744
+ 1595              	.LVL64:
+ 121:../Epiphyte/vibrato.cpp **** 
+ 1596              		.loc 1 121 1 view .LVU398
+ 1597 0004 90ED4C0A 		vldr.32	s0, [r0, #304]
+ 1598 0008 7047     		bx	lr
+ 1599              		.cfi_endproc
+ 1600              	.LFE3685:
+ 1602 000a 00BF     		.section	.text._ZN7daisysp7Vibrato6SetPanEff,"ax",%progbits
+ 1603              		.align	1
+ 1604              		.p2align 2,,3
+ 1605              		.global	_ZN7daisysp7Vibrato6SetPanEff
+ 1606              		.syntax unified
+ 1607              		.thumb
+ 1608              		.thumb_func
+ 1609              		.fpu fpv5-d16
+ 1611              	_ZN7daisysp7Vibrato6SetPanEff:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 39
+
+
+ 1612              	.LVL65:
+ 1613              	.LFB3686:
+ 124:../Epiphyte/vibrato.cpp ****     pan_[0] = fclamp(panl, 0.f, 1.f);
+ 1614              		.loc 1 124 1 is_stmt 1 view -0
+ 1615              		.cfi_startproc
+ 1616              		@ args = 0, pretend = 0, frame = 0
+ 1617              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1618              		@ link register save eliminated.
+ 1619              		.loc 1 125 5 view .LVU400
+ 1620              	.LBB436:
+ 1621              	.LBI436:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1622              		.loc 3 56 14 view .LVU401
+ 1623              	.LBE436:
+ 1624              		.loc 3 58 5 view .LVU402
+ 1625              	.LBB445:
+ 1626              	.LBB437:
+ 1627              	.LBI437:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1628              		.loc 3 32 14 view .LVU403
+ 1629              	.LBB438:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1630              		.loc 3 34 5 view .LVU404
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1631              		.loc 3 36 5 view .LVU405
+ 1632              	.LBE438:
+ 1633              	.LBE437:
+ 1634              	.LBE445:
+ 1635              		.loc 1 125 13 is_stmt 0 view .LVU406
+ 1636 0000 00F51C30 		add	r0, r0, #159744
+ 1637              	.LVL66:
+ 1638              	.LBB446:
+ 1639              	.LBB440:
+ 1640              	.LBB441:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1641              		.loc 3 47 5 view .LVU407
+ 1642 0004 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 1643              	.LBE441:
+ 1644              	.LBE440:
+ 1645              	.LBB443:
+ 1646              	.LBB439:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1647              		.loc 3 36 5 view .LVU408
+ 1648 0008 9FED047A 		vldr.32	s14, .L53
+ 1649              		.syntax unified
+ 1650              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1651 000c 80FE070A 		vmaxnm.f32 s0, s0, s14
+ 1652              	@ 0 "" 2
+ 1653              	.LVL67:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1654              		.loc 3 40 5 is_stmt 1 view .LVU409
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1655              		.loc 3 40 5 is_stmt 0 view .LVU410
+ 1656              		.thumb
+ 1657              		.syntax unified
+ 1658              	.LBE439:
+ 1659              	.LBE443:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 40
+
+
+ 1660              	.LBB444:
+ 1661              	.LBI440:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1662              		.loc 3 43 14 is_stmt 1 view .LVU411
+ 1663              	.LBB442:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1664              		.loc 3 45 5 view .LVU412
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1665              		.loc 3 47 5 view .LVU413
+ 1666              		.syntax unified
+ 1667              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1668 0010 80FE670A 		vminnm.f32 s0, s0, s15
+ 1669              	@ 0 "" 2
+ 1670              	.LVL68:
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1671              		.loc 3 51 5 view .LVU414
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1672              		.loc 3 51 5 is_stmt 0 view .LVU415
+ 1673              		.thumb
+ 1674              		.syntax unified
+ 1675              	.LBE442:
+ 1676              	.LBE444:
+ 1677              	.LBE446:
+ 1678              		.loc 1 125 13 view .LVU416
+ 1679 0014 80ED4A0A 		vstr.32	s0, [r0, #296]
+ 126:../Epiphyte/vibrato.cpp **** }
+ 1680              		.loc 1 126 1 view .LVU417
+ 1681 0018 7047     		bx	lr
+ 1682              	.L54:
+ 1683 001a 00BF     		.align	2
+ 1684              	.L53:
+ 1685 001c 00000000 		.word	0
+ 1686              		.cfi_endproc
+ 1687              	.LFE3686:
+ 1689              		.section	.text._ZN7daisysp7Vibrato6SetPanEf,"ax",%progbits
+ 1690              		.align	1
+ 1691              		.p2align 2,,3
+ 1692              		.global	_ZN7daisysp7Vibrato6SetPanEf
+ 1693              		.syntax unified
+ 1694              		.thumb
+ 1695              		.thumb_func
+ 1696              		.fpu fpv5-d16
+ 1698              	_ZN7daisysp7Vibrato6SetPanEf:
+ 1699              	.LVL69:
+ 1700              	.LFB3687:
+ 127:../Epiphyte/vibrato.cpp **** 
+ 128:../Epiphyte/vibrato.cpp **** void Vibrato::SetPan(float pan)
+ 129:../Epiphyte/vibrato.cpp **** {
+ 1701              		.loc 1 129 1 is_stmt 1 view -0
+ 1702              		.cfi_startproc
+ 1703              		@ args = 0, pretend = 0, frame = 0
+ 1704              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1705              		@ link register save eliminated.
+ 130:../Epiphyte/vibrato.cpp ****     SetPan(pan, pan);
+ 1706              		.loc 1 130 5 view .LVU419
+ 1707              	.LBB447:
+ 1708              	.LBI447:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 41
+
+
+ 123:../Epiphyte/vibrato.cpp **** {
+ 1709              		.loc 1 123 6 view .LVU420
+ 1710              	.LBB448:
+ 125:../Epiphyte/vibrato.cpp **** }
+ 1711              		.loc 1 125 5 view .LVU421
+ 1712              	.LBB449:
+ 1713              	.LBI449:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1714              		.loc 3 56 14 view .LVU422
+ 1715              	.LBE449:
+ 1716              	.LBE448:
+ 1717              	.LBE447:
+ 1718              		.loc 3 58 5 view .LVU423
+ 1719              	.LBB461:
+ 1720              	.LBB460:
+ 1721              	.LBB458:
+ 1722              	.LBB450:
+ 1723              	.LBI450:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1724              		.loc 3 32 14 view .LVU424
+ 1725              	.LBB451:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1726              		.loc 3 34 5 view .LVU425
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1727              		.loc 3 36 5 view .LVU426
+ 1728              	.LBE451:
+ 1729              	.LBE450:
+ 1730              	.LBE458:
+ 125:../Epiphyte/vibrato.cpp **** }
+ 1731              		.loc 1 125 13 is_stmt 0 view .LVU427
+ 1732 0000 00F51C30 		add	r0, r0, #159744
+ 1733              	.LVL70:
+ 1734              	.LBB459:
+ 1735              	.LBB453:
+ 1736              	.LBB454:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1737              		.loc 3 47 5 view .LVU428
+ 1738 0004 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 1739              	.LBE454:
+ 1740              	.LBE453:
+ 1741              	.LBB456:
+ 1742              	.LBB452:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1743              		.loc 3 36 5 view .LVU429
+ 1744 0008 9FED047A 		vldr.32	s14, .L56
+ 1745              		.syntax unified
+ 1746              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1747 000c 80FE070A 		vmaxnm.f32 s0, s0, s14
+ 1748              	@ 0 "" 2
+ 1749              	.LVL71:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1750              		.loc 3 40 5 is_stmt 1 view .LVU430
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1751              		.loc 3 40 5 is_stmt 0 view .LVU431
+ 1752              		.thumb
+ 1753              		.syntax unified
+ 1754              	.LBE452:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 42
+
+
+ 1755              	.LBE456:
+ 1756              	.LBB457:
+ 1757              	.LBI453:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1758              		.loc 3 43 14 is_stmt 1 view .LVU432
+ 1759              	.LBB455:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1760              		.loc 3 45 5 view .LVU433
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1761              		.loc 3 47 5 view .LVU434
+ 1762              		.syntax unified
+ 1763              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1764 0010 80FE670A 		vminnm.f32 s0, s0, s15
+ 1765              	@ 0 "" 2
+ 1766              	.LVL72:
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1767              		.loc 3 51 5 view .LVU435
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1768              		.loc 3 51 5 is_stmt 0 view .LVU436
+ 1769              		.thumb
+ 1770              		.syntax unified
+ 1771              	.LBE455:
+ 1772              	.LBE457:
+ 1773              	.LBE459:
+ 125:../Epiphyte/vibrato.cpp **** }
+ 1774              		.loc 1 125 13 view .LVU437
+ 1775 0014 80ED4A0A 		vstr.32	s0, [r0, #296]
+ 1776              	.LVL73:
+ 125:../Epiphyte/vibrato.cpp **** }
+ 1777              		.loc 1 125 13 view .LVU438
+ 1778              	.LBE460:
+ 1779              	.LBE461:
+ 131:../Epiphyte/vibrato.cpp **** }
+ 1780              		.loc 1 131 1 view .LVU439
+ 1781 0018 7047     		bx	lr
+ 1782              	.L57:
+ 1783 001a 00BF     		.align	2
+ 1784              	.L56:
+ 1785 001c 00000000 		.word	0
+ 1786              		.cfi_endproc
+ 1787              	.LFE3687:
+ 1789              		.section	.text._ZN7daisysp7Vibrato11SetLfoDepthEff,"ax",%progbits
+ 1790              		.align	1
+ 1791              		.p2align 2,,3
+ 1792              		.global	_ZN7daisysp7Vibrato11SetLfoDepthEff
+ 1793              		.syntax unified
+ 1794              		.thumb
+ 1795              		.thumb_func
+ 1796              		.fpu fpv5-d16
+ 1798              	_ZN7daisysp7Vibrato11SetLfoDepthEff:
+ 1799              	.LVL74:
+ 1800              	.LFB3688:
+ 132:../Epiphyte/vibrato.cpp **** 
+ 133:../Epiphyte/vibrato.cpp **** void Vibrato::SetLfoDepth(float depthl, float depthr)
+ 134:../Epiphyte/vibrato.cpp **** {
+ 1801              		.loc 1 134 1 is_stmt 1 view -0
+ 1802              		.cfi_startproc
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 43
+
+
+ 1803              		@ args = 0, pretend = 0, frame = 0
+ 1804              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1805              		@ link register save eliminated.
+ 135:../Epiphyte/vibrato.cpp ****     engines_[0].SetLfoDepth(depthl);
+ 1806              		.loc 1 135 5 view .LVU441
+ 1807              	.LBB462:
+ 1808              	.LBB463:
+ 1809              	.LBB464:
+ 1810              	.LBB465:
+ 1811              	.LBB466:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1812              		.loc 3 36 5 is_stmt 0 view .LVU442
+ 1813 0000 DFED077A 		vldr.32	s15, .L59
+ 1814              		.syntax unified
+ 1815              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1816 0004 80FE270A 		vmaxnm.f32 s0, s0, s15
+ 1817              	@ 0 "" 2
+ 1818              	.LVL75:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1819              		.loc 3 36 5 view .LVU443
+ 1820              		.thumb
+ 1821              		.syntax unified
+ 1822              	.LBE466:
+ 1823              	.LBE465:
+ 1824              	.LBE464:
+  37:../Epiphyte/vibrato.cpp **** }
+ 1825              		.loc 1 37 22 view .LVU444
+ 1826 0008 D0ED057A 		vldr.32	s15, [r0, #20]
+ 1827              	.LBB473:
+ 1828              	.LBB468:
+ 1829              	.LBB469:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1830              		.loc 3 47 5 view .LVU445
+ 1831 000c 9FED057A 		vldr.32	s14, .L59+4
+ 1832              	.LVL76:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1833              		.loc 3 47 5 view .LVU446
+ 1834              	.LBE469:
+ 1835              	.LBE468:
+ 1836              	.LBE473:
+ 1837              	.LBE463:
+ 1838              	.LBI462:
+  34:../Epiphyte/vibrato.cpp **** {
+ 1839              		.loc 1 34 6 is_stmt 1 view .LVU447
+ 1840              	.LBB476:
+  36:../Epiphyte/vibrato.cpp ****     lfo_amp_ = depth * delay_;
+ 1841              		.loc 1 36 5 view .LVU448
+ 1842              	.LBB474:
+ 1843              	.LBI464:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1844              		.loc 3 56 14 view .LVU449
+ 1845              	.LBE474:
+ 1846              	.LBE476:
+ 1847              	.LBE462:
+ 1848              		.loc 3 58 5 view .LVU450
+ 1849              	.LBB478:
+ 1850              	.LBB477:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 44
+
+
+ 1851              	.LBB475:
+ 1852              	.LBB471:
+ 1853              	.LBI465:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1854              		.loc 3 32 14 view .LVU451
+ 1855              	.LBB467:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1856              		.loc 3 34 5 view .LVU452
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1857              		.loc 3 36 5 view .LVU453
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1858              		.loc 3 40 5 view .LVU454
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1859              		.loc 3 40 5 is_stmt 0 view .LVU455
+ 1860              	.LBE467:
+ 1861              	.LBE471:
+ 1862              	.LBB472:
+ 1863              	.LBI468:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1864              		.loc 3 43 14 is_stmt 1 view .LVU456
+ 1865              	.LBB470:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1866              		.loc 3 45 5 view .LVU457
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1867              		.loc 3 47 5 view .LVU458
+ 1868              		.syntax unified
+ 1869              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1870 0010 80FE470A 		vminnm.f32 s0, s0, s14
+ 1871              	@ 0 "" 2
+ 1872              	.LVL77:
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1873              		.loc 3 51 5 view .LVU459
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1874              		.loc 3 51 5 is_stmt 0 view .LVU460
+ 1875              		.thumb
+ 1876              		.syntax unified
+ 1877              	.LBE470:
+ 1878              	.LBE472:
+ 1879              	.LBE475:
+  37:../Epiphyte/vibrato.cpp **** }
+ 1880              		.loc 1 37 5 is_stmt 1 view .LVU461
+  37:../Epiphyte/vibrato.cpp **** }
+ 1881              		.loc 1 37 22 is_stmt 0 view .LVU462
+ 1882 0014 27EE800A 		vmul.f32	s0, s15, s0
+ 1883              	.LVL78:
+  37:../Epiphyte/vibrato.cpp **** }
+ 1884              		.loc 1 37 14 view .LVU463
+ 1885 0018 80ED030A 		vstr.32	s0, [r0, #12]
+ 1886              	.LVL79:
+  37:../Epiphyte/vibrato.cpp **** }
+ 1887              		.loc 1 37 14 view .LVU464
+ 1888              	.LBE477:
+ 1889              	.LBE478:
+ 136:../Epiphyte/vibrato.cpp **** }
+ 1890              		.loc 1 136 1 view .LVU465
+ 1891 001c 7047     		bx	lr
+ 1892              	.L60:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 45
+
+
+ 1893 001e 00BF     		.align	2
+ 1894              	.L59:
+ 1895 0020 00000000 		.word	0
+ 1896 0024 7B146E3F 		.word	1064178811
+ 1897              		.cfi_endproc
+ 1898              	.LFE3688:
+ 1900              		.section	.text._ZN7daisysp7Vibrato11SetLfoDepthEf,"ax",%progbits
+ 1901              		.align	1
+ 1902              		.p2align 2,,3
+ 1903              		.global	_ZN7daisysp7Vibrato11SetLfoDepthEf
+ 1904              		.syntax unified
+ 1905              		.thumb
+ 1906              		.thumb_func
+ 1907              		.fpu fpv5-d16
+ 1909              	_ZN7daisysp7Vibrato11SetLfoDepthEf:
+ 1910              	.LVL80:
+ 1911              	.LFB3689:
+ 137:../Epiphyte/vibrato.cpp **** 
+ 138:../Epiphyte/vibrato.cpp **** void Vibrato::SetLfoDepth(float depth)
+ 139:../Epiphyte/vibrato.cpp **** {
+ 1912              		.loc 1 139 1 is_stmt 1 view -0
+ 1913              		.cfi_startproc
+ 1914              		@ args = 0, pretend = 0, frame = 0
+ 1915              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1916              		@ link register save eliminated.
+ 140:../Epiphyte/vibrato.cpp ****     SetLfoDepth(depth, depth);
+ 1917              		.loc 1 140 5 view .LVU467
+ 1918              	.LBB479:
+ 1919              	.LBB480:
+ 1920              	.LBB481:
+ 1921              	.LBB482:
+ 1922              	.LBB483:
+ 1923              	.LBB484:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1924              		.loc 3 36 5 is_stmt 0 view .LVU468
+ 1925 0000 DFED077A 		vldr.32	s15, .L62
+ 1926              		.syntax unified
+ 1927              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1928 0004 80FE270A 		vmaxnm.f32 s0, s0, s15
+ 1929              	@ 0 "" 2
+ 1930              	.LVL81:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1931              		.loc 3 36 5 view .LVU469
+ 1932              		.thumb
+ 1933              		.syntax unified
+ 1934              	.LBE484:
+ 1935              	.LBE483:
+ 1936              	.LBE482:
+  37:../Epiphyte/vibrato.cpp **** }
+ 1937              		.loc 1 37 22 view .LVU470
+ 1938 0008 D0ED057A 		vldr.32	s15, [r0, #20]
+ 1939              	.LBB491:
+ 1940              	.LBB486:
+ 1941              	.LBB487:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1942              		.loc 3 47 5 view .LVU471
+ 1943 000c 9FED057A 		vldr.32	s14, .L62+4
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 46
+
+
+ 1944              	.LVL82:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1945              		.loc 3 47 5 view .LVU472
+ 1946              	.LBE487:
+ 1947              	.LBE486:
+ 1948              	.LBE491:
+ 1949              	.LBE481:
+ 1950              	.LBE480:
+ 1951              	.LBI479:
+ 133:../Epiphyte/vibrato.cpp **** {
+ 1952              		.loc 1 133 6 is_stmt 1 view .LVU473
+ 1953              	.LBE479:
+ 135:../Epiphyte/vibrato.cpp **** }
+ 1954              		.loc 1 135 5 view .LVU474
+ 1955              	.LBB498:
+ 1956              	.LBB496:
+ 1957              	.LBI480:
+  34:../Epiphyte/vibrato.cpp **** {
+ 1958              		.loc 1 34 6 view .LVU475
+ 1959              	.LBB494:
+  36:../Epiphyte/vibrato.cpp ****     lfo_amp_ = depth * delay_;
+ 1960              		.loc 1 36 5 view .LVU476
+ 1961              	.LBB492:
+ 1962              	.LBI482:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1963              		.loc 3 56 14 view .LVU477
+ 1964              	.LBE492:
+ 1965              	.LBE494:
+ 1966              	.LBE496:
+ 1967              	.LBE498:
+ 1968              		.loc 3 58 5 view .LVU478
+ 1969              	.LBB499:
+ 1970              	.LBB497:
+ 1971              	.LBB495:
+ 1972              	.LBB493:
+ 1973              	.LBB489:
+ 1974              	.LBI483:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1975              		.loc 3 32 14 view .LVU479
+ 1976              	.LBB485:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1977              		.loc 3 34 5 view .LVU480
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1978              		.loc 3 36 5 view .LVU481
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1979              		.loc 3 40 5 view .LVU482
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1980              		.loc 3 40 5 is_stmt 0 view .LVU483
+ 1981              	.LBE485:
+ 1982              	.LBE489:
+ 1983              	.LBB490:
+ 1984              	.LBI486:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 1985              		.loc 3 43 14 is_stmt 1 view .LVU484
+ 1986              	.LBB488:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 1987              		.loc 3 45 5 view .LVU485
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 47
+
+
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 1988              		.loc 3 47 5 view .LVU486
+ 1989              		.syntax unified
+ 1990              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 1991 0010 80FE470A 		vminnm.f32 s0, s0, s14
+ 1992              	@ 0 "" 2
+ 1993              	.LVL83:
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1994              		.loc 3 51 5 view .LVU487
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 1995              		.loc 3 51 5 is_stmt 0 view .LVU488
+ 1996              		.thumb
+ 1997              		.syntax unified
+ 1998              	.LBE488:
+ 1999              	.LBE490:
+ 2000              	.LBE493:
+  37:../Epiphyte/vibrato.cpp **** }
+ 2001              		.loc 1 37 5 is_stmt 1 view .LVU489
+  37:../Epiphyte/vibrato.cpp **** }
+ 2002              		.loc 1 37 22 is_stmt 0 view .LVU490
+ 2003 0014 27EE800A 		vmul.f32	s0, s15, s0
+ 2004              	.LVL84:
+  37:../Epiphyte/vibrato.cpp **** }
+ 2005              		.loc 1 37 14 view .LVU491
+ 2006 0018 80ED030A 		vstr.32	s0, [r0, #12]
+ 2007              	.LVL85:
+  37:../Epiphyte/vibrato.cpp **** }
+ 2008              		.loc 1 37 14 view .LVU492
+ 2009              	.LBE495:
+ 2010              	.LBE497:
+ 2011              	.LBE499:
+ 141:../Epiphyte/vibrato.cpp **** }
+ 2012              		.loc 1 141 1 view .LVU493
+ 2013 001c 7047     		bx	lr
+ 2014              	.L63:
+ 2015 001e 00BF     		.align	2
+ 2016              	.L62:
+ 2017 0020 00000000 		.word	0
+ 2018 0024 7B146E3F 		.word	1064178811
+ 2019              		.cfi_endproc
+ 2020              	.LFE3689:
+ 2022              		.section	.text._ZN7daisysp7Vibrato10SetLfoFreqEff,"ax",%progbits
+ 2023              		.align	1
+ 2024              		.p2align 2,,3
+ 2025              		.global	_ZN7daisysp7Vibrato10SetLfoFreqEff
+ 2026              		.syntax unified
+ 2027              		.thumb
+ 2028              		.thumb_func
+ 2029              		.fpu fpv5-d16
+ 2031              	_ZN7daisysp7Vibrato10SetLfoFreqEff:
+ 2032              	.LVL86:
+ 2033              	.LFB3690:
+ 142:../Epiphyte/vibrato.cpp **** 
+ 143:../Epiphyte/vibrato.cpp **** void Vibrato::SetLfoFreq(float freql, float freqr)
+ 144:../Epiphyte/vibrato.cpp **** {
+ 2034              		.loc 1 144 1 is_stmt 1 view -0
+ 2035              		.cfi_startproc
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 48
+
+
+ 2036              		@ args = 0, pretend = 0, frame = 0
+ 2037              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2038              		@ link register save eliminated.
+ 145:../Epiphyte/vibrato.cpp ****     engines_[0].SetLfoFreq(freql);
+ 2039              		.loc 1 145 5 view .LVU495
+ 2040              	.LBB500:
+ 2041              	.LBB501:
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2042              		.loc 1 42 16 is_stmt 0 view .LVU496
+ 2043 0000 F1EE007A 		vmov.f32	s15, #4.0e+0
+ 2044              	.LVL87:
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2045              		.loc 1 42 16 view .LVU497
+ 2046              	.LBE501:
+ 2047              	.LBI500:
+  40:../Epiphyte/vibrato.cpp **** {
+ 2048              		.loc 1 40 6 is_stmt 1 view .LVU498
+ 2049              	.LBB514:
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2050              		.loc 1 42 5 view .LVU499
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2051              		.loc 1 42 10 is_stmt 0 view .LVU500
+ 2052 0004 D0ED006A 		vldr.32	s13, [r0]
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 2053              		.loc 1 43 29 view .LVU501
+ 2054 0008 90ED027A 		vldr.32	s14, [r0, #8]
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2055              		.loc 1 42 16 view .LVU502
+ 2056 000c 20EE270A 		vmul.f32	s0, s0, s15
+ 2057              	.LVL88:
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 2058              		.loc 1 43 29 view .LVU503
+ 2059 0010 B5EEC07A 		vcmpe.f32	s14, #0
+ 2060              	.LBB502:
+ 2061              	.LBB503:
+ 2062              	.LBB504:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2063              		.loc 3 47 5 view .LVU504
+ 2064 0014 B5EE007A 		vmov.f32	s14, #2.5e-1
+ 2065              	.LBE504:
+ 2066              	.LBE503:
+ 2067              	.LBE502:
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2068              		.loc 1 42 10 view .LVU505
+ 2069 0018 C0EE267A 		vdiv.f32	s15, s0, s13
+ 2070              	.LVL89:
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 2071              		.loc 1 43 5 is_stmt 1 view .LVU506
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 2072              		.loc 1 43 29 is_stmt 0 view .LVU507
+ 2073 001c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 2074              	.LBB511:
+ 2075              	.LBB506:
+ 2076              	.LBB507:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2077              		.loc 3 36 5 view .LVU508
+ 2078 0020 FDEE006A 		vmov.f32	s13, #-2.5e-1
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 49
+
+
+ 2079 0024 48BF     		it	mi
+ 2080 0026 F1EE677A 		vnegmi.f32	s15, s15
+ 2081              	.LVL90:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2082              		.loc 3 36 5 view .LVU509
+ 2083              	.LBE507:
+ 2084              	.LBE506:
+ 2085              	.LBE511:
+  44:../Epiphyte/vibrato.cpp **** }
+ 2086              		.loc 1 44 5 is_stmt 1 view .LVU510
+ 2087              	.LBB512:
+ 2088              	.LBI502:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2089              		.loc 3 56 14 view .LVU511
+ 2090              	.LBE512:
+ 2091              	.LBE514:
+ 2092              	.LBE500:
+ 2093              		.loc 3 58 5 view .LVU512
+ 2094              	.LBB516:
+ 2095              	.LBB515:
+ 2096              	.LBB513:
+ 2097              	.LBB509:
+ 2098              	.LBI506:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2099              		.loc 3 32 14 view .LVU513
+ 2100              	.LBB508:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 2101              		.loc 3 34 5 view .LVU514
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2102              		.loc 3 36 5 view .LVU515
+ 2103              		.syntax unified
+ 2104              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2105 002a C7FEA67A 		vmaxnm.f32 s15, s15, s13
+ 2106              	@ 0 "" 2
+ 2107              	.LVL91:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2108              		.loc 3 40 5 view .LVU516
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2109              		.loc 3 40 5 is_stmt 0 view .LVU517
+ 2110              		.thumb
+ 2111              		.syntax unified
+ 2112              	.LBE508:
+ 2113              	.LBE509:
+ 2114              	.LBB510:
+ 2115              	.LBI503:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2116              		.loc 3 43 14 is_stmt 1 view .LVU518
+ 2117              	.LBB505:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 2118              		.loc 3 45 5 view .LVU519
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2119              		.loc 3 47 5 view .LVU520
+ 2120              		.syntax unified
+ 2121              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2122 002e C7FEC77A 		vminnm.f32 s15, s15, s14
+ 2123              	@ 0 "" 2
+ 2124              	.LVL92:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 50
+
+
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2125              		.loc 3 51 5 view .LVU521
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2126              		.loc 3 51 5 is_stmt 0 view .LVU522
+ 2127              		.thumb
+ 2128              		.syntax unified
+ 2129              	.LBE505:
+ 2130              	.LBE510:
+ 2131              	.LBE513:
+  44:../Epiphyte/vibrato.cpp **** }
+ 2132              		.loc 1 44 15 view .LVU523
+ 2133 0032 C0ED027A 		vstr.32	s15, [r0, #8]
+ 2134              	.LVL93:
+  44:../Epiphyte/vibrato.cpp **** }
+ 2135              		.loc 1 44 15 view .LVU524
+ 2136              	.LBE515:
+ 2137              	.LBE516:
+ 146:../Epiphyte/vibrato.cpp **** }
+ 2138              		.loc 1 146 1 view .LVU525
+ 2139 0036 7047     		bx	lr
+ 2140              		.cfi_endproc
+ 2141              	.LFE3690:
+ 2143              		.section	.text._ZN7daisysp7Vibrato10SetLfoFreqEf,"ax",%progbits
+ 2144              		.align	1
+ 2145              		.p2align 2,,3
+ 2146              		.global	_ZN7daisysp7Vibrato10SetLfoFreqEf
+ 2147              		.syntax unified
+ 2148              		.thumb
+ 2149              		.thumb_func
+ 2150              		.fpu fpv5-d16
+ 2152              	_ZN7daisysp7Vibrato10SetLfoFreqEf:
+ 2153              	.LVL94:
+ 2154              	.LFB3691:
+ 147:../Epiphyte/vibrato.cpp **** 
+ 148:../Epiphyte/vibrato.cpp **** void Vibrato::SetLfoFreq(float freq)
+ 149:../Epiphyte/vibrato.cpp **** {
+ 2155              		.loc 1 149 1 is_stmt 1 view -0
+ 2156              		.cfi_startproc
+ 2157              		@ args = 0, pretend = 0, frame = 0
+ 2158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2159              		@ link register save eliminated.
+ 150:../Epiphyte/vibrato.cpp ****     SetLfoFreq(freq, freq);
+ 2160              		.loc 1 150 5 view .LVU527
+ 2161              	.LBB517:
+ 2162              	.LBB518:
+ 2163              	.LBB519:
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2164              		.loc 1 42 16 is_stmt 0 view .LVU528
+ 2165 0000 F1EE007A 		vmov.f32	s15, #4.0e+0
+ 2166              	.LVL95:
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2167              		.loc 1 42 16 view .LVU529
+ 2168              	.LBE519:
+ 2169              	.LBE518:
+ 2170              	.LBI517:
+ 143:../Epiphyte/vibrato.cpp **** {
+ 2171              		.loc 1 143 6 is_stmt 1 view .LVU530
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 51
+
+
+ 2172              	.LBE517:
+ 145:../Epiphyte/vibrato.cpp **** }
+ 2173              		.loc 1 145 5 view .LVU531
+ 2174              	.LBB536:
+ 2175              	.LBB534:
+ 2176              	.LBI518:
+  40:../Epiphyte/vibrato.cpp **** {
+ 2177              		.loc 1 40 6 view .LVU532
+ 2178              	.LBB532:
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2179              		.loc 1 42 5 view .LVU533
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2180              		.loc 1 42 10 is_stmt 0 view .LVU534
+ 2181 0004 D0ED006A 		vldr.32	s13, [r0]
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 2182              		.loc 1 43 29 view .LVU535
+ 2183 0008 90ED027A 		vldr.32	s14, [r0, #8]
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2184              		.loc 1 42 16 view .LVU536
+ 2185 000c 20EE270A 		vmul.f32	s0, s0, s15
+ 2186              	.LVL96:
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 2187              		.loc 1 43 29 view .LVU537
+ 2188 0010 B5EEC07A 		vcmpe.f32	s14, #0
+ 2189              	.LBB520:
+ 2190              	.LBB521:
+ 2191              	.LBB522:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2192              		.loc 3 47 5 view .LVU538
+ 2193 0014 B5EE007A 		vmov.f32	s14, #2.5e-1
+ 2194              	.LBE522:
+ 2195              	.LBE521:
+ 2196              	.LBE520:
+  42:../Epiphyte/vibrato.cpp ****     freq *= lfo_freq_ < 0.f ? -1.f : 1.f;  //if we're headed down, keep going
+ 2197              		.loc 1 42 10 view .LVU539
+ 2198 0018 C0EE267A 		vdiv.f32	s15, s0, s13
+ 2199              	.LVL97:
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 2200              		.loc 1 43 5 is_stmt 1 view .LVU540
+  43:../Epiphyte/vibrato.cpp ****     lfo_freq_ = fclamp(freq, -.25f, .25f); //clip at +/- .125 * sr
+ 2201              		.loc 1 43 29 is_stmt 0 view .LVU541
+ 2202 001c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 2203              	.LBB529:
+ 2204              	.LBB524:
+ 2205              	.LBB525:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2206              		.loc 3 36 5 view .LVU542
+ 2207 0020 FDEE006A 		vmov.f32	s13, #-2.5e-1
+ 2208 0024 48BF     		it	mi
+ 2209 0026 F1EE677A 		vnegmi.f32	s15, s15
+ 2210              	.LVL98:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2211              		.loc 3 36 5 view .LVU543
+ 2212              	.LBE525:
+ 2213              	.LBE524:
+ 2214              	.LBE529:
+  44:../Epiphyte/vibrato.cpp **** }
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 52
+
+
+ 2215              		.loc 1 44 5 is_stmt 1 view .LVU544
+ 2216              	.LBB530:
+ 2217              	.LBI520:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2218              		.loc 3 56 14 view .LVU545
+ 2219              	.LBE530:
+ 2220              	.LBE532:
+ 2221              	.LBE534:
+ 2222              	.LBE536:
+ 2223              		.loc 3 58 5 view .LVU546
+ 2224              	.LBB537:
+ 2225              	.LBB535:
+ 2226              	.LBB533:
+ 2227              	.LBB531:
+ 2228              	.LBB527:
+ 2229              	.LBI524:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2230              		.loc 3 32 14 view .LVU547
+ 2231              	.LBB526:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 2232              		.loc 3 34 5 view .LVU548
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2233              		.loc 3 36 5 view .LVU549
+ 2234              		.syntax unified
+ 2235              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2236 002a C7FEA67A 		vmaxnm.f32 s15, s15, s13
+ 2237              	@ 0 "" 2
+ 2238              	.LVL99:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2239              		.loc 3 40 5 view .LVU550
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2240              		.loc 3 40 5 is_stmt 0 view .LVU551
+ 2241              		.thumb
+ 2242              		.syntax unified
+ 2243              	.LBE526:
+ 2244              	.LBE527:
+ 2245              	.LBB528:
+ 2246              	.LBI521:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2247              		.loc 3 43 14 is_stmt 1 view .LVU552
+ 2248              	.LBB523:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 2249              		.loc 3 45 5 view .LVU553
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2250              		.loc 3 47 5 view .LVU554
+ 2251              		.syntax unified
+ 2252              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2253 002e C7FEC77A 		vminnm.f32 s15, s15, s14
+ 2254              	@ 0 "" 2
+ 2255              	.LVL100:
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2256              		.loc 3 51 5 view .LVU555
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2257              		.loc 3 51 5 is_stmt 0 view .LVU556
+ 2258              		.thumb
+ 2259              		.syntax unified
+ 2260              	.LBE523:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 53
+
+
+ 2261              	.LBE528:
+ 2262              	.LBE531:
+  44:../Epiphyte/vibrato.cpp **** }
+ 2263              		.loc 1 44 15 view .LVU557
+ 2264 0032 C0ED027A 		vstr.32	s15, [r0, #8]
+ 2265              	.LVL101:
+  44:../Epiphyte/vibrato.cpp **** }
+ 2266              		.loc 1 44 15 view .LVU558
+ 2267              	.LBE533:
+ 2268              	.LBE535:
+ 2269              	.LBE537:
+ 151:../Epiphyte/vibrato.cpp **** }
+ 2270              		.loc 1 151 1 view .LVU559
+ 2271 0036 7047     		bx	lr
+ 2272              		.cfi_endproc
+ 2273              	.LFE3691:
+ 2275              		.section	.text._ZN7daisysp7Vibrato8SetDelayEff,"ax",%progbits
+ 2276              		.align	1
+ 2277              		.p2align 2,,3
+ 2278              		.global	_ZN7daisysp7Vibrato8SetDelayEff
+ 2279              		.syntax unified
+ 2280              		.thumb
+ 2281              		.thumb_func
+ 2282              		.fpu fpv5-d16
+ 2284              	_ZN7daisysp7Vibrato8SetDelayEff:
+ 2285              	.LVL102:
+ 2286              	.LFB3692:
+ 152:../Epiphyte/vibrato.cpp **** 
+ 153:../Epiphyte/vibrato.cpp **** void Vibrato::SetDelay(float delayl, float delayr)
+ 154:../Epiphyte/vibrato.cpp **** {
+ 2287              		.loc 1 154 1 is_stmt 1 view -0
+ 2288              		.cfi_startproc
+ 2289              		@ args = 0, pretend = 0, frame = 0
+ 2290              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2291              		@ link register save eliminated.
+ 155:../Epiphyte/vibrato.cpp ****     engines_[0].SetDelay(delayl);
+ 2292              		.loc 1 155 5 view .LVU561
+ 2293              	.LBB538:
+ 2294              	.LBB539:
+  49:../Epiphyte/vibrato.cpp ****     SetDelayMs(delay);
+ 2295              		.loc 1 49 11 is_stmt 0 view .LVU562
+ 2296 0000 DFED0D7A 		vldr.32	s15, .L73
+ 2297              	.LBB540:
+ 2298              	.LBB541:
+  56:../Epiphyte/vibrato.cpp **** 
+ 2299              		.loc 1 56 17 view .LVU563
+ 2300 0004 9FED0D7A 		vldr.32	s14, .L73+4
+ 2301              	.LVL103:
+  56:../Epiphyte/vibrato.cpp **** 
+ 2302              		.loc 1 56 17 view .LVU564
+ 2303              	.LBE541:
+ 2304              	.LBE540:
+ 2305              	.LBE539:
+ 2306              	.LBI538:
+  47:../Epiphyte/vibrato.cpp **** {
+ 2307              		.loc 1 47 6 is_stmt 1 view .LVU565
+ 2308              	.LBB552:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 54
+
+
+  49:../Epiphyte/vibrato.cpp ****     SetDelayMs(delay);
+ 2309              		.loc 1 49 5 view .LVU566
+  49:../Epiphyte/vibrato.cpp ****     SetDelayMs(delay);
+ 2310              		.loc 1 49 11 is_stmt 0 view .LVU567
+ 2311 0008 F0EE676A 		vmov.f32	s13, s15
+ 2312 000c 9FED0C6A 		vldr.32	s12, .L73+8
+ 2313 0010 E0EE066A 		vfma.f32	s13, s0, s12
+ 2314              	.LVL104:
+  50:../Epiphyte/vibrato.cpp **** }
+ 2315              		.loc 1 50 5 is_stmt 1 view .LVU568
+ 2316              	.LBB551:
+ 2317              	.LBI540:
+  53:../Epiphyte/vibrato.cpp **** {
+ 2318              		.loc 1 53 6 view .LVU569
+ 2319              	.LBB550:
+  55:../Epiphyte/vibrato.cpp ****     delay_ = ms * .001f * sample_rate_; //ms to samples
+ 2320              		.loc 1 55 5 view .LVU570
+ 2321              	.LBB542:
+ 2322              	.LBI542:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2323              		.loc 3 32 14 view .LVU571
+ 2324              	.LBB543:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 2325              		.loc 3 34 5 view .LVU572
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2326              		.loc 3 36 5 view .LVU573
+ 2327              		.syntax unified
+ 2328              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2329 0014 C7FEA67A 		vmaxnm.f32 s15, s15, s13
+ 2330              	@ 0 "" 2
+ 2331              	.LVL105:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2332              		.loc 3 40 5 view .LVU574
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2333              		.loc 3 40 5 is_stmt 0 view .LVU575
+ 2334              		.thumb
+ 2335              		.syntax unified
+ 2336              	.LBE543:
+ 2337              	.LBE542:
+  56:../Epiphyte/vibrato.cpp **** 
+ 2338              		.loc 1 56 5 is_stmt 1 view .LVU576
+  56:../Epiphyte/vibrato.cpp **** 
+ 2339              		.loc 1 56 17 is_stmt 0 view .LVU577
+ 2340 0018 67EE877A 		vmul.f32	s15, s15, s14
+ 2341              	.LVL106:
+  56:../Epiphyte/vibrato.cpp **** 
+ 2342              		.loc 1 56 25 view .LVU578
+ 2343 001c D0ED006A 		vldr.32	s13, [r0]
+ 2344              	.LVL107:
+ 2345              	.LBB544:
+ 2346              	.LBB545:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2347              		.loc 3 47 5 view .LVU579
+ 2348 0020 90ED037A 		vldr.32	s14, [r0, #12]
+ 2349              	.LBE545:
+ 2350              	.LBE544:
+  56:../Epiphyte/vibrato.cpp **** 
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 55
+
+
+ 2351              		.loc 1 56 25 view .LVU580
+ 2352 0024 67EEA67A 		vmul.f32	s15, s15, s13
+ 2353              	.LBB548:
+ 2354              	.LBB546:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2355              		.loc 3 47 5 view .LVU581
+ 2356              		.syntax unified
+ 2357              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2358 0028 87FE677A 		vminnm.f32 s14, s14, s15
+ 2359              	@ 0 "" 2
+ 2360              		.thumb
+ 2361              		.syntax unified
+ 2362              	.LBE546:
+ 2363              	.LBE548:
+  58:../Epiphyte/vibrato.cpp **** }
+ 2364              		.loc 1 58 14 view .LVU582
+ 2365 002c 80ED037A 		vstr.32	s14, [r0, #12]
+  56:../Epiphyte/vibrato.cpp **** 
+ 2366              		.loc 1 56 12 view .LVU583
+ 2367 0030 C0ED057A 		vstr.32	s15, [r0, #20]
+  58:../Epiphyte/vibrato.cpp **** }
+ 2368              		.loc 1 58 5 is_stmt 1 view .LVU584
+ 2369              	.LVL108:
+ 2370              	.LBB549:
+ 2371              	.LBI544:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2372              		.loc 3 43 14 view .LVU585
+ 2373              	.LBB547:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 2374              		.loc 3 45 5 view .LVU586
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2375              		.loc 3 47 5 view .LVU587
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2376              		.loc 3 51 5 view .LVU588
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2377              		.loc 3 51 5 is_stmt 0 view .LVU589
+ 2378              	.LBE547:
+ 2379              	.LBE549:
+ 2380              	.LBE550:
+ 2381              	.LBE551:
+ 2382              	.LBE552:
+ 2383              	.LBE538:
+ 156:../Epiphyte/vibrato.cpp **** }
+ 2384              		.loc 1 156 1 view .LVU590
+ 2385 0034 7047     		bx	lr
+ 2386              	.L74:
+ 2387 0036 00BF     		.align	2
+ 2388              	.L73:
+ 2389 0038 CDCCCC3D 		.word	1036831949
+ 2390 003c 6F12833A 		.word	981668463
+ 2391 0040 CDCCFC40 		.word	1090309325
+ 2392              		.cfi_endproc
+ 2393              	.LFE3692:
+ 2395              		.section	.text._ZN7daisysp7Vibrato8SetDelayEf,"ax",%progbits
+ 2396              		.align	1
+ 2397              		.p2align 2,,3
+ 2398              		.global	_ZN7daisysp7Vibrato8SetDelayEf
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 56
+
+
+ 2399              		.syntax unified
+ 2400              		.thumb
+ 2401              		.thumb_func
+ 2402              		.fpu fpv5-d16
+ 2404              	_ZN7daisysp7Vibrato8SetDelayEf:
+ 2405              	.LFB4224:
+ 2406              		.cfi_startproc
+ 2407              		@ args = 0, pretend = 0, frame = 0
+ 2408              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2409              		@ link register save eliminated.
+ 2410 0000 DFED0D7A 		vldr.32	s15, .L76
+ 2411 0004 9FED0D7A 		vldr.32	s14, .L76+4
+ 2412 0008 F0EE676A 		vmov.f32	s13, s15
+ 2413 000c 9FED0C6A 		vldr.32	s12, .L76+8
+ 2414 0010 E0EE066A 		vfma.f32	s13, s0, s12
+ 2415              		.syntax unified
+ 2416              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2417 0014 C7FEA67A 		vmaxnm.f32 s15, s15, s13
+ 2418              	@ 0 "" 2
+ 2419              		.thumb
+ 2420              		.syntax unified
+ 2421 0018 67EE877A 		vmul.f32	s15, s15, s14
+ 2422 001c D0ED006A 		vldr.32	s13, [r0]
+ 2423 0020 90ED037A 		vldr.32	s14, [r0, #12]
+ 2424 0024 67EEA67A 		vmul.f32	s15, s15, s13
+ 2425              		.syntax unified
+ 2426              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2427 0028 87FE677A 		vminnm.f32 s14, s14, s15
+ 2428              	@ 0 "" 2
+ 2429              		.thumb
+ 2430              		.syntax unified
+ 2431 002c 80ED037A 		vstr.32	s14, [r0, #12]
+ 2432 0030 C0ED057A 		vstr.32	s15, [r0, #20]
+ 2433 0034 7047     		bx	lr
+ 2434              	.L77:
+ 2435 0036 00BF     		.align	2
+ 2436              	.L76:
+ 2437 0038 CDCCCC3D 		.word	1036831949
+ 2438 003c 6F12833A 		.word	981668463
+ 2439 0040 CDCCFC40 		.word	1090309325
+ 2440              		.cfi_endproc
+ 2441              	.LFE4224:
+ 2443              		.section	.text._ZN7daisysp7Vibrato10SetDelayMsEff,"ax",%progbits
+ 2444              		.align	1
+ 2445              		.p2align 2,,3
+ 2446              		.global	_ZN7daisysp7Vibrato10SetDelayMsEff
+ 2447              		.syntax unified
+ 2448              		.thumb
+ 2449              		.thumb_func
+ 2450              		.fpu fpv5-d16
+ 2452              	_ZN7daisysp7Vibrato10SetDelayMsEff:
+ 2453              	.LVL109:
+ 2454              	.LFB3694:
+ 157:../Epiphyte/vibrato.cpp **** 
+ 158:../Epiphyte/vibrato.cpp **** void Vibrato::SetDelay(float delay)
+ 159:../Epiphyte/vibrato.cpp **** {
+ 160:../Epiphyte/vibrato.cpp ****     SetDelay(delay, delay);
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 57
+
+
+ 161:../Epiphyte/vibrato.cpp **** }
+ 162:../Epiphyte/vibrato.cpp **** 
+ 163:../Epiphyte/vibrato.cpp **** void Vibrato::SetDelayMs(float msl, float msr)
+ 164:../Epiphyte/vibrato.cpp **** {
+ 2455              		.loc 1 164 1 is_stmt 1 view -0
+ 2456              		.cfi_startproc
+ 2457              		@ args = 0, pretend = 0, frame = 0
+ 2458              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2459              		@ link register save eliminated.
+ 165:../Epiphyte/vibrato.cpp ****     engines_[0].SetDelayMs(msl);
+ 2460              		.loc 1 165 5 view .LVU592
+ 2461              	.LBB553:
+ 2462              	.LBB554:
+  56:../Epiphyte/vibrato.cpp **** 
+ 2463              		.loc 1 56 17 is_stmt 0 view .LVU593
+ 2464 0000 9FED0A7A 		vldr.32	s14, .L79
+ 2465              	.LBB555:
+ 2466              	.LBB556:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2467              		.loc 3 36 5 view .LVU594
+ 2468 0004 DFED0A7A 		vldr.32	s15, .L79+4
+ 2469              	.LVL110:
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2470              		.loc 3 36 5 view .LVU595
+ 2471              	.LBE556:
+ 2472              	.LBE555:
+ 2473              	.LBE554:
+ 2474              	.LBI553:
+  53:../Epiphyte/vibrato.cpp **** {
+ 2475              		.loc 1 53 6 is_stmt 1 view .LVU596
+ 2476              	.LBB565:
+  55:../Epiphyte/vibrato.cpp ****     delay_ = ms * .001f * sample_rate_; //ms to samples
+ 2477              		.loc 1 55 5 view .LVU597
+ 2478              	.LBB558:
+ 2479              	.LBI555:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2480              		.loc 3 32 14 view .LVU598
+ 2481              	.LBB557:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 2482              		.loc 3 34 5 view .LVU599
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2483              		.loc 3 36 5 view .LVU600
+ 2484              		.syntax unified
+ 2485              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2486 0008 87FE800A 		vmaxnm.f32 s0, s15, s0
+ 2487              	@ 0 "" 2
+ 2488              	.LVL111:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2489              		.loc 3 40 5 view .LVU601
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2490              		.loc 3 40 5 is_stmt 0 view .LVU602
+ 2491              		.thumb
+ 2492              		.syntax unified
+ 2493              	.LBE557:
+ 2494              	.LBE558:
+  56:../Epiphyte/vibrato.cpp **** 
+ 2495              		.loc 1 56 5 is_stmt 1 view .LVU603
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 58
+
+
+  56:../Epiphyte/vibrato.cpp **** 
+ 2496              		.loc 1 56 17 is_stmt 0 view .LVU604
+ 2497 000c 20EE070A 		vmul.f32	s0, s0, s14
+ 2498              	.LVL112:
+  56:../Epiphyte/vibrato.cpp **** 
+ 2499              		.loc 1 56 25 view .LVU605
+ 2500 0010 90ED007A 		vldr.32	s14, [r0]
+ 2501              	.LBB559:
+ 2502              	.LBB560:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2503              		.loc 3 47 5 view .LVU606
+ 2504 0014 D0ED037A 		vldr.32	s15, [r0, #12]
+ 2505              	.LBE560:
+ 2506              	.LBE559:
+  56:../Epiphyte/vibrato.cpp **** 
+ 2507              		.loc 1 56 25 view .LVU607
+ 2508 0018 20EE070A 		vmul.f32	s0, s0, s14
+ 2509              	.LBB563:
+ 2510              	.LBB561:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2511              		.loc 3 47 5 view .LVU608
+ 2512              		.syntax unified
+ 2513              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2514 001c C7FEC07A 		vminnm.f32 s15, s15, s0
+ 2515              	@ 0 "" 2
+ 2516              		.thumb
+ 2517              		.syntax unified
+ 2518              	.LBE561:
+ 2519              	.LBE563:
+  58:../Epiphyte/vibrato.cpp **** }
+ 2520              		.loc 1 58 14 view .LVU609
+ 2521 0020 C0ED037A 		vstr.32	s15, [r0, #12]
+  56:../Epiphyte/vibrato.cpp **** 
+ 2522              		.loc 1 56 12 view .LVU610
+ 2523 0024 80ED050A 		vstr.32	s0, [r0, #20]
+  58:../Epiphyte/vibrato.cpp **** }
+ 2524              		.loc 1 58 5 is_stmt 1 view .LVU611
+ 2525              	.LVL113:
+ 2526              	.LBB564:
+ 2527              	.LBI559:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2528              		.loc 3 43 14 view .LVU612
+ 2529              	.LBB562:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 2530              		.loc 3 45 5 view .LVU613
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2531              		.loc 3 47 5 view .LVU614
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2532              		.loc 3 51 5 view .LVU615
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2533              		.loc 3 51 5 is_stmt 0 view .LVU616
+ 2534              	.LBE562:
+ 2535              	.LBE564:
+ 2536              	.LBE565:
+ 2537              	.LBE553:
+ 166:../Epiphyte/vibrato.cpp **** }
+ 2538              		.loc 1 166 1 view .LVU617
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 59
+
+
+ 2539 0028 7047     		bx	lr
+ 2540              	.L80:
+ 2541 002a 00BF     		.align	2
+ 2542              	.L79:
+ 2543 002c 6F12833A 		.word	981668463
+ 2544 0030 CDCCCC3D 		.word	1036831949
+ 2545              		.cfi_endproc
+ 2546              	.LFE3694:
+ 2548              		.section	.text._ZN7daisysp7Vibrato10SetDelayMsEf,"ax",%progbits
+ 2549              		.align	1
+ 2550              		.p2align 2,,3
+ 2551              		.global	_ZN7daisysp7Vibrato10SetDelayMsEf
+ 2552              		.syntax unified
+ 2553              		.thumb
+ 2554              		.thumb_func
+ 2555              		.fpu fpv5-d16
+ 2557              	_ZN7daisysp7Vibrato10SetDelayMsEf:
+ 2558              	.LFB4226:
+ 2559              		.cfi_startproc
+ 2560              		@ args = 0, pretend = 0, frame = 0
+ 2561              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2562              		@ link register save eliminated.
+ 2563 0000 9FED0A7A 		vldr.32	s14, .L82
+ 2564 0004 DFED0A7A 		vldr.32	s15, .L82+4
+ 2565              		.syntax unified
+ 2566              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2567 0008 87FE800A 		vmaxnm.f32 s0, s15, s0
+ 2568              	@ 0 "" 2
+ 2569              		.thumb
+ 2570              		.syntax unified
+ 2571 000c 20EE070A 		vmul.f32	s0, s0, s14
+ 2572 0010 90ED007A 		vldr.32	s14, [r0]
+ 2573 0014 D0ED037A 		vldr.32	s15, [r0, #12]
+ 2574 0018 20EE070A 		vmul.f32	s0, s0, s14
+ 2575              		.syntax unified
+ 2576              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2577 001c C7FEC07A 		vminnm.f32 s15, s15, s0
+ 2578              	@ 0 "" 2
+ 2579              		.thumb
+ 2580              		.syntax unified
+ 2581 0020 C0ED037A 		vstr.32	s15, [r0, #12]
+ 2582 0024 80ED050A 		vstr.32	s0, [r0, #20]
+ 2583 0028 7047     		bx	lr
+ 2584              	.L83:
+ 2585 002a 00BF     		.align	2
+ 2586              	.L82:
+ 2587 002c 6F12833A 		.word	981668463
+ 2588 0030 CDCCCC3D 		.word	1036831949
+ 2589              		.cfi_endproc
+ 2590              	.LFE4226:
+ 2592              		.section	.text._ZN7daisysp7Vibrato11SetFeedbackEff,"ax",%progbits
+ 2593              		.align	1
+ 2594              		.p2align 2,,3
+ 2595              		.global	_ZN7daisysp7Vibrato11SetFeedbackEff
+ 2596              		.syntax unified
+ 2597              		.thumb
+ 2598              		.thumb_func
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 60
+
+
+ 2599              		.fpu fpv5-d16
+ 2601              	_ZN7daisysp7Vibrato11SetFeedbackEff:
+ 2602              	.LVL114:
+ 2603              	.LFB3696:
+ 167:../Epiphyte/vibrato.cpp **** 
+ 168:../Epiphyte/vibrato.cpp **** void Vibrato::SetDelayMs(float ms)
+ 169:../Epiphyte/vibrato.cpp **** {
+ 170:../Epiphyte/vibrato.cpp ****     SetDelayMs(ms, ms);
+ 171:../Epiphyte/vibrato.cpp **** }
+ 172:../Epiphyte/vibrato.cpp **** 
+ 173:../Epiphyte/vibrato.cpp **** void Vibrato::SetFeedback(float feedbackl, float feedbackr)
+ 174:../Epiphyte/vibrato.cpp **** {
+ 2604              		.loc 1 174 1 is_stmt 1 view -0
+ 2605              		.cfi_startproc
+ 2606              		@ args = 0, pretend = 0, frame = 0
+ 2607              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2608              		@ link register save eliminated.
+ 175:../Epiphyte/vibrato.cpp ****     engines_[0].SetFeedback(feedbackl);
+ 2609              		.loc 1 175 5 view .LVU619
+ 2610              	.LBB566:
+ 2611              	.LBI566:
+  61:../Epiphyte/vibrato.cpp **** {
+ 2612              		.loc 1 61 6 view .LVU620
+ 2613              	.LBB567:
+  63:../Epiphyte/vibrato.cpp **** }
+ 2614              		.loc 1 63 5 view .LVU621
+ 2615              	.LBB568:
+ 2616              	.LBI568:
+  56:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2617              		.loc 3 56 14 view .LVU622
+ 2618              	.LBE568:
+ 2619              	.LBE567:
+ 2620              	.LBE566:
+ 2621              		.loc 3 58 5 view .LVU623
+ 2622              	.LBB579:
+ 2623              	.LBB578:
+ 2624              	.LBB577:
+ 2625              	.LBB569:
+ 2626              	.LBI569:
+  32:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2627              		.loc 3 32 14 view .LVU624
+ 2628              	.LBB570:
+  34:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 2629              		.loc 3 34 5 view .LVU625
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2630              		.loc 3 36 5 view .LVU626
+ 2631              	.LBE570:
+ 2632              	.LBE569:
+ 2633              	.LBB572:
+ 2634              	.LBB573:
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2635              		.loc 3 47 5 is_stmt 0 view .LVU627
+ 2636 0000 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 2637              	.LBE573:
+ 2638              	.LBE572:
+ 2639              	.LBB575:
+ 2640              	.LBB571:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 61
+
+
+  36:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2641              		.loc 3 36 5 view .LVU628
+ 2642 0004 9FED047A 		vldr.32	s14, .L85
+ 2643              		.syntax unified
+ 2644              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2645 0008 80FE070A 		vmaxnm.f32 s0, s0, s14
+ 2646              	@ 0 "" 2
+ 2647              	.LVL115:
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2648              		.loc 3 40 5 is_stmt 1 view .LVU629
+  40:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2649              		.loc 3 40 5 is_stmt 0 view .LVU630
+ 2650              		.thumb
+ 2651              		.syntax unified
+ 2652              	.LBE571:
+ 2653              	.LBE575:
+ 2654              	.LBB576:
+ 2655              	.LBI572:
+  43:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** {
+ 2656              		.loc 3 43 14 is_stmt 1 view .LVU631
+ 2657              	.LBB574:
+  45:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #ifdef __arm__
+ 2658              		.loc 3 45 5 view .LVU632
+  47:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** #else
+ 2659              		.loc 3 47 5 view .LVU633
+ 2660              		.syntax unified
+ 2661              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2662 000c 80FE670A 		vminnm.f32 s0, s0, s15
+ 2663              	@ 0 "" 2
+ 2664              	.LVL116:
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2665              		.loc 3 51 5 view .LVU634
+  51:../Epiphyte/../DaisySP/Source/Utility/dsp.h **** }
+ 2666              		.loc 3 51 5 is_stmt 0 view .LVU635
+ 2667              		.thumb
+ 2668              		.syntax unified
+ 2669              	.LBE574:
+ 2670              	.LBE576:
+ 2671              	.LBE577:
+  63:../Epiphyte/vibrato.cpp **** }
+ 2672              		.loc 1 63 15 view .LVU636
+ 2673 0010 80ED040A 		vstr.32	s0, [r0, #16]
+ 2674              	.LVL117:
+  63:../Epiphyte/vibrato.cpp **** }
+ 2675              		.loc 1 63 15 view .LVU637
+ 2676              	.LBE578:
+ 2677              	.LBE579:
+ 176:../Epiphyte/vibrato.cpp **** }
+ 2678              		.loc 1 176 1 view .LVU638
+ 2679 0014 7047     		bx	lr
+ 2680              	.L86:
+ 2681 0016 00BF     		.align	2
+ 2682              	.L85:
+ 2683 0018 00000000 		.word	0
+ 2684              		.cfi_endproc
+ 2685              	.LFE3696:
+ 2687              		.section	.text._ZN7daisysp7Vibrato11SetFeedbackEf,"ax",%progbits
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 62
+
+
+ 2688              		.align	1
+ 2689              		.p2align 2,,3
+ 2690              		.global	_ZN7daisysp7Vibrato11SetFeedbackEf
+ 2691              		.syntax unified
+ 2692              		.thumb
+ 2693              		.thumb_func
+ 2694              		.fpu fpv5-d16
+ 2696              	_ZN7daisysp7Vibrato11SetFeedbackEf:
+ 2697              	.LFB4228:
+ 2698              		.cfi_startproc
+ 2699              		@ args = 0, pretend = 0, frame = 0
+ 2700              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2701              		@ link register save eliminated.
+ 2702 0000 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 2703 0004 9FED047A 		vldr.32	s14, .L88
+ 2704              		.syntax unified
+ 2705              	@ 36 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2706 0008 80FE070A 		vmaxnm.f32 s0, s0, s14
+ 2707              	@ 0 "" 2
+ 2708              	@ 47 "../Epiphyte/../DaisySP/Source/Utility/dsp.h" 1
+ 2709 000c 80FE670A 		vminnm.f32 s0, s0, s15
+ 2710              	@ 0 "" 2
+ 2711              		.thumb
+ 2712              		.syntax unified
+ 2713 0010 80ED040A 		vstr.32	s0, [r0, #16]
+ 2714 0014 7047     		bx	lr
+ 2715              	.L89:
+ 2716 0016 00BF     		.align	2
+ 2717              	.L88:
+ 2718 0018 00000000 		.word	0
+ 2719              		.cfi_endproc
+ 2720              	.LFE4228:
+ 2722              		.text
+ 2723              	.Letext0:
+ 2724              		.file 4 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major/
+ 2725              		.file 5 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major/
+ 2726              		.file 6 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major/
+ 2727              		.file 7 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major/
+ 2728              		.file 8 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major/
+ 2729              		.file 9 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major/
+ 2730              		.file 10 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2731              		.file 11 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2732              		.file 12 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2733              		.file 13 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2734              		.file 14 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2735              		.file 15 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2736              		.file 16 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2737              		.file 17 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2738              		.file 18 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2739              		.file 19 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2740              		.file 20 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2741              		.file 21 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2742              		.file 22 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2743              		.file 23 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2744              		.file 24 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2745              		.file 25 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2746              		.file 26 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 63
+
+
+ 2747              		.file 27 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2748              		.file 28 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2749              		.file 29 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2750              		.file 30 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2751              		.file 31 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2752              		.file 32 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2753              		.file 33 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2754              		.file 34 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2755              		.file 35 "../Epiphyte/vibrato.h"
+ 2756              		.file 36 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 2757              		.file 37 "../libDaisy/src/per/tim.h"
+ 2758              		.file 38 "../libDaisy/src/util/wav_format.h"
+ 2759              		.file 39 "<built-in>"
+ 2760              		.file 40 "../libDaisy/src/dev/sr_595.h"
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 64
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 vibrato.cpp
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:17     .text._ZN7daisysp13VibratoEngine4InitEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:26     .text._ZN7daisysp13VibratoEngine4InitEf:0000000000000000 _ZN7daisysp13VibratoEngine4InitEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:491    .text._ZN7daisysp13VibratoEngine4InitEf:0000000000000098 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:504    .text._ZN7daisysp13VibratoEngine7ProcessEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:512    .text._ZN7daisysp13VibratoEngine7ProcessEf:0000000000000000 _ZN7daisysp13VibratoEngine7ProcessEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:766    .text._ZN7daisysp13VibratoEngine7ProcessEf:00000000000000e4 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:773    .text._ZN7daisysp13VibratoEngine11SetLfoDepthEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:781    .text._ZN7daisysp13VibratoEngine11SetLfoDepthEf:0000000000000000 _ZN7daisysp13VibratoEngine11SetLfoDepthEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:853    .text._ZN7daisysp13VibratoEngine11SetLfoDepthEf:0000000000000020 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:859    .text._ZN7daisysp13VibratoEngine10SetLfoFreqEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:867    .text._ZN7daisysp13VibratoEngine10SetLfoFreqEf:0000000000000000 _ZN7daisysp13VibratoEngine10SetLfoFreqEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:963    .text._ZN7daisysp13VibratoEngine8SetDelayEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:971    .text._ZN7daisysp13VibratoEngine8SetDelayEf:0000000000000000 _ZN7daisysp13VibratoEngine8SetDelayEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1065   .text._ZN7daisysp13VibratoEngine8SetDelayEf:0000000000000038 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1072   .text._ZN7daisysp13VibratoEngine10SetDelayMsEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1080   .text._ZN7daisysp13VibratoEngine10SetDelayMsEf:0000000000000000 _ZN7daisysp13VibratoEngine10SetDelayMsEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1156   .text._ZN7daisysp13VibratoEngine10SetDelayMsEf:000000000000002c $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1162   .text._ZN7daisysp13VibratoEngine11SetFeedbackEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1170   .text._ZN7daisysp13VibratoEngine11SetFeedbackEf:0000000000000000 _ZN7daisysp13VibratoEngine11SetFeedbackEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1239   .text._ZN7daisysp13VibratoEngine11SetFeedbackEf:0000000000000018 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1244   .text._ZN7daisysp13VibratoEngine10ProcessLfoEv:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1252   .text._ZN7daisysp13VibratoEngine10ProcessLfoEv:0000000000000000 _ZN7daisysp13VibratoEngine10ProcessLfoEv
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1320   .text._ZN7daisysp7Vibrato4InitEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1328   .text._ZN7daisysp7Vibrato4InitEf:0000000000000000 _ZN7daisysp7Vibrato4InitEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1461   .text._ZN7daisysp7Vibrato4InitEf:0000000000000038 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1466   .text._ZN7daisysp7Vibrato7ProcessEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1474   .text._ZN7daisysp7Vibrato7ProcessEf:0000000000000000 _ZN7daisysp7Vibrato7ProcessEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1549   .text._ZN7daisysp7Vibrato7GetLeftEv:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1557   .text._ZN7daisysp7Vibrato7GetLeftEv:0000000000000000 _ZN7daisysp7Vibrato7GetLeftEv
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1576   .text._ZN7daisysp7Vibrato8GetRightEv:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1584   .text._ZN7daisysp7Vibrato8GetRightEv:0000000000000000 _ZN7daisysp7Vibrato8GetRightEv
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1603   .text._ZN7daisysp7Vibrato6SetPanEff:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1611   .text._ZN7daisysp7Vibrato6SetPanEff:0000000000000000 _ZN7daisysp7Vibrato6SetPanEff
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1685   .text._ZN7daisysp7Vibrato6SetPanEff:000000000000001c $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1690   .text._ZN7daisysp7Vibrato6SetPanEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1698   .text._ZN7daisysp7Vibrato6SetPanEf:0000000000000000 _ZN7daisysp7Vibrato6SetPanEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1785   .text._ZN7daisysp7Vibrato6SetPanEf:000000000000001c $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1790   .text._ZN7daisysp7Vibrato11SetLfoDepthEff:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1798   .text._ZN7daisysp7Vibrato11SetLfoDepthEff:0000000000000000 _ZN7daisysp7Vibrato11SetLfoDepthEff
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1895   .text._ZN7daisysp7Vibrato11SetLfoDepthEff:0000000000000020 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1901   .text._ZN7daisysp7Vibrato11SetLfoDepthEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:1909   .text._ZN7daisysp7Vibrato11SetLfoDepthEf:0000000000000000 _ZN7daisysp7Vibrato11SetLfoDepthEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2017   .text._ZN7daisysp7Vibrato11SetLfoDepthEf:0000000000000020 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2023   .text._ZN7daisysp7Vibrato10SetLfoFreqEff:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2031   .text._ZN7daisysp7Vibrato10SetLfoFreqEff:0000000000000000 _ZN7daisysp7Vibrato10SetLfoFreqEff
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2144   .text._ZN7daisysp7Vibrato10SetLfoFreqEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2152   .text._ZN7daisysp7Vibrato10SetLfoFreqEf:0000000000000000 _ZN7daisysp7Vibrato10SetLfoFreqEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2276   .text._ZN7daisysp7Vibrato8SetDelayEff:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2284   .text._ZN7daisysp7Vibrato8SetDelayEff:0000000000000000 _ZN7daisysp7Vibrato8SetDelayEff
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2389   .text._ZN7daisysp7Vibrato8SetDelayEff:0000000000000038 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2396   .text._ZN7daisysp7Vibrato8SetDelayEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2404   .text._ZN7daisysp7Vibrato8SetDelayEf:0000000000000000 _ZN7daisysp7Vibrato8SetDelayEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2437   .text._ZN7daisysp7Vibrato8SetDelayEf:0000000000000038 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2444   .text._ZN7daisysp7Vibrato10SetDelayMsEff:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2452   .text._ZN7daisysp7Vibrato10SetDelayMsEff:0000000000000000 _ZN7daisysp7Vibrato10SetDelayMsEff
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s 			page 65
+
+
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2543   .text._ZN7daisysp7Vibrato10SetDelayMsEff:000000000000002c $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2549   .text._ZN7daisysp7Vibrato10SetDelayMsEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2557   .text._ZN7daisysp7Vibrato10SetDelayMsEf:0000000000000000 _ZN7daisysp7Vibrato10SetDelayMsEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2587   .text._ZN7daisysp7Vibrato10SetDelayMsEf:000000000000002c $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2593   .text._ZN7daisysp7Vibrato11SetFeedbackEff:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2601   .text._ZN7daisysp7Vibrato11SetFeedbackEff:0000000000000000 _ZN7daisysp7Vibrato11SetFeedbackEff
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2683   .text._ZN7daisysp7Vibrato11SetFeedbackEff:0000000000000018 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2688   .text._ZN7daisysp7Vibrato11SetFeedbackEf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2696   .text._ZN7daisysp7Vibrato11SetFeedbackEf:0000000000000000 _ZN7daisysp7Vibrato11SetFeedbackEf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc0TBFcJ.s:2718   .text._ZN7daisysp7Vibrato11SetFeedbackEf:0000000000000018 $d
+
+UNDEFINED SYMBOLS
+memset
