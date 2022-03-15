@@ -4,8 +4,10 @@
 using namespace daisysp;
 using namespace daisy;
 
-#define NUM_OF_OSCILLATORS 1
+#define NUM_OF_OSCILLATORS 8
 #define AUDIO_BLOCK_SIZE 48
+float notes[] = {220.0f, 440.0f, 220.0f, 329.63f, 261.63f, 293.66f, 329.63f, 349.23f};
+int notesIndex = 0;
 
 int PIN_MUX_SEL_0 = 17;
 int PIN_MUX_SEL_1 = 18;
@@ -21,6 +23,7 @@ static VariableShapeOscillator osc[NUM_OF_OSCILLATORS];
 static MoogLadder filterLeft;
 static MoogLadder filterRight;
 static Adsr envelope;
+static Port port;
 
 float outputVolume = 0.75f;
 float portamento = 0.0f;
@@ -43,6 +46,7 @@ float pitchRibbon = 0.0f;
 float cutoffRibbon = 0.0f;
 
 float knob = 0.5f;
+Switch button1;
 
 void SetupOsc(float samplerate) {
   for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
@@ -52,8 +56,8 @@ void SetupOsc(float samplerate) {
     // osc[i].SetAmp(0.5);
 
     osc[i].Init(samplerate);
-    osc[i].SetWaveshape(1.0f);
-    osc[i].SetPW(0.1f);
+    osc[i].SetWaveshape(0.0f);
+    osc[i].SetPW(0.5f);
     osc[i].SetSync(true);
   }
 }
@@ -62,33 +66,44 @@ static void AudioCallback(AudioHandle::InterleavingInputBuffer in,
                           AudioHandle::InterleavingOutputBuffer out,
                           size_t size) {
 
-
+  
   for (size_t i = 0; i < size; i += 2) {
     float sigL = 0;
     float sigR = 0;
     // knob = 0;
     knob = hw.adc.GetFloat(0);
+    button1.Debounce();
+    bool gateState = button1.Pressed();
+    if(button1.RisingEdge()) {
+      notesIndex = (notesIndex + 1) % 8;
+    }
+    float note = notes[notesIndex];
+    note = port.Process(note);
+    float waveshape = knob;
+  
     for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
-      float newFreq = knob * 220.0f + 220.0f;
+      float newFreq = note + (0.2f * i);
       osc[i].SetFreq(newFreq);
-      // osc[i].SetSyncFreq(newFreq);
-
+      osc[i].SetSyncFreq(newFreq);
+      osc[i].SetWaveshape(waveshape);
       // 0% means 0.125 * sig for both sides
       // 50% meant 0.1875 sig primary,  0.0625 sig secondary | 0.125f
       // 100% means 0.25 * sig for primary side, 0% for secondary
+
       float primaryChannelRatio = (stereoSpread * 0.125f + 0.125f);
       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
-      float output = osc[i].Process();
-
+      float oscOutput = osc[i].Process();
       if (i % 2 == 0) {
-        sigL += primaryChannelRatio * output;
-        sigR += secondaryChannelRatio * output;
+        sigL += primaryChannelRatio * oscOutput;
+        sigR += secondaryChannelRatio * oscOutput;
       } else {
-        sigL += secondaryChannelRatio * output;
-        sigR += primaryChannelRatio * output;
+        sigL += secondaryChannelRatio * oscOutput;
+        sigR += primaryChannelRatio * oscOutput;
       }
     }
-
+    float envAmp = envelope.Process(gateState);
+    sigL *= envAmp * outputVolume;
+    sigR *= envAmp * outputVolume;
     // left out
     out[i] = sigL;
 
@@ -145,7 +160,9 @@ int main(void) {
   hw.SetAudioBlockSize(AUDIO_BLOCK_SIZE);
   sample_rate = hw.AudioSampleRate();
 
+  button1.Init(hw.GetPin(1), 1000); // i think this has to tbe a purple pinout
   setupNormalAdc();
+  
 
   // AdcChannelConfig adcConfig;
   // adcConfig.InitSingle(hw.GetPin(15));
@@ -163,8 +180,13 @@ int main(void) {
   // Set parameters for oscillator
   SetupOsc(sample_rate);
   envelope.Init(sample_rate, AUDIO_BLOCK_SIZE);
+  envelope.SetAttackTime(0.5f);
+  envelope.SetReleaseTime(10.5f);
 
-  // start callback
+  port.Init(sample_rate, 0.05f);
+
+
+      // start callback
   hw.StartAudio(AudioCallback);
 
   while (1) {
