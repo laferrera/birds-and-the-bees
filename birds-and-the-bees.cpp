@@ -16,8 +16,8 @@ int PIN_ADC_POT_MUX2 = 16;
 AnalogControl knob_[24];
 
 static DaisySeed hw;
-// static VariableShapeOscillator osc[NUM_OF_OSCILLATORS];
-static Oscillator osc[NUM_OF_OSCILLATORS];
+static VariableShapeOscillator osc[NUM_OF_OSCILLATORS];
+// static Oscillator osc[NUM_OF_OSCILLATORS];
 static MoogLadder filterLeft;
 static MoogLadder filterRight;
 static Adsr envelope;
@@ -46,15 +46,15 @@ float knob = 0.5f;
 
 void SetupOsc(float samplerate) {
   for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
-    osc[i].Init(samplerate);
-    osc[i].SetWaveform(osc[i].WAVE_SIN);
-    osc[i].SetFreq(250);
-    osc[i].SetAmp(0.5);
-
     // osc[i].Init(samplerate);
-    // osc[i].SetWaveshape(1.0f);
-    // osc[i].SetPW(0.1f);
-    // osc[i].SetSync(true);
+    // osc[i].SetWaveform(osc[i].WAVE_SIN);
+    // osc[i].SetFreq(250);
+    // osc[i].SetAmp(0.5);
+
+    osc[i].Init(samplerate);
+    osc[i].SetWaveshape(1.0f);
+    osc[i].SetPW(0.1f);
+    osc[i].SetSync(true);
   }
 }
 
@@ -79,8 +79,7 @@ static void AudioCallback(AudioHandle::InterleavingInputBuffer in,
       float primaryChannelRatio = (stereoSpread * 0.125f + 0.125f);
       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
       float output = osc[i].Process();
-      // sigL = output;
-      // sigR = output;
+
       if (i % 2 == 0) {
         sigL += primaryChannelRatio * output;
         sigR += secondaryChannelRatio * output;
