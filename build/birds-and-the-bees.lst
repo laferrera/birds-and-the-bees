@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -16,129 +16,19 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   13              		.text
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
-  16              		.section	.text._ZN7daisysp4AdsrD2Ev,"axG",%progbits,_ZN7daisysp4AdsrD5Ev,comdat
+  16              		.section	.text._ZN5daisy9DaisySeedD2Ev,"axG",%progbits,_ZN5daisy9DaisySeedD5Ev,comdat
   17              		.align	1
   18              		.p2align 2,,3
-  19              		.weak	_ZN7daisysp4AdsrD2Ev
+  19              		.weak	_ZN5daisy9DaisySeedD2Ev
   20              		.arch armv7e-m
   21              		.syntax unified
   22              		.thumb
   23              		.thumb_func
   24              		.fpu fpv5-d16
-  26              	_ZN7daisysp4AdsrD2Ev:
+  26              	_ZN5daisy9DaisySeedD2Ev:
   27              	.LVL0:
-  28              	.LFB562:
-  29              		.file 1 "../DaisySP/Source/Control/adsr.h"
-   1:../DaisySP/Source/Control/adsr.h **** #pragma once
-   2:../DaisySP/Source/Control/adsr.h **** #ifndef DSY_ADSR_H
-   3:../DaisySP/Source/Control/adsr.h **** #define DSY_ADSR_H
-   4:../DaisySP/Source/Control/adsr.h **** 
-   5:../DaisySP/Source/Control/adsr.h **** #include <stdint.h>
-   6:../DaisySP/Source/Control/adsr.h **** #ifdef __cplusplus
-   7:../DaisySP/Source/Control/adsr.h **** 
-   8:../DaisySP/Source/Control/adsr.h **** namespace daisysp
-   9:../DaisySP/Source/Control/adsr.h **** {
-  10:../DaisySP/Source/Control/adsr.h **** /** Distinct stages that the phase of the envelope can be located in.
-  11:../DaisySP/Source/Control/adsr.h **** - IDLE   = located at phase location 0, and not currently running
-  12:../DaisySP/Source/Control/adsr.h **** - ATTACK  = First segment of envelope where phase moves from 0 to 1
-  13:../DaisySP/Source/Control/adsr.h **** - DECAY   = Second segment of envelope where phase moves from 1 to SUSTAIN value
-  14:../DaisySP/Source/Control/adsr.h **** - RELEASE =     Fourth segment of envelop where phase moves from SUSTAIN to 0
-  15:../DaisySP/Source/Control/adsr.h **** */
-  16:../DaisySP/Source/Control/adsr.h **** enum
-  17:../DaisySP/Source/Control/adsr.h **** {
-  18:../DaisySP/Source/Control/adsr.h ****     ADSR_SEG_IDLE    = 0,
-  19:../DaisySP/Source/Control/adsr.h ****     ADSR_SEG_ATTACK  = 1,
-  20:../DaisySP/Source/Control/adsr.h ****     ADSR_SEG_DECAY   = 2,
-  21:../DaisySP/Source/Control/adsr.h ****     ADSR_SEG_RELEASE = 4
-  22:../DaisySP/Source/Control/adsr.h **** };
-  23:../DaisySP/Source/Control/adsr.h **** 
-  24:../DaisySP/Source/Control/adsr.h **** 
-  25:../DaisySP/Source/Control/adsr.h **** /** adsr envelope module
-  26:../DaisySP/Source/Control/adsr.h **** 
-  27:../DaisySP/Source/Control/adsr.h **** Original author(s) : Paul Batchelor
-  28:../DaisySP/Source/Control/adsr.h **** 
-  29:../DaisySP/Source/Control/adsr.h **** Ported from Soundpipe by Ben Sergentanis, May 2020
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 2
-
-
-  30:../DaisySP/Source/Control/adsr.h ****  
-  31:../DaisySP/Source/Control/adsr.h **** Remake by Steffan DIedrichsen, May 2021
-  32:../DaisySP/Source/Control/adsr.h **** */
-  33:../DaisySP/Source/Control/adsr.h **** class Adsr
-  34:../DaisySP/Source/Control/adsr.h **** {
-  35:../DaisySP/Source/Control/adsr.h ****   public:
-  36:../DaisySP/Source/Control/adsr.h ****     Adsr() {}
-  37:../DaisySP/Source/Control/adsr.h ****     ~Adsr() {}
-  30              		.loc 1 37 5 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
-  35              		.loc 1 37 14 is_stmt 0 view .LVU1
-  36 0000 7047     		bx	lr
-  37              		.cfi_endproc
-  38              	.LFE562:
-  40              		.weak	_ZN7daisysp4AdsrD1Ev
-  41              		.thumb_set _ZN7daisysp4AdsrD1Ev,_ZN7daisysp4AdsrD2Ev
-  42 0002 00BF     		.section	.text._ZN7daisysp10MoogLadderD2Ev,"axG",%progbits,_ZN7daisysp10MoogLadderD5Ev,comdat
-  43              		.align	1
-  44              		.p2align 2,,3
-  45              		.weak	_ZN7daisysp10MoogLadderD2Ev
-  46              		.syntax unified
-  47              		.thumb
-  48              		.thumb_func
-  49              		.fpu fpv5-d16
-  51              	_ZN7daisysp10MoogLadderD2Ev:
-  52              	.LVL1:
-  53              	.LFB3118:
-  54              		.file 2 "../DaisySP/Source/Filters/moogladder.h"
-   1:../DaisySP/Source/Filters/moogladder.h **** #pragma once
-   2:../DaisySP/Source/Filters/moogladder.h **** #ifndef DSY_MOOGLADDER_H
-   3:../DaisySP/Source/Filters/moogladder.h **** #define DSY_MOOGLADDER_H
-   4:../DaisySP/Source/Filters/moogladder.h **** 
-   5:../DaisySP/Source/Filters/moogladder.h **** #include <stdint.h>
-   6:../DaisySP/Source/Filters/moogladder.h **** #ifdef __cplusplus
-   7:../DaisySP/Source/Filters/moogladder.h **** 
-   8:../DaisySP/Source/Filters/moogladder.h **** namespace daisysp
-   9:../DaisySP/Source/Filters/moogladder.h **** {
-  10:../DaisySP/Source/Filters/moogladder.h **** /** Moog ladder filter module
-  11:../DaisySP/Source/Filters/moogladder.h **** 
-  12:../DaisySP/Source/Filters/moogladder.h **** Ported from soundpipe
-  13:../DaisySP/Source/Filters/moogladder.h **** 
-  14:../DaisySP/Source/Filters/moogladder.h **** Original author(s) : Victor Lazzarini, John ffitch (fast tanh), Bob Moog
-  15:../DaisySP/Source/Filters/moogladder.h **** 
-  16:../DaisySP/Source/Filters/moogladder.h **** */
-  17:../DaisySP/Source/Filters/moogladder.h **** class MoogLadder
-  18:../DaisySP/Source/Filters/moogladder.h **** {
-  19:../DaisySP/Source/Filters/moogladder.h ****   public:
-  20:../DaisySP/Source/Filters/moogladder.h ****     MoogLadder() {}
-  21:../DaisySP/Source/Filters/moogladder.h ****     ~MoogLadder() {}
-  55              		.loc 2 21 5 is_stmt 1 view -0
-  56              		.cfi_startproc
-  57              		@ args = 0, pretend = 0, frame = 0
-  58              		@ frame_needed = 0, uses_anonymous_args = 0
-  59              		@ link register save eliminated.
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 3
-
-
-  60              		.loc 2 21 20 is_stmt 0 view .LVU3
-  61 0000 7047     		bx	lr
-  62              		.cfi_endproc
-  63              	.LFE3118:
-  65              		.weak	_ZN7daisysp10MoogLadderD1Ev
-  66              		.thumb_set _ZN7daisysp10MoogLadderD1Ev,_ZN7daisysp10MoogLadderD2Ev
-  67 0002 00BF     		.section	.text._ZN5daisy9DaisySeedD2Ev,"axG",%progbits,_ZN5daisy9DaisySeedD5Ev,comdat
-  68              		.align	1
-  69              		.p2align 2,,3
-  70              		.weak	_ZN5daisy9DaisySeedD2Ev
-  71              		.syntax unified
-  72              		.thumb
-  73              		.thumb_func
-  74              		.fpu fpv5-d16
-  76              	_ZN5daisy9DaisySeedD2Ev:
-  77              	.LVL2:
-  78              	.LFB4236:
-  79              		.file 3 "../libDaisy/src/daisy_seed.h"
+  28              	.LFB2013:
+  29              		.file 1 "../libDaisy/src/daisy_seed.h"
    1:../libDaisy/src/daisy_seed.h **** #pragma once
    2:../libDaisy/src/daisy_seed.h **** #ifndef DSY_SEED_H
    3:../libDaisy/src/daisy_seed.h **** #define DSY_SEED_H
@@ -161,14 +51,17 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   20:../libDaisy/src/daisy_seed.h ****   public:
   21:../libDaisy/src/daisy_seed.h ****     DaisySeed() {}
   22:../libDaisy/src/daisy_seed.h ****     ~DaisySeed() {}
-  80              		.loc 3 22 5 is_stmt 1 view -0
-  81              		.cfi_startproc
-  82              		@ args = 0, pretend = 0, frame = 0
-  83              		@ frame_needed = 0, uses_anonymous_args = 0
-  84              		@ link register save eliminated.
-  85              	.LBB82:
-  86              	.LBI82:
-  87              		.file 4 "../libDaisy/src/sys/system.h"
+  30              		.loc 1 22 5 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  35              	.LBB95:
+  36              	.LBI95:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 2
+
+
+  37              		.file 2 "../libDaisy/src/sys/system.h"
    1:../libDaisy/src/sys/system.h **** #ifndef DSY_SYSTEM_H
    2:../libDaisy/src/sys/system.h **** #define DSY_SYSTEM_H
    3:../libDaisy/src/sys/system.h **** 
@@ -178,9 +71,6 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
    7:../libDaisy/src/sys/system.h **** #include "per/tim.h"
    8:../libDaisy/src/sys/system.h **** 
    9:../libDaisy/src/sys/system.h **** namespace daisy
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 4
-
-
   10:../libDaisy/src/sys/system.h **** {
   11:../libDaisy/src/sys/system.h **** /** A handle for interacting with the Core System. 
   12:../libDaisy/src/sys/system.h ****  ** This includes the Clock tree, MPU, global DMA initialization,
@@ -228,19 +118,19 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   54:../libDaisy/src/sys/system.h ****         bool       use_dcache;
   55:../libDaisy/src/sys/system.h ****         bool       use_icache;
   56:../libDaisy/src/sys/system.h ****     };
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 3
+
+
   57:../libDaisy/src/sys/system.h **** 
   58:../libDaisy/src/sys/system.h ****     System() {}
   59:../libDaisy/src/sys/system.h ****     ~System() {}
-  88              		.loc 4 59 5 view .LVU5
-  89              		.loc 4 59 5 is_stmt 0 view .LVU6
-  90              	.LBE82:
-  91              	.LBB83:
-  92              	.LBI83:
-  93              		.file 5 "../libDaisy/src/hid/usb.h"
+  38              		.loc 2 59 5 view .LVU1
+  39              		.loc 2 59 5 is_stmt 0 view .LVU2
+  40              	.LBE95:
+  41              	.LBB96:
+  42              	.LBI96:
+  43              		.file 3 "../libDaisy/src/hid/usb.h"
    1:../libDaisy/src/hid/usb.h **** #pragma once
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 5
-
-
    2:../libDaisy/src/hid/usb.h **** #ifndef DSY_HID_USB_H
    3:../libDaisy/src/hid/usb.h **** #define DSY_HID_USB_H
    4:../libDaisy/src/hid/usb.h **** #include <stdint.h>
@@ -282,12 +172,15 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   40:../libDaisy/src/hid/usb.h ****     UsbHandle() {}
   41:../libDaisy/src/hid/usb.h **** 
   42:../libDaisy/src/hid/usb.h ****     ~UsbHandle() {}
-  94              		.loc 5 42 5 is_stmt 1 view .LVU7
-  95              		.loc 5 42 5 is_stmt 0 view .LVU8
-  96              	.LBE83:
-  97              	.LBB84:
-  98              	.LBI84:
-  99              		.file 6 "../libDaisy/src/per/adc.h"
+  44              		.loc 3 42 5 is_stmt 1 view .LVU3
+  45              		.loc 3 42 5 is_stmt 0 view .LVU4
+  46              	.LBE96:
+  47              	.LBB97:
+  48              	.LBI97:
+  49              		.file 4 "../libDaisy/src/per/adc.h"
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 4
+
+
    1:../libDaisy/src/per/adc.h **** #pragma once
    2:../libDaisy/src/per/adc.h **** #ifndef DSY_ADC_H
    3:../libDaisy/src/per/adc.h **** #define DSY_ADC_H /**< Macro */
@@ -298,9 +191,6 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
    8:../libDaisy/src/per/adc.h **** 
    9:../libDaisy/src/per/adc.h **** #define DSY_ADC_MAX_CHANNELS 16 /**< Maximum number of ADC channels */
   10:../libDaisy/src/per/adc.h **** 
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 6
-
-
   11:../libDaisy/src/per/adc.h **** namespace daisy
   12:../libDaisy/src/per/adc.h **** {
   13:../libDaisy/src/per/adc.h **** /** @addtogroup analog_digital_conversion
@@ -348,6 +238,9 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   55:../libDaisy/src/per/adc.h ****                  dsy_gpio_pin mux_2 = {DSY_GPIOX, 0});
   56:../libDaisy/src/per/adc.h **** 
   57:../libDaisy/src/per/adc.h ****     dsy_gpio pin_;                   /**< & */
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 5
+
+
   58:../libDaisy/src/per/adc.h ****     dsy_gpio mux_pin_[MUX_SEL_LAST]; /**< & */
   59:../libDaisy/src/per/adc.h ****     uint8_t  mux_channels_;          /**< & */
   60:../libDaisy/src/per/adc.h **** };
@@ -358,9 +251,6 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   65:../libDaisy/src/per/adc.h **** class AdcHandle
   66:../libDaisy/src/per/adc.h **** {
   67:../libDaisy/src/per/adc.h ****   public:
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 7
-
-
   68:../libDaisy/src/per/adc.h ****     /** Supported oversampling amounts */
   69:../libDaisy/src/per/adc.h ****     enum OverSampling
   70:../libDaisy/src/per/adc.h ****     {
@@ -379,12 +269,12 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   83:../libDaisy/src/per/adc.h **** 
   84:../libDaisy/src/per/adc.h ****     AdcHandle() {}
   85:../libDaisy/src/per/adc.h ****     ~AdcHandle() {}
- 100              		.loc 6 85 5 is_stmt 1 view .LVU9
- 101              		.loc 6 85 5 is_stmt 0 view .LVU10
- 102              	.LBE84:
- 103              	.LBB85:
- 104              	.LBI85:
- 105              		.file 7 "../libDaisy/src/hid/audio.h"
+  50              		.loc 4 85 5 is_stmt 1 view .LVU5
+  51              		.loc 4 85 5 is_stmt 0 view .LVU6
+  52              	.LBE97:
+  53              	.LBB98:
+  54              	.LBI98:
+  55              		.file 5 "../libDaisy/src/hid/audio.h"
    1:../libDaisy/src/hid/audio.h **** #ifndef DSY_AUDIO_H
    2:../libDaisy/src/hid/audio.h **** #define DSY_AUDIO_H /**< & */
    3:../libDaisy/src/hid/audio.h **** 
@@ -408,6 +298,9 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   21:../libDaisy/src/hid/audio.h ****     {
   22:../libDaisy/src/hid/audio.h ****         OK,
   23:../libDaisy/src/hid/audio.h ****         ERR,
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 6
+
+
   24:../libDaisy/src/hid/audio.h ****     };
   25:../libDaisy/src/hid/audio.h **** 
   26:../libDaisy/src/hid/audio.h ****     /** Non-Interleaving input buffer
@@ -418,9 +311,6 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   31:../libDaisy/src/hid/audio.h **** 
   32:../libDaisy/src/hid/audio.h ****     /** Non-Interleaving output buffer
   33:../libDaisy/src/hid/audio.h ****      * Arranged by float[chn][sample] 
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 8
-
-
   34:../libDaisy/src/hid/audio.h ****     */
   35:../libDaisy/src/hid/audio.h ****     typedef float** OutputBuffer;
   36:../libDaisy/src/hid/audio.h **** 
@@ -451,15 +341,125 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   61:../libDaisy/src/hid/audio.h **** 
   62:../libDaisy/src/hid/audio.h ****     AudioHandle() : pimpl_(nullptr) {}
   63:../libDaisy/src/hid/audio.h ****     ~AudioHandle() {}
- 106              		.loc 7 63 5 is_stmt 1 view .LVU11
- 107              		.loc 7 63 5 is_stmt 0 view .LVU12
- 108              	.LBE85:
- 109              		.loc 3 22 19 view .LVU13
+  56              		.loc 5 63 5 is_stmt 1 view .LVU7
+  57              		.loc 5 63 5 is_stmt 0 view .LVU8
+  58              	.LBE98:
+  59              		.loc 1 22 19 view .LVU9
+  60 0000 7047     		bx	lr
+  61              		.cfi_endproc
+  62              	.LFE2013:
+  64              		.weak	_ZN5daisy9DaisySeedD1Ev
+  65              		.thumb_set _ZN5daisy9DaisySeedD1Ev,_ZN5daisy9DaisySeedD2Ev
+  66 0002 00BF     		.section	.text._ZN7daisysp4AdsrD2Ev,"axG",%progbits,_ZN7daisysp4AdsrD5Ev,comdat
+  67              		.align	1
+  68              		.p2align 2,,3
+  69              		.weak	_ZN7daisysp4AdsrD2Ev
+  70              		.syntax unified
+  71              		.thumb
+  72              		.thumb_func
+  73              		.fpu fpv5-d16
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 7
+
+
+  75              	_ZN7daisysp4AdsrD2Ev:
+  76              	.LVL1:
+  77              	.LFB2036:
+  78              		.file 6 "../DaisySP/Source/Control/adsr.h"
+   1:../DaisySP/Source/Control/adsr.h **** #pragma once
+   2:../DaisySP/Source/Control/adsr.h **** #ifndef DSY_ADSR_H
+   3:../DaisySP/Source/Control/adsr.h **** #define DSY_ADSR_H
+   4:../DaisySP/Source/Control/adsr.h **** 
+   5:../DaisySP/Source/Control/adsr.h **** #include <stdint.h>
+   6:../DaisySP/Source/Control/adsr.h **** #ifdef __cplusplus
+   7:../DaisySP/Source/Control/adsr.h **** 
+   8:../DaisySP/Source/Control/adsr.h **** namespace daisysp
+   9:../DaisySP/Source/Control/adsr.h **** {
+  10:../DaisySP/Source/Control/adsr.h **** /** Distinct stages that the phase of the envelope can be located in.
+  11:../DaisySP/Source/Control/adsr.h **** - IDLE   = located at phase location 0, and not currently running
+  12:../DaisySP/Source/Control/adsr.h **** - ATTACK  = First segment of envelope where phase moves from 0 to 1
+  13:../DaisySP/Source/Control/adsr.h **** - DECAY   = Second segment of envelope where phase moves from 1 to SUSTAIN value
+  14:../DaisySP/Source/Control/adsr.h **** - RELEASE =     Fourth segment of envelop where phase moves from SUSTAIN to 0
+  15:../DaisySP/Source/Control/adsr.h **** */
+  16:../DaisySP/Source/Control/adsr.h **** enum
+  17:../DaisySP/Source/Control/adsr.h **** {
+  18:../DaisySP/Source/Control/adsr.h ****     ADSR_SEG_IDLE    = 0,
+  19:../DaisySP/Source/Control/adsr.h ****     ADSR_SEG_ATTACK  = 1,
+  20:../DaisySP/Source/Control/adsr.h ****     ADSR_SEG_DECAY   = 2,
+  21:../DaisySP/Source/Control/adsr.h ****     ADSR_SEG_RELEASE = 4
+  22:../DaisySP/Source/Control/adsr.h **** };
+  23:../DaisySP/Source/Control/adsr.h **** 
+  24:../DaisySP/Source/Control/adsr.h **** 
+  25:../DaisySP/Source/Control/adsr.h **** /** adsr envelope module
+  26:../DaisySP/Source/Control/adsr.h **** 
+  27:../DaisySP/Source/Control/adsr.h **** Original author(s) : Paul Batchelor
+  28:../DaisySP/Source/Control/adsr.h **** 
+  29:../DaisySP/Source/Control/adsr.h **** Ported from Soundpipe by Ben Sergentanis, May 2020
+  30:../DaisySP/Source/Control/adsr.h ****  
+  31:../DaisySP/Source/Control/adsr.h **** Remake by Steffan DIedrichsen, May 2021
+  32:../DaisySP/Source/Control/adsr.h **** */
+  33:../DaisySP/Source/Control/adsr.h **** class Adsr
+  34:../DaisySP/Source/Control/adsr.h **** {
+  35:../DaisySP/Source/Control/adsr.h ****   public:
+  36:../DaisySP/Source/Control/adsr.h ****     Adsr() {}
+  37:../DaisySP/Source/Control/adsr.h ****     ~Adsr() {}
+  79              		.loc 6 37 5 is_stmt 1 view -0
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83              		@ link register save eliminated.
+  84              		.loc 6 37 14 is_stmt 0 view .LVU11
+  85 0000 7047     		bx	lr
+  86              		.cfi_endproc
+  87              	.LFE2036:
+  89              		.weak	_ZN7daisysp4AdsrD1Ev
+  90              		.thumb_set _ZN7daisysp4AdsrD1Ev,_ZN7daisysp4AdsrD2Ev
+  91 0002 00BF     		.section	.text._ZN7daisysp10MoogLadderD2Ev,"axG",%progbits,_ZN7daisysp10MoogLadderD5Ev,comdat
+  92              		.align	1
+  93              		.p2align 2,,3
+  94              		.weak	_ZN7daisysp10MoogLadderD2Ev
+  95              		.syntax unified
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 8
+
+
+  96              		.thumb
+  97              		.thumb_func
+  98              		.fpu fpv5-d16
+ 100              	_ZN7daisysp10MoogLadderD2Ev:
+ 101              	.LVL2:
+ 102              	.LFB3991:
+ 103              		.file 7 "../DaisySP/Source/Filters/moogladder.h"
+   1:../DaisySP/Source/Filters/moogladder.h **** #pragma once
+   2:../DaisySP/Source/Filters/moogladder.h **** #ifndef DSY_MOOGLADDER_H
+   3:../DaisySP/Source/Filters/moogladder.h **** #define DSY_MOOGLADDER_H
+   4:../DaisySP/Source/Filters/moogladder.h **** 
+   5:../DaisySP/Source/Filters/moogladder.h **** #include <stdint.h>
+   6:../DaisySP/Source/Filters/moogladder.h **** #ifdef __cplusplus
+   7:../DaisySP/Source/Filters/moogladder.h **** 
+   8:../DaisySP/Source/Filters/moogladder.h **** namespace daisysp
+   9:../DaisySP/Source/Filters/moogladder.h **** {
+  10:../DaisySP/Source/Filters/moogladder.h **** /** Moog ladder filter module
+  11:../DaisySP/Source/Filters/moogladder.h **** 
+  12:../DaisySP/Source/Filters/moogladder.h **** Ported from soundpipe
+  13:../DaisySP/Source/Filters/moogladder.h **** 
+  14:../DaisySP/Source/Filters/moogladder.h **** Original author(s) : Victor Lazzarini, John ffitch (fast tanh), Bob Moog
+  15:../DaisySP/Source/Filters/moogladder.h **** 
+  16:../DaisySP/Source/Filters/moogladder.h **** */
+  17:../DaisySP/Source/Filters/moogladder.h **** class MoogLadder
+  18:../DaisySP/Source/Filters/moogladder.h **** {
+  19:../DaisySP/Source/Filters/moogladder.h ****   public:
+  20:../DaisySP/Source/Filters/moogladder.h ****     MoogLadder() {}
+  21:../DaisySP/Source/Filters/moogladder.h ****     ~MoogLadder() {}
+ 104              		.loc 7 21 5 is_stmt 1 view -0
+ 105              		.cfi_startproc
+ 106              		@ args = 0, pretend = 0, frame = 0
+ 107              		@ frame_needed = 0, uses_anonymous_args = 0
+ 108              		@ link register save eliminated.
+ 109              		.loc 7 21 20 is_stmt 0 view .LVU13
  110 0000 7047     		bx	lr
  111              		.cfi_endproc
- 112              	.LFE4236:
- 114              		.weak	_ZN5daisy9DaisySeedD1Ev
- 115              		.thumb_set _ZN5daisy9DaisySeedD1Ev,_ZN5daisy9DaisySeedD2Ev
+ 112              	.LFE3991:
+ 114              		.weak	_ZN7daisysp10MoogLadderD1Ev
+ 115              		.thumb_set _ZN7daisysp10MoogLadderD1Ev,_ZN7daisysp10MoogLadderD2Ev
  116 0002 00BF     		.section	.text.__tcf_0,"ax",%progbits
  117              		.align	1
  118              		.p2align 2,,3
@@ -468,17 +468,17 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
  121              		.thumb_func
  122              		.fpu fpv5-d16
  124              	__tcf_0:
- 125              	.LFB4800:
+ 125              	.LFB4802:
  126              		.file 8 "birds-and-the-bees.cpp"
-   1:birds-and-the-bees.cpp **** #include "daisysp.h"
-   2:birds-and-the-bees.cpp **** #include "daisy_seed.h"
+   1:birds-and-the-bees.cpp **** #include "daisy_seed.h"
+   2:birds-and-the-bees.cpp **** #include "daisysp.h"
    3:birds-and-the-bees.cpp **** 
    4:birds-and-the-bees.cpp **** using namespace daisysp;
    5:birds-and-the-bees.cpp **** using namespace daisy;
    6:birds-and-the-bees.cpp **** 
-   7:birds-and-the-bees.cpp **** #define NUM_OF_OSCILLATORS 8
+   7:birds-and-the-bees.cpp **** #define NUM_OF_OSCILLATORS 1
    8:birds-and-the-bees.cpp **** #define AUDIO_BLOCK_SIZE 48
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 9
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 9
 
 
    9:birds-and-the-bees.cpp **** 
@@ -497,7 +497,7 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
  132              		.loc 8 16 15 is_stmt 0 view .LVU15
  133 0000 7047     		bx	lr
  134              		.cfi_endproc
- 135              	.LFE4800:
+ 135              	.LFE4802:
  137 0002 00BF     		.section	.text._ZL13AudioCallbackPKfPfj,"ax",%progbits
  138              		.align	1
  139              		.p2align 2,,3
@@ -510,671 +510,804 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
  147              	.LFB4242:
   17:birds-and-the-bees.cpp **** 
   18:birds-and-the-bees.cpp **** static DaisySeed hw;
-  19:birds-and-the-bees.cpp **** static VariableShapeOscillator osc[8];
-  20:birds-and-the-bees.cpp **** static MoogLadder filterLeft;
-  21:birds-and-the-bees.cpp **** static MoogLadder filterRight;
-  22:birds-and-the-bees.cpp **** static Adsr envelope;
-  23:birds-and-the-bees.cpp **** 
-  24:birds-and-the-bees.cpp **** float outputVolume = 0.75f;
-  25:birds-and-the-bees.cpp **** float portamento = 0.0f;
-  26:birds-and-the-bees.cpp **** float swarmPreset = 0.0f; // what is this...
-  27:birds-and-the-bees.cpp **** float swarmParcialRange = 0.0f; // what is that...
-  28:birds-and-the-bees.cpp **** float cutoffHz = 100.0f;
-  29:birds-and-the-bees.cpp **** float resonance = 0.0f;
-  30:birds-and-the-bees.cpp **** float filterSwarmSpread = 0.5; // what is dis...
-  31:birds-and-the-bees.cpp **** float enveloptToCutoff = 0.0f;
-  32:birds-and-the-bees.cpp **** float overdrive = 0.0f;
-  33:birds-and-the-bees.cpp **** float tune = 0.0f; // in cents?
-  34:birds-and-the-bees.cpp **** float attackMs = 0.0f;
-  35:birds-and-the-bees.cpp **** float decayMs = 0.0f;
-  36:birds-and-the-bees.cpp **** float sustain = 0.0f; 
-  37:birds-and-the-bees.cpp **** float releaseMs = 0.0f;
-  38:birds-and-the-bees.cpp **** int octave = 2;
-  39:birds-and-the-bees.cpp **** float stereoSpread = 0.5f;
-  40:birds-and-the-bees.cpp **** 
+  19:birds-and-the-bees.cpp **** // static VariableShapeOscillator osc[NUM_OF_OSCILLATORS];
+  20:birds-and-the-bees.cpp **** static Oscillator osc[NUM_OF_OSCILLATORS];
+  21:birds-and-the-bees.cpp **** static MoogLadder filterLeft;
+  22:birds-and-the-bees.cpp **** static MoogLadder filterRight;
+  23:birds-and-the-bees.cpp **** static Adsr envelope;
+  24:birds-and-the-bees.cpp **** 
+  25:birds-and-the-bees.cpp **** float outputVolume = 0.75f;
+  26:birds-and-the-bees.cpp **** float portamento = 0.0f;
+  27:birds-and-the-bees.cpp **** float swarmPreset = 0.0f;       // what is this...
+  28:birds-and-the-bees.cpp **** float swarmParcialRange = 0.0f; // what is that...
+  29:birds-and-the-bees.cpp **** float cutoffHz = 100.0f;
+  30:birds-and-the-bees.cpp **** float resonance = 0.0f;
+  31:birds-and-the-bees.cpp **** float filterSwarmSpread = 0.5; // what is dis...
+  32:birds-and-the-bees.cpp **** float enveloptToCutoff = 0.0f;
+  33:birds-and-the-bees.cpp **** float overdrive = 0.0f;
+  34:birds-and-the-bees.cpp **** float tune = 0.0f; // in cents?
+  35:birds-and-the-bees.cpp **** float attackMs = 0.0f;
+  36:birds-and-the-bees.cpp **** float decayMs = 0.0f;
+  37:birds-and-the-bees.cpp **** float sustain = 0.0f;
+  38:birds-and-the-bees.cpp **** float releaseMs = 0.0f;
+  39:birds-and-the-bees.cpp **** int octave = 2;
+  40:birds-and-the-bees.cpp **** float stereoSpread = 0.5f;
   41:birds-and-the-bees.cpp **** 
-  42:birds-and-the-bees.cpp **** 
-  43:birds-and-the-bees.cpp **** 
-  44:birds-and-the-bees.cpp **** float knob = 0.5f;
-  45:birds-and-the-bees.cpp **** 
-  46:birds-and-the-bees.cpp **** void SetupOsc(float samplerate) {
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 10
+  42:birds-and-the-bees.cpp **** float pitchRibbon = 0.0f;
+  43:birds-and-the-bees.cpp **** float cutoffRibbon = 0.0f;
+  44:birds-and-the-bees.cpp **** 
+  45:birds-and-the-bees.cpp **** float knob = 0.5f;
+  46:birds-and-the-bees.cpp **** 
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 10
 
 
-  47:birds-and-the-bees.cpp ****   for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
-  48:birds-and-the-bees.cpp ****     osc[i].Init(samplerate);
-  49:birds-and-the-bees.cpp ****     // osc[i].SetAmp(0.125f);
-  50:birds-and-the-bees.cpp ****   }
-  51:birds-and-the-bees.cpp **** }
-  52:birds-and-the-bees.cpp **** 
-  53:birds-and-the-bees.cpp **** static void AudioCallback(AudioHandle::InterleavingInputBuffer in,
-  54:birds-and-the-bees.cpp ****                           AudioHandle::InterleavingOutputBuffer out,
-  55:birds-and-the-bees.cpp ****                           size_t size) {
- 148              		.loc 8 55 40 is_stmt 1 view -0
+  47:birds-and-the-bees.cpp **** void SetupOsc(float samplerate) {
+  48:birds-and-the-bees.cpp ****   for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
+  49:birds-and-the-bees.cpp ****     osc[i].Init(samplerate);
+  50:birds-and-the-bees.cpp ****     osc[i].SetWaveform(osc[i].WAVE_SIN);
+  51:birds-and-the-bees.cpp ****     osc[i].SetFreq(250);
+  52:birds-and-the-bees.cpp ****     osc[i].SetAmp(0.5);
+  53:birds-and-the-bees.cpp **** 
+  54:birds-and-the-bees.cpp ****     // osc[i].Init(samplerate);
+  55:birds-and-the-bees.cpp ****     // osc[i].SetWaveshape(1.0f);
+  56:birds-and-the-bees.cpp ****     // osc[i].SetPW(0.1f);
+  57:birds-and-the-bees.cpp ****     // osc[i].SetSync(true);
+  58:birds-and-the-bees.cpp ****   }
+  59:birds-and-the-bees.cpp **** }
+  60:birds-and-the-bees.cpp **** 
+  61:birds-and-the-bees.cpp **** static void AudioCallback(AudioHandle::InterleavingInputBuffer in,
+  62:birds-and-the-bees.cpp ****                           AudioHandle::InterleavingOutputBuffer out,
+  63:birds-and-the-bees.cpp ****                           size_t size) {
+ 148              		.loc 8 63 40 is_stmt 1 view -0
  149              		.cfi_startproc
  150              		@ args = 0, pretend = 0, frame = 0
  151              		@ frame_needed = 0, uses_anonymous_args = 0
-  56:birds-and-the-bees.cpp ****   float sigL;
- 152              		.loc 8 56 3 view .LVU17
-  57:birds-and-the-bees.cpp ****   float sigR;
- 153              		.loc 8 57 3 view .LVU18
-  58:birds-and-the-bees.cpp **** 
-  59:birds-and-the-bees.cpp ****   for (size_t i = 0; i < size; i += 2) {
- 154              		.loc 8 59 3 view .LVU19
- 155              	.LBB87:
- 156              		.loc 8 59 24 view .LVU20
- 157 0000 002A     		cmp	r2, #0
- 158 0002 5ED0     		beq	.L15
- 159 0004 013A     		subs	r2, r2, #1
- 160              	.LVL4:
- 161              		.loc 8 59 24 is_stmt 0 view .LVU21
- 162              	.LBE87:
-  55:birds-and-the-bees.cpp ****   float sigL;
- 163              		.loc 8 55 40 view .LVU22
- 164 0006 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
- 165              		.cfi_def_cfa_offset 32
- 166              		.cfi_offset 4, -32
- 167              		.cfi_offset 5, -28
- 168              		.cfi_offset 6, -24
- 169              		.cfi_offset 7, -20
- 170              		.cfi_offset 8, -16
- 171              		.cfi_offset 9, -12
- 172              		.cfi_offset 10, -8
- 173              		.cfi_offset 14, -4
- 174 000a 8846     		mov	r8, r1
- 175              	.LBB97:
- 176              		.loc 8 59 24 view .LVU23
- 177 000c 4FF00009 		mov	r9, #0
- 178 0010 2C4E     		ldr	r6, .L20
- 179 0012 4FEA520A 		lsr	r10, r2, #1
- 180 0016 2C4F     		ldr	r7, .L20+4
- 181              	.LBE97:
-  55:birds-and-the-bees.cpp ****   float sigL;
- 182              		.loc 8 55 40 view .LVU24
- 183 0018 2DED048B 		vpush.64	{d8, d9}
- 184              		.cfi_def_cfa_offset 48
- 185              		.cfi_offset 80, -48
- 186              		.cfi_offset 81, -44
- 187              		.cfi_offset 82, -40
- 188              		.cfi_offset 83, -36
- 189              	.LVL5:
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 11
-
-
- 190              	.L12:
- 191              	.LBB98:
- 192              	.LBB88:
-  60:birds-and-the-bees.cpp ****     // knob = 0;
-  61:birds-and-the-bees.cpp ****     knob = hw.adc.GetMuxFloat(0,1);
- 193              		.loc 8 61 5 is_stmt 1 view .LVU25
- 194              		.loc 8 61 30 is_stmt 0 view .LVU26
- 195 001c 0122     		movs	r2, #1
- 196 001e 0021     		movs	r1, #0
- 197 0020 2A48     		ldr	r0, .L20+8
- 198              	.LBB89:
-  62:birds-and-the-bees.cpp ****     float knob2 = hw.adc.GetMuxFloat(1, 1);
-  63:birds-and-the-bees.cpp ****     for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
- 199              		.loc 8 63 14 view .LVU27
- 200 0022 0025     		movs	r5, #0
- 201              	.LBE89:
-  61:birds-and-the-bees.cpp ****     float knob2 = hw.adc.GetMuxFloat(1, 1);
- 202              		.loc 8 61 30 view .LVU28
- 203 0024 FFF7FEFF 		bl	_ZNK5daisy9AdcHandle11GetMuxFloatEhh
- 204              	.LVL6:
-  62:birds-and-the-bees.cpp ****     float knob2 = hw.adc.GetMuxFloat(1, 1);
- 205              		.loc 8 62 37 view .LVU29
- 206 0028 0122     		movs	r2, #1
- 207 002a 2848     		ldr	r0, .L20+8
- 208 002c 1146     		mov	r1, r2
- 209 002e 284C     		ldr	r4, .L20+12
-  61:birds-and-the-bees.cpp ****     float knob2 = hw.adc.GetMuxFloat(1, 1);
- 210              		.loc 8 61 10 view .LVU30
- 211 0030 86ED000A 		vstr.32	s0, [r6]
-  62:birds-and-the-bees.cpp ****     float knob2 = hw.adc.GetMuxFloat(1, 1);
- 212              		.loc 8 62 5 is_stmt 1 view .LVU31
-  62:birds-and-the-bees.cpp ****     float knob2 = hw.adc.GetMuxFloat(1, 1);
- 213              		.loc 8 62 37 is_stmt 0 view .LVU32
- 214 0034 FFF7FEFF 		bl	_ZNK5daisy9AdcHandle11GetMuxFloatEhh
- 215              	.LVL7:
- 216              		.loc 8 63 5 is_stmt 1 view .LVU33
- 217              	.LBB95:
- 218              		.loc 8 63 23 view .LVU34
- 219 0038 0DE0     		b	.L10
- 220              	.LVL8:
- 221              	.L19:
- 222              		.loc 8 63 5 is_stmt 0 view .LVU35
- 223 003a 0135     		adds	r5, r5, #1
- 224              	.LVL9:
- 225              	.LBB90:
-  64:birds-and-the-bees.cpp ****       osc[i].SetFreq(knob * 220.0f + 220.0f);
+  64:birds-and-the-bees.cpp **** 
   65:birds-and-the-bees.cpp **** 
-  66:birds-and-the-bees.cpp ****       // 0% means 0.125 * sig for both sides
-  67:birds-and-the-bees.cpp ****       // 50% meant 0.1875 sig primary,  0.0625 sig secondary | 0.125f
-  68:birds-and-the-bees.cpp ****       // 100% means 0.25 * sig for primary side, 0% for secondary
-  69:birds-and-the-bees.cpp ****       float primaryChannelRatio = (stereoSpread * 0.125f + 0.125f);
-  70:birds-and-the-bees.cpp ****       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
-  71:birds-and-the-bees.cpp **** 
-  72:birds-and-the-bees.cpp ****       if (i % 2 == 0) {
-  73:birds-and-the-bees.cpp ****         sigL += primaryChannelRatio * osc[i].Process();
- 226              		.loc 8 73 53 view .LVU36
- 227 003c FFF7FEFF 		bl	_ZN7daisysp23VariableShapeOscillator7ProcessEv
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 12
+  66:birds-and-the-bees.cpp ****   for (size_t i = 0; i < size; i += 2) {
+ 152              		.loc 8 66 3 view .LVU17
+ 153              	.LBB100:
+ 154              		.loc 8 66 24 view .LVU18
+ 155 0000 02B9     		cbnz	r2, .L17
+ 156 0002 7047     		bx	lr
+ 157              	.L17:
+ 158 0004 013A     		subs	r2, r2, #1
+ 159              	.LVL4:
+ 160              		.loc 8 66 24 is_stmt 0 view .LVU19
+ 161              	.LBE100:
+  63:birds-and-the-bees.cpp **** 
+ 162              		.loc 8 63 40 view .LVU20
+ 163 0006 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 164              		.cfi_def_cfa_offset 32
+ 165              		.cfi_offset 3, -32
+ 166              		.cfi_offset 4, -28
+ 167              		.cfi_offset 5, -24
+ 168              		.cfi_offset 6, -20
+ 169              		.cfi_offset 7, -16
+ 170              		.cfi_offset 8, -12
+ 171              		.cfi_offset 9, -8
+ 172              		.cfi_offset 14, -4
+ 173 000a 0D46     		mov	r5, r1
+ 174              	.LBB118:
+ 175              		.loc 8 66 24 view .LVU21
+ 176 000c 0026     		movs	r6, #0
+ 177 000e DFF89090 		ldr	r9, .L18+16
+ 178 0012 5408     		lsrs	r4, r2, #1
+ 179 0014 1E4F     		ldr	r7, .L18
+ 180 0016 DFF88C80 		ldr	r8, .L18+20
+ 181              	.LBE118:
+  63:birds-and-the-bees.cpp **** 
+ 182              		.loc 8 63 40 view .LVU22
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 11
 
 
- 228              	.LVL10:
-  74:birds-and-the-bees.cpp ****         sigR += secondaryChannelRatio * osc[i].Process();
- 229              		.loc 8 74 55 view .LVU37
- 230 0040 2046     		mov	r0, r4
-  73:birds-and-the-bees.cpp ****         sigR += secondaryChannelRatio * osc[i].Process();
- 231              		.loc 8 73 14 view .LVU38
- 232 0042 E0EE298A 		vfma.f32	s17, s0, s19
- 233              	.LVL11:
- 234              		.loc 8 74 9 is_stmt 1 view .LVU39
- 235              		.loc 8 74 55 is_stmt 0 view .LVU40
- 236 0046 FFF7FEFF 		bl	_ZN7daisysp23VariableShapeOscillator7ProcessEv
- 237              	.LVL12:
- 238              	.LBE90:
-  63:birds-and-the-bees.cpp ****       osc[i].SetFreq(knob * 220.0f + 220.0f);
- 239              		.loc 8 63 23 view .LVU41
- 240 004a 082D     		cmp	r5, #8
- 241              	.LBB91:
- 242              		.loc 8 74 14 view .LVU42
- 243 004c A0EE089A 		vfma.f32	s18, s0, s16
- 244              	.LVL13:
- 245              		.loc 8 74 14 view .LVU43
- 246              	.LBE91:
-  63:birds-and-the-bees.cpp ****       osc[i].SetFreq(knob * 220.0f + 220.0f);
- 247              		.loc 8 63 5 is_stmt 1 view .LVU44
-  63:birds-and-the-bees.cpp ****       osc[i].SetFreq(knob * 220.0f + 220.0f);
- 248              		.loc 8 63 23 view .LVU45
- 249 0050 04F12C04 		add	r4, r4, #44
- 250 0054 25D0     		beq	.L18
- 251              	.LVL14:
- 252              	.L10:
- 253              	.LBB92:
-  64:birds-and-the-bees.cpp **** 
- 254              		.loc 8 64 7 view .LVU46
-  64:birds-and-the-bees.cpp **** 
- 255              		.loc 8 64 21 is_stmt 0 view .LVU47
- 256 0056 D6ED007A 		vldr.32	s15, [r6]
- 257 005a 2046     		mov	r0, r4
- 258 005c 9FED1D0A 		vldr.32	s0, .L20+16
- 259 0060 A7EE800A 		vfma.f32	s0, s15, s0
- 260 0064 FFF7FEFF 		bl	_ZN7daisysp23VariableShapeOscillator7SetFreqEf
- 261              	.LVL15:
-  69:birds-and-the-bees.cpp ****       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
- 262              		.loc 8 69 7 is_stmt 1 view .LVU48
-  75:birds-and-the-bees.cpp ****       }
-  76:birds-and-the-bees.cpp ****       else {
-  77:birds-and-the-bees.cpp ****         sigL += secondaryChannelRatio * osc[i].Process();
- 263              		.loc 8 77 9 view .LVU49
-  69:birds-and-the-bees.cpp ****       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
- 264              		.loc 8 69 13 is_stmt 0 view .LVU50
- 265 0068 F4EE007A 		vmov.f32	s15, #1.25e-1
-  69:birds-and-the-bees.cpp ****       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
- 266              		.loc 8 69 49 view .LVU51
- 267 006c 97ED007A 		vldr.32	s14, [r7]
-  72:birds-and-the-bees.cpp ****         sigL += primaryChannelRatio * osc[i].Process();
- 268              		.loc 8 72 7 view .LVU52
- 269 0070 EB07     		lsls	r3, r5, #31
- 270              		.loc 8 77 55 view .LVU53
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 13
+ 183 001a 2DED028B 		vpush.64	{d8}
+ 184              		.cfi_def_cfa_offset 40
+ 185              		.cfi_offset 80, -40
+ 186              		.cfi_offset 81, -36
+ 187              	.LVL5:
+ 188              	.L8:
+ 189              	.LBB119:
+ 190              	.LBB101:
+  67:birds-and-the-bees.cpp ****     float sigL = 0;
+ 191              		.loc 8 67 5 is_stmt 1 view .LVU23
+  68:birds-and-the-bees.cpp ****     float sigR = 0;
+ 192              		.loc 8 68 5 view .LVU24
+  69:birds-and-the-bees.cpp ****     // knob = 0;
+  70:birds-and-the-bees.cpp ****     knob = hw.adc.GetFloat(0);
+ 193              		.loc 8 70 5 view .LVU25
+ 194              		.loc 8 70 27 is_stmt 0 view .LVU26
+ 195 001e 0021     		movs	r1, #0
+ 196 0020 1C48     		ldr	r0, .L18+4
+ 197 0022 FFF7FEFF 		bl	_ZNK5daisy9AdcHandle8GetFloatEh
+ 198              	.LVL6:
+ 199              	.LBB102:
+ 200              	.LBB103:
+  71:birds-and-the-bees.cpp ****     for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
+  72:birds-and-the-bees.cpp ****       float newFreq = knob * 220.0f + 220.0f;
+ 201              		.loc 8 72 13 view .LVU27
+ 202 0026 DFED1C7A 		vldr.32	s15, .L18+8
+ 203              	.LBB104:
+ 204              	.LBB105:
+ 205              		.file 9 "../DaisySP/Source/Synthesis/oscillator.h"
+   1:../DaisySP/Source/Synthesis/oscillator.h **** #pragma once
+   2:../DaisySP/Source/Synthesis/oscillator.h **** #ifndef DSY_OSCILLATOR_H
+   3:../DaisySP/Source/Synthesis/oscillator.h **** #define DSY_OSCILLATOR_H
+   4:../DaisySP/Source/Synthesis/oscillator.h **** #include <stdint.h>
+   5:../DaisySP/Source/Synthesis/oscillator.h **** #include "Utility/dsp.h"
+   6:../DaisySP/Source/Synthesis/oscillator.h **** #ifdef __cplusplus
+   7:../DaisySP/Source/Synthesis/oscillator.h **** 
+   8:../DaisySP/Source/Synthesis/oscillator.h **** namespace daisysp
+   9:../DaisySP/Source/Synthesis/oscillator.h **** {
+  10:../DaisySP/Source/Synthesis/oscillator.h **** /** Synthesis of several waveforms, including polyBLEP bandlimited waveforms.
+  11:../DaisySP/Source/Synthesis/oscillator.h **** */
+  12:../DaisySP/Source/Synthesis/oscillator.h **** class Oscillator
+  13:../DaisySP/Source/Synthesis/oscillator.h **** {
+  14:../DaisySP/Source/Synthesis/oscillator.h ****   public:
+  15:../DaisySP/Source/Synthesis/oscillator.h ****     Oscillator() {}
+  16:../DaisySP/Source/Synthesis/oscillator.h ****     ~Oscillator() {}
+  17:../DaisySP/Source/Synthesis/oscillator.h ****     /** Choices for output waveforms, POLYBLEP are appropriately labeled. Others are naive forms.
+  18:../DaisySP/Source/Synthesis/oscillator.h ****     */
+  19:../DaisySP/Source/Synthesis/oscillator.h ****     enum
+  20:../DaisySP/Source/Synthesis/oscillator.h ****     {
+  21:../DaisySP/Source/Synthesis/oscillator.h ****         WAVE_SIN,
+  22:../DaisySP/Source/Synthesis/oscillator.h ****         WAVE_TRI,
+  23:../DaisySP/Source/Synthesis/oscillator.h ****         WAVE_SAW,
+  24:../DaisySP/Source/Synthesis/oscillator.h ****         WAVE_RAMP,
+  25:../DaisySP/Source/Synthesis/oscillator.h ****         WAVE_SQUARE,
+  26:../DaisySP/Source/Synthesis/oscillator.h ****         WAVE_POLYBLEP_TRI,
+  27:../DaisySP/Source/Synthesis/oscillator.h ****         WAVE_POLYBLEP_SAW,
+  28:../DaisySP/Source/Synthesis/oscillator.h ****         WAVE_POLYBLEP_SQUARE,
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 12
 
 
- 271 0072 2046     		mov	r0, r4
-  69:birds-and-the-bees.cpp ****       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
- 272              		.loc 8 69 13 view .LVU54
- 273 0074 F0EE679A 		vmov.f32	s19, s15
- 274 0078 E7EE279A 		vfma.f32	s19, s14, s15
- 275              	.LVL16:
-  70:birds-and-the-bees.cpp **** 
- 276              		.loc 8 70 7 is_stmt 1 view .LVU55
-  70:birds-and-the-bees.cpp **** 
- 277              		.loc 8 70 13 is_stmt 0 view .LVU56
- 278 007c E7EE677A 		vfms.f32	s15, s14, s15
- 279 0080 B0EE678A 		vmov.f32	s16, s15
- 280              	.LVL17:
-  72:birds-and-the-bees.cpp ****         sigL += primaryChannelRatio * osc[i].Process();
- 281              		.loc 8 72 7 is_stmt 1 view .LVU57
-  73:birds-and-the-bees.cpp ****         sigR += secondaryChannelRatio * osc[i].Process();
- 282              		.loc 8 73 9 view .LVU58
-  72:birds-and-the-bees.cpp ****         sigL += primaryChannelRatio * osc[i].Process();
- 283              		.loc 8 72 7 is_stmt 0 view .LVU59
- 284 0084 D9D5     		bpl	.L19
-  72:birds-and-the-bees.cpp ****         sigL += primaryChannelRatio * osc[i].Process();
- 285              		.loc 8 72 7 view .LVU60
- 286              	.LBE92:
-  63:birds-and-the-bees.cpp ****       osc[i].SetFreq(knob * 220.0f + 220.0f);
- 287              		.loc 8 63 5 view .LVU61
- 288 0086 0135     		adds	r5, r5, #1
- 289              	.LVL18:
- 290              	.LBB93:
- 291              		.loc 8 77 55 view .LVU62
- 292 0088 FFF7FEFF 		bl	_ZN7daisysp23VariableShapeOscillator7ProcessEv
- 293              	.LVL19:
-  78:birds-and-the-bees.cpp ****         sigR += primaryChannelRatio * osc[i].Process();
- 294              		.loc 8 78 53 view .LVU63
- 295 008c 2046     		mov	r0, r4
-  77:birds-and-the-bees.cpp ****         sigR += primaryChannelRatio * osc[i].Process();
- 296              		.loc 8 77 14 view .LVU64
- 297 008e E0EE088A 		vfma.f32	s17, s0, s16
- 298              	.LVL20:
- 299              		.loc 8 78 9 is_stmt 1 view .LVU65
- 300              		.loc 8 78 53 is_stmt 0 view .LVU66
- 301 0092 FFF7FEFF 		bl	_ZN7daisysp23VariableShapeOscillator7ProcessEv
- 302              	.LVL21:
- 303              	.LBE93:
-  63:birds-and-the-bees.cpp ****       osc[i].SetFreq(knob * 220.0f + 220.0f);
- 304              		.loc 8 63 23 view .LVU67
- 305 0096 082D     		cmp	r5, #8
- 306              	.LBB94:
- 307              		.loc 8 78 14 view .LVU68
- 308 0098 A0EE299A 		vfma.f32	s18, s0, s19
- 309              	.LVL22:
- 310              		.loc 8 78 14 view .LVU69
- 311              	.LBE94:
-  63:birds-and-the-bees.cpp ****       osc[i].SetFreq(knob * 220.0f + 220.0f);
- 312              		.loc 8 63 5 is_stmt 1 view .LVU70
-  63:birds-and-the-bees.cpp ****       osc[i].SetFreq(knob * 220.0f + 220.0f);
- 313              		.loc 8 63 23 view .LVU71
- 314 009c 04F12C04 		add	r4, r4, #44
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 14
+  29:../DaisySP/Source/Synthesis/oscillator.h ****         WAVE_LAST,
+  30:../DaisySP/Source/Synthesis/oscillator.h ****     };
+  31:../DaisySP/Source/Synthesis/oscillator.h **** 
+  32:../DaisySP/Source/Synthesis/oscillator.h **** 
+  33:../DaisySP/Source/Synthesis/oscillator.h ****     /** Initializes the Oscillator
+  34:../DaisySP/Source/Synthesis/oscillator.h **** 
+  35:../DaisySP/Source/Synthesis/oscillator.h ****         \param sample_rate - sample rate of the audio engine being run, and the frequency that the 
+  36:../DaisySP/Source/Synthesis/oscillator.h **** 
+  37:../DaisySP/Source/Synthesis/oscillator.h ****         Defaults:
+  38:../DaisySP/Source/Synthesis/oscillator.h ****         - freq_ = 100 Hz
+  39:../DaisySP/Source/Synthesis/oscillator.h ****         - amp_ = 0.5
+  40:../DaisySP/Source/Synthesis/oscillator.h ****         - waveform_ = sine wave.
+  41:../DaisySP/Source/Synthesis/oscillator.h ****     */
+  42:../DaisySP/Source/Synthesis/oscillator.h ****     void Init(float sample_rate)
+  43:../DaisySP/Source/Synthesis/oscillator.h ****     {
+  44:../DaisySP/Source/Synthesis/oscillator.h ****         sr_        = sample_rate;
+  45:../DaisySP/Source/Synthesis/oscillator.h ****         sr_recip_  = 1.0f / sample_rate;
+  46:../DaisySP/Source/Synthesis/oscillator.h ****         freq_      = 100.0f;
+  47:../DaisySP/Source/Synthesis/oscillator.h ****         amp_       = 0.5f;
+  48:../DaisySP/Source/Synthesis/oscillator.h ****         phase_     = 0.0f;
+  49:../DaisySP/Source/Synthesis/oscillator.h ****         phase_inc_ = CalcPhaseInc(freq_);
+  50:../DaisySP/Source/Synthesis/oscillator.h ****         waveform_  = WAVE_SIN;
+  51:../DaisySP/Source/Synthesis/oscillator.h ****         eoc_       = true;
+  52:../DaisySP/Source/Synthesis/oscillator.h ****         eor_       = true;
+  53:../DaisySP/Source/Synthesis/oscillator.h ****     }
+  54:../DaisySP/Source/Synthesis/oscillator.h **** 
+  55:../DaisySP/Source/Synthesis/oscillator.h **** 
+  56:../DaisySP/Source/Synthesis/oscillator.h ****     /** Changes the frequency of the Oscillator, and recalculates phase increment.
+  57:../DaisySP/Source/Synthesis/oscillator.h ****     */
+  58:../DaisySP/Source/Synthesis/oscillator.h ****     inline void SetFreq(const float f)
+  59:../DaisySP/Source/Synthesis/oscillator.h ****     {
+  60:../DaisySP/Source/Synthesis/oscillator.h ****         freq_      = f;
+  61:../DaisySP/Source/Synthesis/oscillator.h ****         phase_inc_ = CalcPhaseInc(f);
+ 206              		.loc 9 61 34 view .LVU28
+ 207 002a 1948     		ldr	r0, .L18
+ 208              	.LBE105:
+ 209              	.LBE104:
+ 210              	.LBE103:
+ 211              	.LBE102:
+ 212              	.LBE101:
+  66:birds-and-the-bees.cpp ****     float sigL = 0;
+ 213              		.loc 8 66 24 view .LVU29
+ 214 002c 0835     		adds	r5, r5, #8
+ 215              	.LBB116:
+ 216              	.LBB113:
+ 217              	.LBB110:
+ 218              		.loc 8 72 13 view .LVU30
+ 219 002e E0EE277A 		vfma.f32	s15, s0, s15
+ 220              	.LBE110:
+ 221              	.LBE113:
+  70:birds-and-the-bees.cpp ****     for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
+ 222              		.loc 8 70 10 view .LVU31
+ 223 0032 89ED000A 		vstr.32	s0, [r9]
+  71:birds-and-the-bees.cpp ****       float newFreq = knob * 220.0f + 220.0f;
+ 224              		.loc 8 71 5 is_stmt 1 view .LVU32
+ 225              	.LVL7:
+ 226              	.LBB114:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 13
 
 
- 315 00a0 D9D1     		bne	.L10
- 316              	.L18:
-  63:birds-and-the-bees.cpp ****       osc[i].SetFreq(knob * 220.0f + 220.0f);
- 317              		.loc 8 63 23 is_stmt 0 view .LVU72
- 318              	.LBE95:
-  79:birds-and-the-bees.cpp ****       }
-  80:birds-and-the-bees.cpp ****     }
-  81:birds-and-the-bees.cpp **** 
-  82:birds-and-the-bees.cpp ****       // left out
-  83:birds-and-the-bees.cpp ****       out[i] = sigL;
- 319              		.loc 8 83 7 is_stmt 1 discriminator 2 view .LVU73
- 320              	.LBE88:
-  59:birds-and-the-bees.cpp ****     // knob = 0;
- 321              		.loc 8 59 24 is_stmt 0 discriminator 2 view .LVU74
- 322 00a2 D145     		cmp	r9, r10
- 323              	.LBB96:
- 324              		.loc 8 83 14 discriminator 2 view .LVU75
- 325 00a4 C8ED008A 		vstr.32	s17, [r8]
-  84:birds-and-the-bees.cpp **** 
-  85:birds-and-the-bees.cpp ****       // right out
-  86:birds-and-the-bees.cpp ****       out[i + 1] = sigR;
- 326              		.loc 8 86 7 is_stmt 1 discriminator 2 view .LVU76
- 327              		.loc 8 86 18 is_stmt 0 discriminator 2 view .LVU77
- 328 00a8 88ED019A 		vstr.32	s18, [r8, #4]
- 329              	.LBE96:
-  59:birds-and-the-bees.cpp ****     // knob = 0;
- 330              		.loc 8 59 3 is_stmt 1 discriminator 2 view .LVU78
- 331              	.LVL23:
-  59:birds-and-the-bees.cpp ****     // knob = 0;
- 332              		.loc 8 59 24 discriminator 2 view .LVU79
- 333 00ac 09F10103 		add	r3, r9, #1
- 334 00b0 08F10808 		add	r8, r8, #8
- 335              	.LVL24:
-  59:birds-and-the-bees.cpp ****     // knob = 0;
- 336              		.loc 8 59 24 is_stmt 0 discriminator 2 view .LVU80
- 337 00b4 01D0     		beq	.L6
- 338              	.LVL25:
-  59:birds-and-the-bees.cpp ****     // knob = 0;
- 339              		.loc 8 59 24 discriminator 2 view .LVU81
- 340 00b6 9946     		mov	r9, r3
- 341              	.LVL26:
-  59:birds-and-the-bees.cpp ****     // knob = 0;
- 342              		.loc 8 59 24 discriminator 2 view .LVU82
- 343 00b8 B0E7     		b	.L12
- 344              	.LVL27:
- 345              	.L6:
-  59:birds-and-the-bees.cpp ****     // knob = 0;
- 346              		.loc 8 59 24 discriminator 2 view .LVU83
- 347              	.LBE98:
-  87:birds-and-the-bees.cpp ****     }
-  88:birds-and-the-bees.cpp **** }
- 348              		.loc 8 88 1 view .LVU84
- 349 00ba BDEC048B 		vldm	sp!, {d8-d9}
- 350              		.cfi_restore 82
- 351              		.cfi_restore 83
- 352              		.cfi_restore 80
- 353              		.cfi_restore 81
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 15
+  71:birds-and-the-bees.cpp ****       float newFreq = knob * 220.0f + 220.0f;
+ 227              		.loc 8 71 23 view .LVU33
+ 228              	.LBB111:
+ 229              		.loc 8 72 7 view .LVU34
+  73:birds-and-the-bees.cpp ****       osc[i].SetFreq(newFreq);
+ 230              		.loc 8 73 7 view .LVU35
+ 231              	.LBB108:
+ 232              	.LBI104:
+  58:../DaisySP/Source/Synthesis/oscillator.h ****     {
+ 233              		.loc 9 58 17 view .LVU36
+ 234              	.LBB106:
+  60:../DaisySP/Source/Synthesis/oscillator.h ****         phase_inc_ = CalcPhaseInc(f);
+ 235              		.loc 9 60 9 view .LVU37
+ 236              		.loc 9 61 34 is_stmt 0 view .LVU38
+ 237 0036 B0EE670A 		vmov.f32	s0, s15
+  60:../DaisySP/Source/Synthesis/oscillator.h ****         phase_inc_ = CalcPhaseInc(f);
+ 238              		.loc 9 60 20 view .LVU39
+ 239 003a C7ED027A 		vstr.32	s15, [r7, #8]
+ 240              		.loc 9 61 9 is_stmt 1 view .LVU40
+ 241              		.loc 9 61 34 is_stmt 0 view .LVU41
+ 242 003e FFF7FEFF 		bl	_ZN7daisysp10Oscillator12CalcPhaseIncEf
+ 243              	.LVL8:
+ 244              		.loc 9 61 34 view .LVU42
+ 245              	.LBE106:
+ 246              	.LBE108:
+  74:birds-and-the-bees.cpp ****       // osc[i].SetSyncFreq(newFreq);
+  75:birds-and-the-bees.cpp **** 
+  76:birds-and-the-bees.cpp ****       // 0% means 0.125 * sig for both sides
+  77:birds-and-the-bees.cpp ****       // 50% meant 0.1875 sig primary,  0.0625 sig secondary | 0.125f
+  78:birds-and-the-bees.cpp ****       // 100% means 0.25 * sig for primary side, 0% for secondary
+  79:birds-and-the-bees.cpp ****       float primaryChannelRatio = (stereoSpread * 0.125f + 0.125f);
+ 247              		.loc 8 79 13 view .LVU43
+ 248 0042 F4EE007A 		vmov.f32	s15, #1.25e-1
+ 249              		.loc 8 79 49 view .LVU44
+ 250 0046 98ED007A 		vldr.32	s14, [r8]
+  80:birds-and-the-bees.cpp ****       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
+  81:birds-and-the-bees.cpp ****       float output = osc[i].Process();
+ 251              		.loc 8 81 36 view .LVU45
+ 252 004a 1148     		ldr	r0, .L18
+  79:birds-and-the-bees.cpp ****       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
+ 253              		.loc 8 79 13 view .LVU46
+ 254 004c F0EE678A 		vmov.f32	s17, s15
+ 255              	.LBB109:
+ 256              	.LBB107:
+ 257              		.loc 9 61 20 view .LVU47
+ 258 0050 87ED060A 		vstr.32	s0, [r7, #24]
+ 259              	.LVL9:
+ 260              		.loc 9 61 20 view .LVU48
+ 261              	.LBE107:
+ 262              	.LBE109:
+  79:birds-and-the-bees.cpp ****       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
+ 263              		.loc 8 79 7 is_stmt 1 view .LVU49
+  79:birds-and-the-bees.cpp ****       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
+ 264              		.loc 8 79 13 is_stmt 0 view .LVU50
+ 265 0054 E7EE278A 		vfma.f32	s17, s14, s15
+ 266              	.LVL10:
+  80:birds-and-the-bees.cpp ****       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 14
 
 
- 354              		.cfi_def_cfa_offset 32
- 355              	.LVL28:
- 356              		.loc 8 88 1 view .LVU85
- 357 00be BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
- 358              	.LVL29:
- 359              	.L15:
- 360              		.cfi_def_cfa_offset 0
- 361              		.cfi_restore 4
- 362              		.cfi_restore 5
- 363              		.cfi_restore 6
- 364              		.cfi_restore 7
- 365              		.cfi_restore 8
- 366              		.cfi_restore 9
- 367              		.cfi_restore 10
- 368              		.cfi_restore 14
- 369              		.loc 8 88 1 view .LVU86
- 370 00c2 7047     		bx	lr
- 371              	.L21:
- 372              		.align	2
- 373              	.L20:
- 374 00c4 00000000 		.word	.LANCHOR1
- 375 00c8 00000000 		.word	.LANCHOR3
- 376 00cc 18000000 		.word	.LANCHOR0+24
- 377 00d0 00000000 		.word	.LANCHOR2
- 378 00d4 00005C43 		.word	1130102784
- 379              		.cfi_endproc
- 380              	.LFE4242:
- 382              		.section	.text.__tcf_1,"ax",%progbits
- 383              		.align	1
- 384              		.p2align 2,,3
- 385              		.syntax unified
- 386              		.thumb
- 387              		.thumb_func
- 388              		.fpu fpv5-d16
- 390              	__tcf_1:
- 391              	.LFB4804:
- 392              		.cfi_startproc
- 393              		@ args = 0, pretend = 0, frame = 0
- 394              		@ frame_needed = 0, uses_anonymous_args = 0
- 395              		@ link register save eliminated.
- 396 0000 7047     		bx	lr
- 397              		.cfi_endproc
- 398              	.LFE4804:
- 400 0002 00BF     		.section	.text._Z8SetupOscf,"ax",%progbits
- 401              		.align	1
- 402              		.p2align 2,,3
- 403              		.global	_Z8SetupOscf
- 404              		.syntax unified
- 405              		.thumb
- 406              		.thumb_func
- 407              		.fpu fpv5-d16
- 409              	_Z8SetupOscf:
- 410              	.LVL30:
- 411              	.LFB4241:
-  46:birds-and-the-bees.cpp ****   for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
- 412              		.loc 8 46 33 is_stmt 1 view -0
- 413              		.cfi_startproc
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 16
+ 267              		.loc 8 80 7 is_stmt 1 view .LVU51
+  80:birds-and-the-bees.cpp ****       float secondaryChannelRatio = (0.125f - (stereoSpread * 0.125f));
+ 268              		.loc 8 80 13 is_stmt 0 view .LVU52
+ 269 0058 E7EE677A 		vfms.f32	s15, s14, s15
+ 270 005c B0EE678A 		vmov.f32	s16, s15
+ 271              	.LVL11:
+ 272              		.loc 8 81 7 is_stmt 1 view .LVU53
+ 273              		.loc 8 81 36 is_stmt 0 view .LVU54
+ 274 0060 FFF7FEFF 		bl	_ZN7daisysp10Oscillator7ProcessEv
+ 275              	.LVL12:
+  82:birds-and-the-bees.cpp ****       // sigL = output;
+  83:birds-and-the-bees.cpp ****       // sigR = output;
+  84:birds-and-the-bees.cpp ****       if (i % 2 == 0) {
+ 276              		.loc 8 84 7 is_stmt 1 view .LVU55
+  85:birds-and-the-bees.cpp ****         sigL += primaryChannelRatio * output;
+ 277              		.loc 8 85 9 view .LVU56
+ 278              		.loc 8 85 14 is_stmt 0 view .LVU57
+ 279 0064 DFED0D7A 		vldr.32	s15, .L18+12
+ 280              	.LBE111:
+ 281              	.LBE114:
+ 282              	.LBE116:
+  66:birds-and-the-bees.cpp ****     float sigL = 0;
+ 283              		.loc 8 66 24 view .LVU58
+ 284 0068 B442     		cmp	r4, r6
+ 285 006a 06F10103 		add	r3, r6, #1
+ 286              	.LBB117:
+ 287              	.LBB115:
+ 288              	.LBB112:
+ 289              		.loc 8 85 14 view .LVU59
+ 290 006e B0EE677A 		vmov.f32	s14, s15
+  86:birds-and-the-bees.cpp ****         sigR += secondaryChannelRatio * output;
+ 291              		.loc 8 86 14 view .LVU60
+ 292 0072 E8EE007A 		vfma.f32	s15, s16, s0
+  85:birds-and-the-bees.cpp ****         sigL += primaryChannelRatio * output;
+ 293              		.loc 8 85 14 view .LVU61
+ 294 0076 A8EE807A 		vfma.f32	s14, s17, s0
+ 295              	.LVL13:
+ 296              		.loc 8 86 9 is_stmt 1 view .LVU62
+ 297              		.loc 8 86 9 is_stmt 0 view .LVU63
+ 298              	.LBE112:
+  71:birds-and-the-bees.cpp ****       float newFreq = knob * 220.0f + 220.0f;
+ 299              		.loc 8 71 5 is_stmt 1 view .LVU64
+  71:birds-and-the-bees.cpp ****       float newFreq = knob * 220.0f + 220.0f;
+ 300              		.loc 8 71 23 view .LVU65
+ 301              	.LBE115:
+  87:birds-and-the-bees.cpp ****       } else {
+  88:birds-and-the-bees.cpp ****         sigL += secondaryChannelRatio * output;
+  89:birds-and-the-bees.cpp ****         sigR += primaryChannelRatio * output;
+  90:birds-and-the-bees.cpp ****       }
+  91:birds-and-the-bees.cpp ****     }
+  92:birds-and-the-bees.cpp **** 
+  93:birds-and-the-bees.cpp ****     // left out
+  94:birds-and-the-bees.cpp ****     out[i] = sigL;
+ 302              		.loc 8 94 5 view .LVU66
+  95:birds-and-the-bees.cpp **** 
+  96:birds-and-the-bees.cpp ****     // right out
+  97:birds-and-the-bees.cpp ****     out[i + 1] = sigR;
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 15
 
 
- 414              		@ args = 0, pretend = 0, frame = 0
- 415              		@ frame_needed = 0, uses_anonymous_args = 0
-  47:birds-and-the-bees.cpp ****     osc[i].Init(samplerate);
- 416              		.loc 8 47 3 view .LVU88
- 417              	.LBB99:
-  47:birds-and-the-bees.cpp ****     osc[i].Init(samplerate);
- 418              		.loc 8 47 21 view .LVU89
- 419              	.LBE99:
-  46:birds-and-the-bees.cpp ****   for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
- 420              		.loc 8 46 33 is_stmt 0 view .LVU90
- 421 0000 38B5     		push	{r3, r4, r5, lr}
- 422              		.cfi_def_cfa_offset 16
- 423              		.cfi_offset 3, -16
- 424              		.cfi_offset 4, -12
- 425              		.cfi_offset 5, -8
- 426              		.cfi_offset 14, -4
- 427 0002 094C     		ldr	r4, .L27
- 428 0004 2DED028B 		vpush.64	{d8}
- 429              		.cfi_def_cfa_offset 24
- 430              		.cfi_offset 80, -24
- 431              		.cfi_offset 81, -20
-  46:birds-and-the-bees.cpp ****   for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
- 432              		.loc 8 46 33 view .LVU91
- 433 0008 B0EE408A 		vmov.f32	s16, s0
- 434 000c 04F5B075 		add	r5, r4, #352
- 435              	.LVL31:
- 436              	.L24:
- 437              	.LBB100:
-  48:birds-and-the-bees.cpp ****     // osc[i].SetAmp(0.125f);
- 438              		.loc 8 48 5 is_stmt 1 discriminator 2 view .LVU92
-  48:birds-and-the-bees.cpp ****     // osc[i].SetAmp(0.125f);
- 439              		.loc 8 48 16 is_stmt 0 discriminator 2 view .LVU93
- 440 0010 2046     		mov	r0, r4
-  47:birds-and-the-bees.cpp ****     osc[i].Init(samplerate);
- 441              		.loc 8 47 21 discriminator 2 view .LVU94
- 442 0012 2C34     		adds	r4, r4, #44
-  48:birds-and-the-bees.cpp ****     // osc[i].SetAmp(0.125f);
- 443              		.loc 8 48 16 discriminator 2 view .LVU95
- 444 0014 B0EE480A 		vmov.f32	s0, s16
- 445 0018 FFF7FEFF 		bl	_ZN7daisysp23VariableShapeOscillator4InitEf
- 446              	.LVL32:
-  47:birds-and-the-bees.cpp ****     osc[i].Init(samplerate);
- 447              		.loc 8 47 3 is_stmt 1 discriminator 2 view .LVU96
-  47:birds-and-the-bees.cpp ****     osc[i].Init(samplerate);
- 448              		.loc 8 47 21 discriminator 2 view .LVU97
- 449 001c AC42     		cmp	r4, r5
- 450 001e F7D1     		bne	.L24
- 451              	.LBE100:
-  51:birds-and-the-bees.cpp **** 
- 452              		.loc 8 51 1 is_stmt 0 view .LVU98
- 453 0020 BDEC028B 		vldm	sp!, {d8}
- 454              		.cfi_restore 80
- 455              		.cfi_restore 81
- 456              		.cfi_def_cfa_offset 16
- 457              	.LVL33:
-  51:birds-and-the-bees.cpp **** 
- 458              		.loc 8 51 1 view .LVU99
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 17
+ 303              		.loc 8 97 16 is_stmt 0 view .LVU67
+ 304 007a 45ED017A 		vstr.32	s15, [r5, #-4]
+  94:birds-and-the-bees.cpp **** 
+ 305              		.loc 8 94 12 view .LVU68
+ 306 007e 05ED027A 		vstr.32	s14, [r5, #-8]
+ 307              		.loc 8 97 5 is_stmt 1 view .LVU69
+ 308              	.LBE117:
+  66:birds-and-the-bees.cpp ****     float sigL = 0;
+ 309              		.loc 8 66 3 view .LVU70
+ 310              	.LVL14:
+  66:birds-and-the-bees.cpp ****     float sigL = 0;
+ 311              		.loc 8 66 24 view .LVU71
+ 312 0082 03D1     		bne	.L9
+ 313              	.LBE119:
+  98:birds-and-the-bees.cpp ****   }
+  99:birds-and-the-bees.cpp **** }
+ 314              		.loc 8 99 1 is_stmt 0 view .LVU72
+ 315 0084 BDEC028B 		vldm	sp!, {d8}
+ 316              		.cfi_remember_state
+ 317              		.cfi_restore 80
+ 318              		.cfi_restore 81
+ 319              		.cfi_def_cfa_offset 32
+ 320              	.LVL15:
+ 321              		.loc 8 99 1 view .LVU73
+ 322 0088 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 323              	.LVL16:
+ 324              	.L9:
+ 325              		.cfi_restore_state
+ 326              	.LBB120:
+ 327              		.loc 8 99 1 view .LVU74
+ 328 008c 1E46     		mov	r6, r3
+ 329              	.LVL17:
+ 330              		.loc 8 99 1 view .LVU75
+ 331 008e C6E7     		b	.L8
+ 332              	.L19:
+ 333              		.align	2
+ 334              	.L18:
+ 335 0090 00000000 		.word	.LANCHOR2
+ 336 0094 18000000 		.word	.LANCHOR0+24
+ 337 0098 00005C43 		.word	1130102784
+ 338 009c 00000000 		.word	0
+ 339 00a0 00000000 		.word	.LANCHOR1
+ 340 00a4 00000000 		.word	.LANCHOR3
+ 341              	.LBE120:
+ 342              		.cfi_endproc
+ 343              	.LFE4242:
+ 345              		.section	.text.__tcf_1,"ax",%progbits
+ 346              		.align	1
+ 347              		.p2align 2,,3
+ 348              		.syntax unified
+ 349              		.thumb
+ 350              		.thumb_func
+ 351              		.fpu fpv5-d16
+ 353              	__tcf_1:
+ 354              	.LFB4806:
+ 355              		.cfi_startproc
+ 356              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 16
 
 
- 459 0024 38BD     		pop	{r3, r4, r5, pc}
- 460              	.L28:
- 461 0026 00BF     		.align	2
- 462              	.L27:
- 463 0028 00000000 		.word	.LANCHOR2
- 464              		.cfi_endproc
- 465              	.LFE4241:
- 467              		.section	.text.startup.main,"ax",%progbits
- 468              		.align	1
- 469              		.p2align 2,,3
- 470              		.global	main
- 471              		.syntax unified
- 472              		.thumb
- 473              		.thumb_func
- 474              		.fpu fpv5-d16
- 476              	main:
- 477              	.LFB4243:
-  89:birds-and-the-bees.cpp **** 
-  90:birds-and-the-bees.cpp **** int main(void) {
- 478              		.loc 8 90 16 is_stmt 1 view -0
- 479              		.cfi_startproc
- 480              		@ args = 0, pretend = 0, frame = 80
- 481              		@ frame_needed = 0, uses_anonymous_args = 0
-  91:birds-and-the-bees.cpp ****   // initialize hw hardware and oscillator daisysp module
-  92:birds-and-the-bees.cpp ****   float sample_rate;
- 482              		.loc 8 92 3 view .LVU101
-  93:birds-and-the-bees.cpp ****   hw.Configure();
- 483              		.loc 8 93 3 view .LVU102
-  90:birds-and-the-bees.cpp ****   // initialize hw hardware and oscillator daisysp module
- 484              		.loc 8 90 16 is_stmt 0 view .LVU103
- 485 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 486              		.cfi_def_cfa_offset 20
- 487              		.cfi_offset 4, -20
- 488              		.cfi_offset 5, -16
- 489              		.cfi_offset 6, -12
- 490              		.cfi_offset 7, -8
- 491              		.cfi_offset 14, -4
- 492              		.loc 8 93 15 view .LVU104
- 493 0002 5048     		ldr	r0, .L34
-  94:birds-and-the-bees.cpp ****   hw.Init();
-  95:birds-and-the-bees.cpp ****   //   hw.SetAudioBlockSize(AUDIO_BLOCK_SIZE);
-  96:birds-and-the-bees.cpp ****   sample_rate = hw.AudioSampleRate();
-  97:birds-and-the-bees.cpp **** 
-  98:birds-and-the-bees.cpp **** //   AdcChannelConfig adcConfig;
-  99:birds-and-the-bees.cpp **** //   adcConfig.InitSingle(hw.GetPin(15));
- 100:birds-and-the-bees.cpp **** //   hw.adc.Init(&adcConfig, 1);
- 101:birds-and-the-bees.cpp **** //   hw.adc.Start();
- 102:birds-and-the-bees.cpp **** 
- 103:birds-and-the-bees.cpp ****   //   AdcChannelConfig adc[4];
- 104:birds-and-the-bees.cpp ****   //   adc[0].InitSingle(hw.GetPin(15));
- 105:birds-and-the-bees.cpp ****   //   adc[1].InitSingle(hw.GetPin(16));
- 106:birds-and-the-bees.cpp ****   //   adc[2].InitSingle(hw.GetPin(17));
- 107:birds-and-the-bees.cpp ****   //   adc[3].InitSingle(hw.GetPin(18));
- 108:birds-and-the-bees.cpp ****   //   hw.adc.Init(adc, 4); // my Daisyhw instance is called hw
- 109:birds-and-the-bees.cpp ****   //   hw.adc.Start();
- 110:birds-and-the-bees.cpp **** 
- 111:birds-and-the-bees.cpp ****   // let's try to mux
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 18
+ 357              		@ frame_needed = 0, uses_anonymous_args = 0
+ 358              		@ link register save eliminated.
+ 359 0000 7047     		bx	lr
+ 360              		.cfi_endproc
+ 361              	.LFE4806:
+ 363 0002 00BF     		.section	.text._Z8SetupOscf,"ax",%progbits
+ 364              		.align	1
+ 365              		.p2align 2,,3
+ 366              		.global	_Z8SetupOscf
+ 367              		.syntax unified
+ 368              		.thumb
+ 369              		.thumb_func
+ 370              		.fpu fpv5-d16
+ 372              	_Z8SetupOscf:
+ 373              	.LVL18:
+ 374              	.LFB4241:
+  47:birds-and-the-bees.cpp ****   for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
+ 375              		.loc 8 47 33 is_stmt 1 view -0
+ 376              		.cfi_startproc
+ 377              		@ args = 0, pretend = 0, frame = 0
+ 378              		@ frame_needed = 0, uses_anonymous_args = 0
+  48:birds-and-the-bees.cpp ****     osc[i].Init(samplerate);
+ 379              		.loc 8 48 3 view .LVU77
+ 380              	.LBB130:
+  48:birds-and-the-bees.cpp ****     osc[i].Init(samplerate);
+ 381              		.loc 8 48 21 view .LVU78
+  49:birds-and-the-bees.cpp ****     osc[i].SetWaveform(osc[i].WAVE_SIN);
+ 382              		.loc 8 49 5 view .LVU79
+  49:birds-and-the-bees.cpp ****     osc[i].SetWaveform(osc[i].WAVE_SIN);
+ 383              		.loc 8 49 5 is_stmt 0 view .LVU80
+ 384              	.LBE130:
+  47:birds-and-the-bees.cpp ****   for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
+ 385              		.loc 8 47 33 view .LVU81
+ 386 0000 F0EE407A 		vmov.f32	s15, s0
+ 387              	.LVL19:
+ 388              	.LBB151:
+ 389              	.LBB131:
+ 390              	.LBI131:
+  42:../DaisySP/Source/Synthesis/oscillator.h ****     {
+ 391              		.loc 9 42 10 is_stmt 1 view .LVU82
+ 392              	.LBB132:
+  44:../DaisySP/Source/Synthesis/oscillator.h ****         sr_recip_  = 1.0f / sample_rate;
+ 393              		.loc 9 44 9 view .LVU83
+  46:../DaisySP/Source/Synthesis/oscillator.h ****         amp_       = 0.5f;
+ 394              		.loc 9 46 20 is_stmt 0 view .LVU84
+ 395 0004 9FED140A 		vldr.32	s0, .L23
+ 396              	.LVL20:
+  45:../DaisySP/Source/Synthesis/oscillator.h ****         freq_      = 100.0f;
+ 397              		.loc 9 45 27 view .LVU85
+ 398 0008 F7EE006A 		vmov.f32	s13, #1.0e+0
+ 399              	.LBE132:
+ 400              	.LBE131:
+ 401              	.LBE151:
+  47:birds-and-the-bees.cpp ****   for (int i = 0; i < NUM_OF_OSCILLATORS; i++) {
+ 402              		.loc 8 47 33 view .LVU86
+ 403 000c 38B5     		push	{r3, r4, r5, lr}
+ 404              		.cfi_def_cfa_offset 16
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 17
 
 
- 112:birds-and-the-bees.cpp ****   AdcChannelConfig adc_cfg[2];
- 113:birds-and-the-bees.cpp **** //   adc_cfg[0].InitSingle(hw.GetPin(15));
- 114:birds-and-the-bees.cpp ****     adc_cfg[0].InitMux(hw.GetPin(PIN_ADC_POT_MUX1),
- 494              		.loc 8 114 23 view .LVU105
- 495 0004 504F     		ldr	r7, .L34+4
- 496 0006 514D     		ldr	r5, .L34+8
- 497 0008 514C     		ldr	r4, .L34+12
- 498 000a 524E     		ldr	r6, .L34+16
-  90:birds-and-the-bees.cpp ****   // initialize hw hardware and oscillator daisysp module
- 499              		.loc 8 90 16 view .LVU106
- 500 000c 2DED028B 		vpush.64	{d8}
- 501              		.cfi_def_cfa_offset 28
- 502              		.cfi_offset 80, -28
- 503              		.cfi_offset 81, -24
- 504 0010 97B0     		sub	sp, sp, #92
- 505              		.cfi_def_cfa_offset 120
-  93:birds-and-the-bees.cpp ****   hw.Init();
- 506              		.loc 8 93 15 view .LVU107
- 507 0012 FFF7FEFF 		bl	_ZN5daisy9DaisySeed9ConfigureEv
- 508              	.LVL34:
-  94:birds-and-the-bees.cpp ****   hw.Init();
- 509              		.loc 8 94 3 is_stmt 1 view .LVU108
-  94:birds-and-the-bees.cpp ****   hw.Init();
- 510              		.loc 8 94 10 is_stmt 0 view .LVU109
- 511 0016 0021     		movs	r1, #0
- 512 0018 4A48     		ldr	r0, .L34
- 513 001a FFF7FEFF 		bl	_ZN5daisy9DaisySeed4InitEb
- 514              	.LVL35:
-  96:birds-and-the-bees.cpp **** 
- 515              		.loc 8 96 3 is_stmt 1 view .LVU110
-  96:birds-and-the-bees.cpp **** 
- 516              		.loc 8 96 35 is_stmt 0 view .LVU111
- 517 001e 4948     		ldr	r0, .L34
- 518 0020 FFF7FEFF 		bl	_ZN5daisy9DaisySeed15AudioSampleRateEv
- 519              	.LVL36:
- 520              		.loc 8 114 23 view .LVU112
- 521 0024 4C4B     		ldr	r3, .L34+20
-  96:birds-and-the-bees.cpp **** 
- 522              		.loc 8 96 35 view .LVU113
- 523 0026 B0EE408A 		vmov.f32	s16, s0
- 524              	.LVL37:
- 112:birds-and-the-bees.cpp **** //   adc_cfg[0].InitSingle(hw.GetPin(15));
- 525              		.loc 8 112 3 is_stmt 1 view .LVU114
- 526              		.loc 8 114 5 view .LVU115
- 527              		.loc 8 114 23 is_stmt 0 view .LVU116
- 528 002a 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
- 529 002c FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
- 530              	.LVL38:
- 531              		.loc 8 114 23 view .LVU117
- 532 0030 0346     		mov	r3, r0	@ movhi
- 533 0032 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
- 534 0034 ADF81430 		strh	r3, [sp, #20]	@ movhi
- 535 0038 FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
- 536              	.LVL39:
- 537 003c ADF81800 		strh	r0, [sp, #24]	@ movhi
- 538 0040 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
- 539 0042 FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 19
+ 405              		.cfi_offset 3, -16
+ 406              		.cfi_offset 4, -12
+ 407              		.cfi_offset 5, -8
+ 408              		.cfi_offset 14, -4
+ 409              	.LBB152:
+ 410              	.LBB136:
+ 411              	.LBB133:
+  45:../DaisySP/Source/Synthesis/oscillator.h ****         freq_      = 100.0f;
+ 412              		.loc 9 45 27 view .LVU87
+ 413 000e 86EEA77A 		vdiv.f32	s14, s13, s15
+  44:../DaisySP/Source/Synthesis/oscillator.h ****         sr_recip_  = 1.0f / sample_rate;
+ 414              		.loc 9 44 20 view .LVU88
+ 415 0012 124C     		ldr	r4, .L23+4
+  48:../DaisySP/Source/Synthesis/oscillator.h ****         phase_inc_ = CalcPhaseInc(freq_);
+ 416              		.loc 9 48 20 view .LVU89
+ 417 0014 0023     		movs	r3, #0
+  47:../DaisySP/Source/Synthesis/oscillator.h ****         phase_     = 0.0f;
+ 418              		.loc 9 47 20 view .LVU90
+ 419 0016 4FF07C55 		mov	r5, #1056964608
+  49:../DaisySP/Source/Synthesis/oscillator.h ****         waveform_  = WAVE_SIN;
+ 420              		.loc 9 49 34 view .LVU91
+ 421 001a 2046     		mov	r0, r4
+  44:../DaisySP/Source/Synthesis/oscillator.h ****         sr_recip_  = 1.0f / sample_rate;
+ 422              		.loc 9 44 20 view .LVU92
+ 423 001c C4ED037A 		vstr.32	s15, [r4, #12]
+  45:../DaisySP/Source/Synthesis/oscillator.h ****         freq_      = 100.0f;
+ 424              		.loc 9 45 9 is_stmt 1 view .LVU93
+  48:../DaisySP/Source/Synthesis/oscillator.h ****         phase_inc_ = CalcPhaseInc(freq_);
+ 425              		.loc 9 48 20 is_stmt 0 view .LVU94
+ 426 0020 6361     		str	r3, [r4, #20]	@ float
+  46:../DaisySP/Source/Synthesis/oscillator.h ****         amp_       = 0.5f;
+ 427              		.loc 9 46 20 view .LVU95
+ 428 0022 84ED020A 		vstr.32	s0, [r4, #8]
+  47:../DaisySP/Source/Synthesis/oscillator.h ****         phase_     = 0.0f;
+ 429              		.loc 9 47 20 view .LVU96
+ 430 0026 6560     		str	r5, [r4, #4]	@ float
+  45:../DaisySP/Source/Synthesis/oscillator.h ****         freq_      = 100.0f;
+ 431              		.loc 9 45 20 view .LVU97
+ 432 0028 84ED047A 		vstr.32	s14, [r4, #16]
+  46:../DaisySP/Source/Synthesis/oscillator.h ****         amp_       = 0.5f;
+ 433              		.loc 9 46 9 is_stmt 1 view .LVU98
+  47:../DaisySP/Source/Synthesis/oscillator.h ****         phase_     = 0.0f;
+ 434              		.loc 9 47 9 view .LVU99
+  48:../DaisySP/Source/Synthesis/oscillator.h ****         phase_inc_ = CalcPhaseInc(freq_);
+ 435              		.loc 9 48 9 view .LVU100
+  49:../DaisySP/Source/Synthesis/oscillator.h ****         waveform_  = WAVE_SIN;
+ 436              		.loc 9 49 9 view .LVU101
+  49:../DaisySP/Source/Synthesis/oscillator.h ****         waveform_  = WAVE_SIN;
+ 437              		.loc 9 49 34 is_stmt 0 view .LVU102
+ 438 002c FFF7FEFF 		bl	_ZN7daisysp10Oscillator12CalcPhaseIncEf
+ 439              	.LVL21:
+  49:../DaisySP/Source/Synthesis/oscillator.h ****         waveform_  = WAVE_SIN;
+ 440              		.loc 9 49 34 view .LVU103
+ 441 0030 F0EE407A 		vmov.f32	s15, s0
+  50:../DaisySP/Source/Synthesis/oscillator.h ****         eoc_       = true;
+ 442              		.loc 9 50 20 view .LVU104
+ 443 0034 0022     		movs	r2, #0
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 18
 
 
- 540              	.LVL40:
- 541 0046 ADF81C00 		strh	r0, [sp, #28]	@ movhi
- 542 004a 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
- 543 004c FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
- 544              	.LVL41:
- 545 0050 BDF81C30 		ldrh	r3, [sp, #28]
- 546 0054 0822     		movs	r2, #8
- 547 0056 0599     		ldr	r1, [sp, #20]
- 548 0058 ADF80400 		strh	r0, [sp, #4]	@ movhi
- 549 005c 0DA8     		add	r0, sp, #52
- 550 005e ADF80030 		strh	r3, [sp]	@ movhi
- 551 0062 069B     		ldr	r3, [sp, #24]
- 552 0064 FFF7FEFF 		bl	_ZN5daisy16AdcChannelConfig7InitMuxE12dsy_gpio_pinjS1_S1_S1_
- 553              	.LVL42:
- 115:birds-and-the-bees.cpp ****                      8,
- 116:birds-and-the-bees.cpp ****                      hw.GetPin(PIN_MUX_SEL_0),
- 117:birds-and-the-bees.cpp ****                      hw.GetPin(PIN_MUX_SEL_1),
- 118:birds-and-the-bees.cpp ****                      hw.GetPin(PIN_MUX_SEL_2));
- 119:birds-and-the-bees.cpp ****     adc_cfg[1].InitMux(hw.GetPin(PIN_ADC_POT_MUX2),
- 554              		.loc 8 119 5 is_stmt 1 view .LVU118
- 555              		.loc 8 119 23 is_stmt 0 view .LVU119
- 556 0068 3C4B     		ldr	r3, .L34+24
- 557 006a 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
- 558 006c FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
- 559              	.LVL43:
- 560 0070 ADF82400 		strh	r0, [sp, #36]	@ movhi
- 561 0074 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
- 562 0076 FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
- 563              	.LVL44:
- 564 007a ADF82800 		strh	r0, [sp, #40]	@ movhi
- 565 007e 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
- 566              	.LBB101:
- 120:birds-and-the-bees.cpp ****                        8,
- 121:birds-and-the-bees.cpp ****                        hw.GetPin(PIN_MUX_SEL_0),
- 122:birds-and-the-bees.cpp ****                        hw.GetPin(PIN_MUX_SEL_1),
- 123:birds-and-the-bees.cpp ****                        hw.GetPin(PIN_MUX_SEL_2));
- 124:birds-and-the-bees.cpp ****   // adc_cfg[2].InitMux(hw.GetPin(PIN_ADC_POT_MUX3),
- 125:birds-and-the-bees.cpp ****   //                    8,
- 126:birds-and-the-bees.cpp ****   //                    hw.GetPin(PIN_MUX_SEL_0),
- 127:birds-and-the-bees.cpp ****   //                    hw.GetPin(PIN_MUX_SEL_1),
- 128:birds-and-the-bees.cpp ****   //                    hw.GetPin(PIN_MUX_SEL_2));
- 129:birds-and-the-bees.cpp **** 
- 130:birds-and-the-bees.cpp ****   hw.adc.Init(adc_cfg, 1);
- 131:birds-and-the-bees.cpp ****   hw.adc.Start();
- 132:birds-and-the-bees.cpp ****   hw.StartLog(false);
- 133:birds-and-the-bees.cpp **** 
- 134:birds-and-the-bees.cpp ****   //   // Order of pots on the hardware connected to mux.
- 135:birds-and-the-bees.cpp ****   //   //   for(size_t i = 0; i < 24; i+=3)
- 136:birds-and-the-bees.cpp ****     for (size_t i = 0; i < 16; i += 2) {
- 567              		.loc 8 136 17 view .LVU120
- 568 0080 0025     		movs	r5, #0
- 569              	.LBE101:
- 119:birds-and-the-bees.cpp ****                        8,
- 570              		.loc 8 119 23 view .LVU121
- 571 0082 FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
- 572              	.LVL45:
- 573 0086 0346     		mov	r3, r0	@ movhi
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 20
+ 444              	.LBE133:
+ 445              	.LBE136:
+ 446              	.LBB137:
+ 447              	.LBB138:
+  60:../DaisySP/Source/Synthesis/oscillator.h ****         phase_inc_ = CalcPhaseInc(f);
+ 448              		.loc 9 60 20 view .LVU105
+ 449 0036 9FED0A0A 		vldr.32	s0, .L23+8
+ 450              	.LBE138:
+ 451              	.LBE137:
+ 452              	.LBB142:
+ 453              	.LBB134:
+  52:../DaisySP/Source/Synthesis/oscillator.h ****     }
+ 454              		.loc 9 52 20 view .LVU106
+ 455 003a 40F20113 		movw	r3, #257
+ 456              	.LBE134:
+ 457              	.LBE142:
+ 458              	.LBB143:
+ 459              	.LBB139:
+ 460              		.loc 9 61 34 view .LVU107
+ 461 003e 2046     		mov	r0, r4
+ 462              	.LBE139:
+ 463              	.LBE143:
+ 464              	.LBB144:
+ 465              	.LBB135:
+  50:../DaisySP/Source/Synthesis/oscillator.h ****         eoc_       = true;
+ 466              		.loc 9 50 20 view .LVU108
+ 467 0040 2270     		strb	r2, [r4]
+  49:../DaisySP/Source/Synthesis/oscillator.h ****         waveform_  = WAVE_SIN;
+ 468              		.loc 9 49 20 view .LVU109
+ 469 0042 C4ED067A 		vstr.32	s15, [r4, #24]
+  50:../DaisySP/Source/Synthesis/oscillator.h ****         eoc_       = true;
+ 470              		.loc 9 50 9 is_stmt 1 view .LVU110
+  51:../DaisySP/Source/Synthesis/oscillator.h ****         eor_       = true;
+ 471              		.loc 9 51 9 view .LVU111
+  52:../DaisySP/Source/Synthesis/oscillator.h ****     }
+ 472              		.loc 9 52 9 view .LVU112
+  52:../DaisySP/Source/Synthesis/oscillator.h ****     }
+ 473              		.loc 9 52 20 is_stmt 0 view .LVU113
+ 474 0046 A384     		strh	r3, [r4, #36]	@ movhi
+ 475              	.LVL22:
+  52:../DaisySP/Source/Synthesis/oscillator.h ****     }
+ 476              		.loc 9 52 20 view .LVU114
+ 477              	.LBE135:
+ 478              	.LBE144:
+  50:birds-and-the-bees.cpp ****     osc[i].SetFreq(250);
+ 479              		.loc 8 50 5 is_stmt 1 view .LVU115
+  50:birds-and-the-bees.cpp ****     osc[i].SetFreq(250);
+ 480              		.loc 8 50 5 is_stmt 0 view .LVU116
+ 481              	.LBE152:
+  62:../DaisySP/Source/Synthesis/oscillator.h ****     }
+  63:../DaisySP/Source/Synthesis/oscillator.h **** 
+  64:../DaisySP/Source/Synthesis/oscillator.h **** 
+  65:../DaisySP/Source/Synthesis/oscillator.h ****     /** Sets the amplitude of the waveform.
+  66:../DaisySP/Source/Synthesis/oscillator.h ****     */
+  67:../DaisySP/Source/Synthesis/oscillator.h ****     inline void SetAmp(const float a) { amp_ = a; }
+  68:../DaisySP/Source/Synthesis/oscillator.h ****     /** Sets the waveform to be synthesized by the Process() function.
+  69:../DaisySP/Source/Synthesis/oscillator.h ****     */
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 19
 
 
- 574 0088 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
- 575 008a ADF82C30 		strh	r3, [sp, #44]	@ movhi
- 576 008e FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
- 577              	.LVL46:
- 578 0092 BDF82C30 		ldrh	r3, [sp, #44]
- 579 0096 0822     		movs	r2, #8
- 580 0098 0999     		ldr	r1, [sp, #36]
- 581 009a ADF80400 		strh	r0, [sp, #4]	@ movhi
- 582 009e 0DF14500 		add	r0, sp, #69
- 583 00a2 ADF80030 		strh	r3, [sp]	@ movhi
- 584 00a6 0A9B     		ldr	r3, [sp, #40]
- 585 00a8 FFF7FEFF 		bl	_ZN5daisy16AdcChannelConfig7InitMuxE12dsy_gpio_pinjS1_S1_S1_
- 586              	.LVL47:
- 130:birds-and-the-bees.cpp ****   hw.adc.Start();
- 587              		.loc 8 130 3 is_stmt 1 view .LVU122
- 130:birds-and-the-bees.cpp ****   hw.adc.Start();
- 588              		.loc 8 130 14 is_stmt 0 view .LVU123
- 589 00ac 0423     		movs	r3, #4
- 590 00ae 0122     		movs	r2, #1
- 591 00b0 0DA9     		add	r1, sp, #52
- 592 00b2 2B48     		ldr	r0, .L34+28
- 593 00b4 FFF7FEFF 		bl	_ZN5daisy9AdcHandle4InitEPNS_16AdcChannelConfigEjNS0_12OverSamplingE
- 594              	.LVL48:
- 131:birds-and-the-bees.cpp ****   hw.StartLog(false);
- 595              		.loc 8 131 3 is_stmt 1 view .LVU124
- 131:birds-and-the-bees.cpp ****   hw.StartLog(false);
- 596              		.loc 8 131 15 is_stmt 0 view .LVU125
- 597 00b8 2948     		ldr	r0, .L34+28
- 598 00ba FFF7FEFF 		bl	_ZN5daisy9AdcHandle5StartEv
- 599              	.LVL49:
- 132:birds-and-the-bees.cpp **** 
- 600              		.loc 8 132 3 is_stmt 1 view .LVU126
- 601              	.LBB102:
- 602              	.LBI102:
+  70:../DaisySP/Source/Synthesis/oscillator.h ****     inline void SetWaveform(const uint8_t wf)
+  71:../DaisySP/Source/Synthesis/oscillator.h ****     {
+  72:../DaisySP/Source/Synthesis/oscillator.h ****         waveform_ = wf < WAVE_LAST ? wf : WAVE_SIN;
+ 482              		.loc 9 72 9 is_stmt 1 view .LVU117
+ 483              	.LBB153:
+  51:birds-and-the-bees.cpp ****     osc[i].SetAmp(0.5);
+ 484              		.loc 8 51 5 view .LVU118
+ 485              	.LBB145:
+ 486              	.LBI137:
+  58:../DaisySP/Source/Synthesis/oscillator.h ****     {
+ 487              		.loc 9 58 17 view .LVU119
+ 488              	.LBB140:
+  60:../DaisySP/Source/Synthesis/oscillator.h ****         phase_inc_ = CalcPhaseInc(f);
+ 489              		.loc 9 60 9 view .LVU120
+  60:../DaisySP/Source/Synthesis/oscillator.h ****         phase_inc_ = CalcPhaseInc(f);
+ 490              		.loc 9 60 20 is_stmt 0 view .LVU121
+ 491 0048 84ED020A 		vstr.32	s0, [r4, #8]
+  61:../DaisySP/Source/Synthesis/oscillator.h ****     }
+ 492              		.loc 9 61 9 is_stmt 1 view .LVU122
+  61:../DaisySP/Source/Synthesis/oscillator.h ****     }
+ 493              		.loc 9 61 34 is_stmt 0 view .LVU123
+ 494 004c FFF7FEFF 		bl	_ZN7daisysp10Oscillator12CalcPhaseIncEf
+ 495              	.LVL23:
+ 496              	.LBE140:
+ 497              	.LBE145:
+ 498              	.LBB146:
+ 499              	.LBB147:
+  67:../DaisySP/Source/Synthesis/oscillator.h ****     /** Sets the waveform to be synthesized by the Process() function.
+ 500              		.loc 9 67 46 view .LVU124
+ 501 0050 6560     		str	r5, [r4, #4]	@ float
+ 502              	.LBE147:
+ 503              	.LBE146:
+ 504              	.LBB149:
+ 505              	.LBB141:
+  61:../DaisySP/Source/Synthesis/oscillator.h ****     }
+ 506              		.loc 9 61 20 view .LVU125
+ 507 0052 84ED060A 		vstr.32	s0, [r4, #24]
+ 508              	.LVL24:
+  61:../DaisySP/Source/Synthesis/oscillator.h ****     }
+ 509              		.loc 9 61 20 view .LVU126
+ 510              	.LBE141:
+ 511              	.LBE149:
+  52:birds-and-the-bees.cpp **** 
+ 512              		.loc 8 52 5 is_stmt 1 view .LVU127
+ 513              	.LBB150:
+ 514              	.LBI146:
+  67:../DaisySP/Source/Synthesis/oscillator.h ****     /** Sets the waveform to be synthesized by the Process() function.
+ 515              		.loc 9 67 17 view .LVU128
+ 516              	.LBB148:
+  67:../DaisySP/Source/Synthesis/oscillator.h ****     /** Sets the waveform to be synthesized by the Process() function.
+ 517              		.loc 9 67 41 view .LVU129
+  67:../DaisySP/Source/Synthesis/oscillator.h ****     /** Sets the waveform to be synthesized by the Process() function.
+ 518              		.loc 9 67 41 is_stmt 0 view .LVU130
+ 519              	.LBE148:
+ 520              	.LBE150:
+  48:birds-and-the-bees.cpp ****     osc[i].Init(samplerate);
+ 521              		.loc 8 48 3 is_stmt 1 view .LVU131
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 20
+
+
+  48:birds-and-the-bees.cpp ****     osc[i].Init(samplerate);
+ 522              		.loc 8 48 21 view .LVU132
+ 523              	.LBE153:
+  59:birds-and-the-bees.cpp **** 
+ 524              		.loc 8 59 1 is_stmt 0 view .LVU133
+ 525 0056 38BD     		pop	{r3, r4, r5, pc}
+ 526              	.L24:
+ 527              		.align	2
+ 528              	.L23:
+ 529 0058 0000C842 		.word	1120403456
+ 530 005c 00000000 		.word	.LANCHOR2
+ 531 0060 00007A43 		.word	1132068864
+ 532              		.cfi_endproc
+ 533              	.LFE4241:
+ 535              		.section	.text._Z11setupMuxAdcv,"ax",%progbits
+ 536              		.align	1
+ 537              		.p2align 2,,3
+ 538              		.global	_Z11setupMuxAdcv
+ 539              		.syntax unified
+ 540              		.thumb
+ 541              		.thumb_func
+ 542              		.fpu fpv5-d16
+ 544              	_Z11setupMuxAdcv:
+ 545              	.LFB4243:
+ 100:birds-and-the-bees.cpp **** 
+ 101:birds-and-the-bees.cpp **** void setupMuxAdc(void) {
+ 546              		.loc 8 101 24 is_stmt 1 view -0
+ 547              		.cfi_startproc
+ 548              		@ args = 0, pretend = 0, frame = 80
+ 549              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102:birds-and-the-bees.cpp ****   // let's try to mux
+ 103:birds-and-the-bees.cpp ****   AdcChannelConfig adc_cfg[2];
+ 550              		.loc 8 103 3 view .LVU135
+ 104:birds-and-the-bees.cpp ****   //   adc_cfg[0].InitSingle(hw.GetPin(15));
+ 105:birds-and-the-bees.cpp ****   adc_cfg[0].InitMux(hw.GetPin(PIN_ADC_POT_MUX1),
+ 551              		.loc 8 105 3 view .LVU136
+ 552              		.loc 8 105 21 is_stmt 0 view .LVU137
+ 553 0000 414B     		ldr	r3, .L29
+ 101:birds-and-the-bees.cpp ****   // let's try to mux
+ 554              		.loc 8 101 24 view .LVU138
+ 555 0002 70B5     		push	{r4, r5, r6, lr}
+ 556              		.cfi_def_cfa_offset 16
+ 557              		.cfi_offset 4, -16
+ 558              		.cfi_offset 5, -12
+ 559              		.cfi_offset 6, -8
+ 560              		.cfi_offset 14, -4
+ 561              		.loc 8 105 21 view .LVU139
+ 562 0004 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 101:birds-and-the-bees.cpp ****   // let's try to mux
+ 563              		.loc 8 101 24 view .LVU140
+ 564 0006 96B0     		sub	sp, sp, #88
+ 565              		.cfi_def_cfa_offset 104
+ 566              		.loc 8 105 21 view .LVU141
+ 567 0008 404E     		ldr	r6, .L29+4
+ 568 000a FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
+ 569              	.LVL25:
+ 570 000e 0346     		mov	r3, r0	@ movhi
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 21
+
+
+ 571 0010 3F4D     		ldr	r5, .L29+8
+ 572 0012 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 573 0014 3F4C     		ldr	r4, .L29+12
+ 574 0016 ADF81430 		strh	r3, [sp, #20]	@ movhi
+ 575 001a FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
+ 576              	.LVL26:
+ 577 001e 0346     		mov	r3, r0	@ movhi
+ 578 0020 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+ 579 0022 ADF81830 		strh	r3, [sp, #24]	@ movhi
+ 580 0026 FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
+ 581              	.LVL27:
+ 582 002a ADF81C00 		strh	r0, [sp, #28]	@ movhi
+ 583 002e 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 584 0030 FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
+ 585              	.LVL28:
+ 586 0034 BDF81C30 		ldrh	r3, [sp, #28]
+ 587 0038 0822     		movs	r2, #8
+ 588 003a 0599     		ldr	r1, [sp, #20]
+ 589 003c ADF80400 		strh	r0, [sp, #4]	@ movhi
+ 590 0040 0DA8     		add	r0, sp, #52
+ 591 0042 ADF80030 		strh	r3, [sp]	@ movhi
+ 592 0046 069B     		ldr	r3, [sp, #24]
+ 593 0048 FFF7FEFF 		bl	_ZN5daisy16AdcChannelConfig7InitMuxE12dsy_gpio_pinjS1_S1_S1_
+ 594              	.LVL29:
+ 106:birds-and-the-bees.cpp ****                      8,
+ 107:birds-and-the-bees.cpp ****                      hw.GetPin(PIN_MUX_SEL_0),
+ 108:birds-and-the-bees.cpp ****                      hw.GetPin(PIN_MUX_SEL_1),
+ 109:birds-and-the-bees.cpp ****                      hw.GetPin(PIN_MUX_SEL_2));
+ 110:birds-and-the-bees.cpp ****   adc_cfg[1].InitMux(hw.GetPin(PIN_ADC_POT_MUX2),
+ 595              		.loc 8 110 3 is_stmt 1 view .LVU142
+ 596              		.loc 8 110 21 is_stmt 0 view .LVU143
+ 597 004c 324B     		ldr	r3, .L29+16
+ 598 004e 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 599 0050 FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
+ 600              	.LVL30:
+ 601 0054 0346     		mov	r3, r0	@ movhi
+ 602 0056 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 603 0058 ADF82430 		strh	r3, [sp, #36]	@ movhi
+ 604 005c FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
+ 605              	.LVL31:
+ 606 0060 0346     		mov	r3, r0	@ movhi
+ 607 0062 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+ 608              	.LBB154:
+ 111:birds-and-the-bees.cpp ****                      8,
+ 112:birds-and-the-bees.cpp ****                      hw.GetPin(PIN_MUX_SEL_0),
+ 113:birds-and-the-bees.cpp ****                      hw.GetPin(PIN_MUX_SEL_1),
+ 114:birds-and-the-bees.cpp ****                      hw.GetPin(PIN_MUX_SEL_2));
+ 115:birds-and-the-bees.cpp ****   // adc_cfg[2].InitMux(hw.GetPin(PIN_ADC_POT_MUX3),
+ 116:birds-and-the-bees.cpp ****   //                    8,
+ 117:birds-and-the-bees.cpp ****   //                    hw.GetPin(PIN_MUX_SEL_0),
+ 118:birds-and-the-bees.cpp ****   //                    hw.GetPin(PIN_MUX_SEL_1),
+ 119:birds-and-the-bees.cpp ****   //                    hw.GetPin(PIN_MUX_SEL_2));
+ 120:birds-and-the-bees.cpp **** 
+ 121:birds-and-the-bees.cpp ****   hw.adc.Init(adc_cfg, 2);
+ 122:birds-and-the-bees.cpp ****   hw.adc.Start();
+ 123:birds-and-the-bees.cpp ****   hw.StartLog(false);
+ 124:birds-and-the-bees.cpp **** 
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 22
+
+
+ 125:birds-and-the-bees.cpp ****   //   // Order of pots on the hardware connected to mux.
+ 126:birds-and-the-bees.cpp ****   //   //   for(size_t i = 0; i < 24; i+=3)
+ 127:birds-and-the-bees.cpp ****   for (size_t i = 0; i < 16; i += 2) {
+ 609              		.loc 8 127 15 view .LVU144
+ 610 0064 0025     		movs	r5, #0
+ 611 0066 2D4E     		ldr	r6, .L29+20
+ 612              	.LBE154:
+ 110:birds-and-the-bees.cpp ****                      8,
+ 613              		.loc 8 110 21 view .LVU145
+ 614 0068 ADF82830 		strh	r3, [sp, #40]	@ movhi
+ 615 006c FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
+ 616              	.LVL32:
+ 617 0070 0346     		mov	r3, r0	@ movhi
+ 618 0072 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 619 0074 ADF82C30 		strh	r3, [sp, #44]	@ movhi
+ 620 0078 FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
+ 621              	.LVL33:
+ 622 007c BDF82C10 		ldrh	r1, [sp, #44]
+ 623 0080 0822     		movs	r2, #8
+ 624 0082 0A9B     		ldr	r3, [sp, #40]
+ 625 0084 ADF80400 		strh	r0, [sp, #4]	@ movhi
+ 626 0088 0DF14500 		add	r0, sp, #69
+ 627 008c ADF80010 		strh	r1, [sp]	@ movhi
+ 628 0090 0999     		ldr	r1, [sp, #36]
+ 629 0092 FFF7FEFF 		bl	_ZN5daisy16AdcChannelConfig7InitMuxE12dsy_gpio_pinjS1_S1_S1_
+ 630              	.LVL34:
+ 121:birds-and-the-bees.cpp ****   hw.adc.Start();
+ 631              		.loc 8 121 3 is_stmt 1 view .LVU146
+ 121:birds-and-the-bees.cpp ****   hw.adc.Start();
+ 632              		.loc 8 121 14 is_stmt 0 view .LVU147
+ 633 0096 0423     		movs	r3, #4
+ 634 0098 0222     		movs	r2, #2
+ 635 009a 0DA9     		add	r1, sp, #52
+ 636 009c 2048     		ldr	r0, .L29+24
+ 637 009e FFF7FEFF 		bl	_ZN5daisy9AdcHandle4InitEPNS_16AdcChannelConfigEjNS0_12OverSamplingE
+ 638              	.LVL35:
+ 122:birds-and-the-bees.cpp ****   hw.StartLog(false);
+ 639              		.loc 8 122 3 is_stmt 1 view .LVU148
+ 122:birds-and-the-bees.cpp ****   hw.StartLog(false);
+ 640              		.loc 8 122 15 is_stmt 0 view .LVU149
+ 641 00a2 1F48     		ldr	r0, .L29+24
+ 642 00a4 FFF7FEFF 		bl	_ZN5daisy9AdcHandle5StartEv
+ 643              	.LVL36:
+ 123:birds-and-the-bees.cpp **** 
+ 644              		.loc 8 123 3 is_stmt 1 view .LVU150
+ 645              	.LBB155:
+ 646              	.LBI155:
   23:../libDaisy/src/daisy_seed.h **** 
   24:../libDaisy/src/daisy_seed.h ****     /** 
   25:../libDaisy/src/daisy_seed.h ****     Configures the settings for all internal peripherals,
@@ -1185,6 +1318,9 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   30:../libDaisy/src/daisy_seed.h **** 
   31:../libDaisy/src/daisy_seed.h ****     //Defaults listed below:
   32:../libDaisy/src/daisy_seed.h ****     //TODO: Add defaults
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 23
+
+
   33:../libDaisy/src/daisy_seed.h **** 
   34:../libDaisy/src/daisy_seed.h ****     /** & */
   35:../libDaisy/src/daisy_seed.h ****     void Configure();
@@ -1198,9 +1334,6 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   43:../libDaisy/src/daisy_seed.h ****     can be initialized using their specific initializers within libdaisy
   44:../libDaisy/src/daisy_seed.h ****     for a specific application.
   45:../libDaisy/src/daisy_seed.h ****     */
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 21
-
-
   46:../libDaisy/src/daisy_seed.h ****     void Init(bool boost = false);
   47:../libDaisy/src/daisy_seed.h **** 
   48:../libDaisy/src/daisy_seed.h ****     /** 
@@ -1245,6 +1378,9 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   87:../libDaisy/src/daisy_seed.h ****     void SetAudioSampleRate(SaiHandle::Config::SampleRate samplerate);
   88:../libDaisy/src/daisy_seed.h **** 
   89:../libDaisy/src/daisy_seed.h ****     /** Returns the audio sample rate in Hz as a floating point number.
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 24
+
+
   90:../libDaisy/src/daisy_seed.h ****      */
   91:../libDaisy/src/daisy_seed.h ****     float AudioSampleRate();
   92:../libDaisy/src/daisy_seed.h **** 
@@ -1258,9 +1394,6 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
  100:../libDaisy/src/daisy_seed.h ****     /** Returns the rate in Hz that the Audio callback is called */
  101:../libDaisy/src/daisy_seed.h ****     float AudioCallbackRate() const;
  102:../libDaisy/src/daisy_seed.h **** 
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 22
-
-
  103:../libDaisy/src/daisy_seed.h ****     /** Sets the state of the built in LED
  104:../libDaisy/src/daisy_seed.h ****      */
  105:../libDaisy/src/daisy_seed.h ****     void SetLed(bool state);
@@ -1288,254 +1421,435 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
  127:../libDaisy/src/daisy_seed.h ****     /** Start the logging session. Optionally wait for terminal connection before proceeding.
  128:../libDaisy/src/daisy_seed.h ****     */
  129:../libDaisy/src/daisy_seed.h ****     static void StartLog(bool wait_for_pc = false)
- 603              		.loc 3 129 17 view .LVU127
- 604              	.LBB103:
+ 647              		.loc 1 129 17 view .LVU151
+ 648              	.LBB156:
  130:../libDaisy/src/daisy_seed.h ****     {
  131:../libDaisy/src/daisy_seed.h ****         Log::StartLog(wait_for_pc);
- 605              		.loc 3 131 9 view .LVU128
- 606              		.loc 3 131 22 is_stmt 0 view .LVU129
- 607 00be 2846     		mov	r0, r5
- 608 00c0 FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE8StartLogEb
- 609              	.LVL50:
- 610              		.loc 3 131 22 view .LVU130
- 611              	.LBE103:
- 612              	.LBE102:
- 613              		.loc 8 136 5 is_stmt 1 view .LVU131
- 614              	.LBB104:
- 615              		.loc 8 136 26 view .LVU132
- 616              	.L30:
- 137:birds-and-the-bees.cpp ****       knob_[i].Init(hw.adc.GetMuxPtr(0, i), hw.AudioCallbackRate());
- 617              		.loc 8 137 7 discriminator 2 view .LVU133
- 618 00c4 ECB2     		uxtb	r4, r5
- 619              		.loc 8 137 20 is_stmt 0 discriminator 2 view .LVU134
- 620 00c6 0021     		movs	r1, #0
- 621 00c8 2548     		ldr	r0, .L34+28
- 136:birds-and-the-bees.cpp ****       knob_[i].Init(hw.adc.GetMuxPtr(0, i), hw.AudioCallbackRate());
- 622              		.loc 8 136 34 discriminator 2 view .LVU135
- 623 00ca 0235     		adds	r5, r5, #2
- 624              	.LVL51:
- 625              		.loc 8 137 20 discriminator 2 view .LVU136
- 626 00cc 2246     		mov	r2, r4
- 627 00ce FFF7FEFF 		bl	_ZNK5daisy9AdcHandle9GetMuxPtrEhh
- 628              	.LVL52:
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 23
+ 649              		.loc 1 131 9 view .LVU152
+ 650              		.loc 1 131 22 is_stmt 0 view .LVU153
+ 651 00a8 2846     		mov	r0, r5
+ 652 00aa FFF7FEFF 		bl	_ZN5daisy6LoggerILNS_17LoggerDestinationE1EE8StartLogEb
+ 653              	.LVL37:
+ 654              		.loc 1 131 22 view .LVU154
+ 655              	.LBE156:
+ 656              	.LBE155:
+ 657              		.loc 8 127 3 is_stmt 1 view .LVU155
+ 658              	.LBB157:
+ 659              		.loc 8 127 24 view .LVU156
+ 660              	.L26:
+ 128:birds-and-the-bees.cpp ****     knob_[i].Init(hw.adc.GetMuxPtr(0, i), hw.AudioCallbackRate());
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 25
 
 
- 629 00d2 0146     		mov	r1, r0
- 630 00d4 1B48     		ldr	r0, .L34
- 631 00d6 0391     		str	r1, [sp, #12]
- 632 00d8 FFF7FEFF 		bl	_ZNK5daisy9DaisySeed17AudioCallbackRateEv
- 633              	.LVL53:
- 634 00dc 0023     		movs	r3, #0
- 635 00de DFED210A 		vldr.32	s1, .L34+32
- 636 00e2 3046     		mov	r0, r6
- 637 00e4 0399     		ldr	r1, [sp, #12]
- 638 00e6 1A46     		mov	r2, r3
- 639 00e8 FFF7FEFF 		bl	_ZN5daisy13AnalogControl4InitEPtfbbf
- 640              	.LVL54:
- 138:birds-and-the-bees.cpp ****       knob_[i + 1].Init(hw.adc.GetMuxPtr(1, i + 1), hw.AudioCallbackRate());
- 641              		.loc 8 138 7 is_stmt 1 discriminator 2 view .LVU137
- 642              		.loc 8 138 24 is_stmt 0 discriminator 2 view .LVU138
- 643 00ec 621C     		adds	r2, r4, #1
- 644 00ee 0121     		movs	r1, #1
- 645 00f0 1B48     		ldr	r0, .L34+28
- 646 00f2 D2B2     		uxtb	r2, r2
- 647 00f4 FFF7FEFF 		bl	_ZNK5daisy9AdcHandle9GetMuxPtrEhh
- 648              	.LVL55:
- 649 00f8 0146     		mov	r1, r0
- 650 00fa 1248     		ldr	r0, .L34
- 651 00fc 0391     		str	r1, [sp, #12]
- 652 00fe FFF7FEFF 		bl	_ZNK5daisy9DaisySeed17AudioCallbackRateEv
- 653              	.LVL56:
- 654 0102 0023     		movs	r3, #0
- 655 0104 06F12000 		add	r0, r6, #32
- 656 0108 DFED160A 		vldr.32	s1, .L34+32
- 136:birds-and-the-bees.cpp ****       knob_[i].Init(hw.adc.GetMuxPtr(0, i), hw.AudioCallbackRate());
- 657              		.loc 8 136 26 discriminator 2 view .LVU139
- 658 010c 4036     		adds	r6, r6, #64
- 659              		.loc 8 138 24 discriminator 2 view .LVU140
- 660 010e 0399     		ldr	r1, [sp, #12]
- 661 0110 1A46     		mov	r2, r3
- 662 0112 FFF7FEFF 		bl	_ZN5daisy13AnalogControl4InitEPtfbbf
- 663              	.LVL57:
- 136:birds-and-the-bees.cpp ****       knob_[i].Init(hw.adc.GetMuxPtr(0, i), hw.AudioCallbackRate());
- 664              		.loc 8 136 5 is_stmt 1 discriminator 2 view .LVU141
- 136:birds-and-the-bees.cpp ****       knob_[i].Init(hw.adc.GetMuxPtr(0, i), hw.AudioCallbackRate());
- 665              		.loc 8 136 26 discriminator 2 view .LVU142
- 666 0116 102D     		cmp	r5, #16
- 667 0118 D4D1     		bne	.L30
- 668              	.LBE104:
- 139:birds-and-the-bees.cpp ****       // knob_[i + 2].Init(hw.adc.GetMuxPtr(2, i + 2), AudioCallbackRate());
- 140:birds-and-the-bees.cpp ****     }
- 141:birds-and-the-bees.cpp **** 
- 142:birds-and-the-bees.cpp ****   // Set parameters for oscillator
- 143:birds-and-the-bees.cpp ****   SetupOsc(sample_rate);
- 669              		.loc 8 143 3 view .LVU143
- 670              		.loc 8 143 11 is_stmt 0 view .LVU144
- 671 011a B0EE480A 		vmov.f32	s0, s16
- 672 011e 124C     		ldr	r4, .L34+36
- 673 0120 FFF7FEFF 		bl	_Z8SetupOscf
- 674              	.LVL58:
- 144:birds-and-the-bees.cpp **** 
- 145:birds-and-the-bees.cpp ****   // start callback
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 24
+ 661              		.loc 8 128 5 discriminator 2 view .LVU157
+ 662 00ae ECB2     		uxtb	r4, r5
+ 663              		.loc 8 128 18 is_stmt 0 discriminator 2 view .LVU158
+ 664 00b0 0021     		movs	r1, #0
+ 665 00b2 1B48     		ldr	r0, .L29+24
+ 127:birds-and-the-bees.cpp ****     knob_[i].Init(hw.adc.GetMuxPtr(0, i), hw.AudioCallbackRate());
+ 666              		.loc 8 127 32 discriminator 2 view .LVU159
+ 667 00b4 0235     		adds	r5, r5, #2
+ 668              	.LVL38:
+ 669              		.loc 8 128 18 discriminator 2 view .LVU160
+ 670 00b6 2246     		mov	r2, r4
+ 671 00b8 FFF7FEFF 		bl	_ZNK5daisy9AdcHandle9GetMuxPtrEhh
+ 672              	.LVL39:
+ 673 00bc 0146     		mov	r1, r0
+ 674 00be 1948     		ldr	r0, .L29+28
+ 675 00c0 0391     		str	r1, [sp, #12]
+ 676 00c2 FFF7FEFF 		bl	_ZNK5daisy9DaisySeed17AudioCallbackRateEv
+ 677              	.LVL40:
+ 678 00c6 0023     		movs	r3, #0
+ 679 00c8 DFED170A 		vldr.32	s1, .L29+32
+ 680 00cc 3046     		mov	r0, r6
+ 681 00ce 0399     		ldr	r1, [sp, #12]
+ 682 00d0 1A46     		mov	r2, r3
+ 683 00d2 FFF7FEFF 		bl	_ZN5daisy13AnalogControl4InitEPtfbbf
+ 684              	.LVL41:
+ 129:birds-and-the-bees.cpp ****     knob_[i + 1].Init(hw.adc.GetMuxPtr(1, i + 1), hw.AudioCallbackRate());
+ 685              		.loc 8 129 5 is_stmt 1 discriminator 2 view .LVU161
+ 686              		.loc 8 129 22 is_stmt 0 discriminator 2 view .LVU162
+ 687 00d6 621C     		adds	r2, r4, #1
+ 688 00d8 0121     		movs	r1, #1
+ 689 00da 1148     		ldr	r0, .L29+24
+ 690 00dc D2B2     		uxtb	r2, r2
+ 691 00de FFF7FEFF 		bl	_ZNK5daisy9AdcHandle9GetMuxPtrEhh
+ 692              	.LVL42:
+ 693 00e2 0146     		mov	r1, r0
+ 694 00e4 0F48     		ldr	r0, .L29+28
+ 695 00e6 0391     		str	r1, [sp, #12]
+ 696 00e8 FFF7FEFF 		bl	_ZNK5daisy9DaisySeed17AudioCallbackRateEv
+ 697              	.LVL43:
+ 698 00ec 0023     		movs	r3, #0
+ 699 00ee 06F12000 		add	r0, r6, #32
+ 700 00f2 DFED0D0A 		vldr.32	s1, .L29+32
+ 127:birds-and-the-bees.cpp ****     knob_[i].Init(hw.adc.GetMuxPtr(0, i), hw.AudioCallbackRate());
+ 701              		.loc 8 127 24 discriminator 2 view .LVU163
+ 702 00f6 4036     		adds	r6, r6, #64
+ 703              		.loc 8 129 22 discriminator 2 view .LVU164
+ 704 00f8 0399     		ldr	r1, [sp, #12]
+ 705 00fa 1A46     		mov	r2, r3
+ 706 00fc FFF7FEFF 		bl	_ZN5daisy13AnalogControl4InitEPtfbbf
+ 707              	.LVL44:
+ 127:birds-and-the-bees.cpp ****     knob_[i].Init(hw.adc.GetMuxPtr(0, i), hw.AudioCallbackRate());
+ 708              		.loc 8 127 3 is_stmt 1 discriminator 2 view .LVU165
+ 127:birds-and-the-bees.cpp ****     knob_[i].Init(hw.adc.GetMuxPtr(0, i), hw.AudioCallbackRate());
+ 709              		.loc 8 127 24 discriminator 2 view .LVU166
+ 710 0100 102D     		cmp	r5, #16
+ 711 0102 D4D1     		bne	.L26
+ 712              	.LBE157:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 26
 
 
- 146:birds-and-the-bees.cpp **** 
- 147:birds-and-the-bees.cpp ****   hw.StartAudio(AudioCallback);
- 675              		.loc 8 147 3 is_stmt 1 view .LVU145
- 676              		.loc 8 147 16 is_stmt 0 view .LVU146
- 677 0124 1149     		ldr	r1, .L34+40
- 678 0126 0748     		ldr	r0, .L34
- 679 0128 FFF7FEFF 		bl	_ZN5daisy9DaisySeed10StartAudioEPFvPKfPfjE
- 680              	.LVL59:
- 681              	.L31:
+ 130:birds-and-the-bees.cpp ****     // knob_[i + 2].Init(hw.adc.GetMuxPtr(2, i + 2), AudioCallbackRate());
+ 131:birds-and-the-bees.cpp ****   }
+ 132:birds-and-the-bees.cpp **** }
+ 713              		.loc 8 132 1 is_stmt 0 view .LVU167
+ 714 0104 16B0     		add	sp, sp, #88
+ 715              		.cfi_def_cfa_offset 16
+ 716              		@ sp needed
+ 717 0106 70BD     		pop	{r4, r5, r6, pc}
+ 718              	.LVL45:
+ 719              	.L30:
+ 720              		.loc 8 132 1 view .LVU168
+ 721              		.align	2
+ 722              	.L29:
+ 723 0108 00000000 		.word	.LANCHOR4
+ 724 010c 00000000 		.word	.LANCHOR5
+ 725 0110 00000000 		.word	.LANCHOR6
+ 726 0114 00000000 		.word	.LANCHOR7
+ 727 0118 00000000 		.word	.LANCHOR8
+ 728 011c 00000000 		.word	.LANCHOR9
+ 729 0120 18000000 		.word	.LANCHOR0+24
+ 730 0124 00000000 		.word	.LANCHOR0
+ 731 0128 6F12033B 		.word	990057071
+ 732              		.cfi_endproc
+ 733              	.LFE4243:
+ 735              		.section	.text._Z14setupNormalAdcv,"ax",%progbits
+ 736              		.align	1
+ 737              		.p2align 2,,3
+ 738              		.global	_Z14setupNormalAdcv
+ 739              		.syntax unified
+ 740              		.thumb
+ 741              		.thumb_func
+ 742              		.fpu fpv5-d16
+ 744              	_Z14setupNormalAdcv:
+ 745              	.LFB4244:
+ 133:birds-and-the-bees.cpp **** 
+ 134:birds-and-the-bees.cpp **** void setupNormalAdc(void) {
+ 746              		.loc 8 134 27 is_stmt 1 view -0
+ 747              		.cfi_startproc
+ 748              		@ args = 0, pretend = 0, frame = 24
+ 749              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135:birds-and-the-bees.cpp ****   AdcChannelConfig adcConfig;
+ 750              		.loc 8 135 3 view .LVU170
+ 136:birds-and-the-bees.cpp ****   adcConfig.InitSingle(hw.GetPin(15));
+ 751              		.loc 8 136 3 view .LVU171
+ 134:birds-and-the-bees.cpp ****   AdcChannelConfig adcConfig;
+ 752              		.loc 8 134 27 is_stmt 0 view .LVU172
+ 753 0000 10B5     		push	{r4, lr}
+ 754              		.cfi_def_cfa_offset 8
+ 755              		.cfi_offset 4, -8
+ 756              		.cfi_offset 14, -4
+ 757              		.loc 8 136 23 view .LVU173
+ 758 0002 0F20     		movs	r0, #15
+ 134:birds-and-the-bees.cpp ****   AdcChannelConfig adcConfig;
+ 759              		.loc 8 134 27 view .LVU174
+ 760 0004 86B0     		sub	sp, sp, #24
+ 761              		.cfi_def_cfa_offset 32
+ 762              		.loc 8 136 23 view .LVU175
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 27
+
+
+ 763 0006 FFF7FEFF 		bl	_ZN5daisy9DaisySeed6GetPinEh
+ 764              	.LVL46:
+ 765 000a 0346     		mov	r3, r0	@ movhi
+ 766 000c 01A8     		add	r0, sp, #4
+ 137:birds-and-the-bees.cpp ****   hw.adc.Init(&adcConfig, 1);
+ 767              		.loc 8 137 14 view .LVU176
+ 768 000e 094C     		ldr	r4, .L33
+ 136:birds-and-the-bees.cpp ****   adcConfig.InitSingle(hw.GetPin(15));
+ 769              		.loc 8 136 23 view .LVU177
+ 770 0010 ADF80030 		strh	r3, [sp]	@ movhi
+ 771 0014 0099     		ldr	r1, [sp]
+ 772 0016 FFF7FEFF 		bl	_ZN5daisy16AdcChannelConfig10InitSingleE12dsy_gpio_pin
+ 773              	.LVL47:
+ 774              		.loc 8 137 3 is_stmt 1 view .LVU178
+ 775              		.loc 8 137 14 is_stmt 0 view .LVU179
+ 776 001a 0423     		movs	r3, #4
+ 777 001c 0122     		movs	r2, #1
+ 778 001e 2046     		mov	r0, r4
+ 779 0020 0DEB0301 		add	r1, sp, r3
+ 780 0024 FFF7FEFF 		bl	_ZN5daisy9AdcHandle4InitEPNS_16AdcChannelConfigEjNS0_12OverSamplingE
+ 781              	.LVL48:
+ 138:birds-and-the-bees.cpp ****   hw.adc.Start();
+ 782              		.loc 8 138 3 is_stmt 1 view .LVU180
+ 783              		.loc 8 138 15 is_stmt 0 view .LVU181
+ 784 0028 2046     		mov	r0, r4
+ 785 002a FFF7FEFF 		bl	_ZN5daisy9AdcHandle5StartEv
+ 786              	.LVL49:
+ 139:birds-and-the-bees.cpp **** }
+ 787              		.loc 8 139 1 view .LVU182
+ 788 002e 06B0     		add	sp, sp, #24
+ 789              		.cfi_def_cfa_offset 8
+ 790              		@ sp needed
+ 791 0030 10BD     		pop	{r4, pc}
+ 792              	.L34:
+ 793 0032 00BF     		.align	2
+ 794              	.L33:
+ 795 0034 18000000 		.word	.LANCHOR0+24
+ 796              		.cfi_endproc
+ 797              	.LFE4244:
+ 799              		.section	.text.startup.main,"ax",%progbits
+ 800              		.align	1
+ 801              		.p2align 2,,3
+ 802              		.global	main
+ 803              		.syntax unified
+ 804              		.thumb
+ 805              		.thumb_func
+ 806              		.fpu fpv5-d16
+ 808              	main:
+ 809              	.LFB4245:
+ 140:birds-and-the-bees.cpp **** 
+ 141:birds-and-the-bees.cpp **** int main(void) {
+ 810              		.loc 8 141 16 is_stmt 1 view -0
+ 811              		.cfi_startproc
+ 812              		@ args = 0, pretend = 0, frame = 8
+ 813              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142:birds-and-the-bees.cpp ****   // initialize hw hardware and oscillator daisysp module
+ 143:birds-and-the-bees.cpp ****   float sample_rate;
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 28
+
+
+ 814              		.loc 8 143 3 view .LVU184
+ 144:birds-and-the-bees.cpp ****   hw.Configure();
+ 815              		.loc 8 144 3 view .LVU185
+ 141:birds-and-the-bees.cpp ****   // initialize hw hardware and oscillator daisysp module
+ 816              		.loc 8 141 16 is_stmt 0 view .LVU186
+ 817 0000 10B5     		push	{r4, lr}
+ 818              		.cfi_def_cfa_offset 8
+ 819              		.cfi_offset 4, -8
+ 820              		.cfi_offset 14, -4
+ 821              		.loc 8 144 15 view .LVU187
+ 822 0002 1648     		ldr	r0, .L38
+ 141:birds-and-the-bees.cpp ****   // initialize hw hardware and oscillator daisysp module
+ 823              		.loc 8 141 16 view .LVU188
+ 824 0004 82B0     		sub	sp, sp, #8
+ 825              		.cfi_def_cfa_offset 16
+ 826              		.loc 8 144 15 view .LVU189
+ 827 0006 FFF7FEFF 		bl	_ZN5daisy9DaisySeed9ConfigureEv
+ 828              	.LVL50:
+ 145:birds-and-the-bees.cpp ****   hw.Init();
+ 829              		.loc 8 145 3 is_stmt 1 view .LVU190
+ 830              		.loc 8 145 10 is_stmt 0 view .LVU191
+ 831 000a 0021     		movs	r1, #0
+ 832 000c 1348     		ldr	r0, .L38
+ 833 000e FFF7FEFF 		bl	_ZN5daisy9DaisySeed4InitEb
+ 834              	.LVL51:
+ 146:birds-and-the-bees.cpp ****   hw.SetAudioBlockSize(AUDIO_BLOCK_SIZE);
+ 835              		.loc 8 146 3 is_stmt 1 view .LVU192
+ 836              		.loc 8 146 23 is_stmt 0 view .LVU193
+ 837 0012 3021     		movs	r1, #48
+ 838 0014 1148     		ldr	r0, .L38
+ 839 0016 FFF7FEFF 		bl	_ZN5daisy9DaisySeed17SetAudioBlockSizeEj
+ 840              	.LVL52:
+ 147:birds-and-the-bees.cpp ****   sample_rate = hw.AudioSampleRate();
+ 841              		.loc 8 147 3 is_stmt 1 view .LVU194
+ 842              		.loc 8 147 35 is_stmt 0 view .LVU195
+ 843 001a 1048     		ldr	r0, .L38
+ 844 001c FFF7FEFF 		bl	_ZN5daisy9DaisySeed15AudioSampleRateEv
+ 845              	.LVL53:
+ 846 0020 8DED010A 		vstr.32	s0, [sp, #4]	@ int
+ 847              	.LVL54:
  148:birds-and-the-bees.cpp **** 
- 149:birds-and-the-bees.cpp ****   while (1) {
- 682              		.loc 8 149 3 is_stmt 1 discriminator 1 view .LVU147
- 150:birds-and-the-bees.cpp ****     knob = hw.adc.GetFloat(0);
- 683              		.loc 8 150 5 discriminator 1 view .LVU148
- 684              		.loc 8 150 27 is_stmt 0 discriminator 1 view .LVU149
- 685 012c 0021     		movs	r1, #0
- 686 012e 0C48     		ldr	r0, .L34+28
- 687 0130 FFF7FEFF 		bl	_ZNK5daisy9AdcHandle8GetFloatEh
- 688              	.LVL60:
- 151:birds-and-the-bees.cpp ****     hw.DelayMs(100);
- 689              		.loc 8 151 15 discriminator 1 view .LVU150
- 690 0134 6421     		movs	r1, #100
- 691 0136 0348     		ldr	r0, .L34
- 150:birds-and-the-bees.cpp ****     knob = hw.adc.GetFloat(0);
- 692              		.loc 8 150 10 discriminator 1 view .LVU151
- 693 0138 84ED000A 		vstr.32	s0, [r4]
- 694              		.loc 8 151 5 is_stmt 1 discriminator 1 view .LVU152
- 695              		.loc 8 151 15 is_stmt 0 discriminator 1 view .LVU153
- 696 013c FFF7FEFF 		bl	_ZN5daisy9DaisySeed7DelayMsEj
- 697              	.LVL61:
- 149:birds-and-the-bees.cpp ****     knob = hw.adc.GetFloat(0);
- 698              		.loc 8 149 3 is_stmt 1 discriminator 1 view .LVU154
- 699 0140 F4E7     		b	.L31
- 700              	.L35:
- 701 0142 00BF     		.align	2
- 702              	.L34:
- 703 0144 00000000 		.word	.LANCHOR0
- 704 0148 00000000 		.word	.LANCHOR5
- 705 014c 00000000 		.word	.LANCHOR6
- 706 0150 00000000 		.word	.LANCHOR7
- 707 0154 00000000 		.word	.LANCHOR9
- 708 0158 00000000 		.word	.LANCHOR4
- 709 015c 00000000 		.word	.LANCHOR8
- 710 0160 18000000 		.word	.LANCHOR0+24
- 711 0164 6F12033B 		.word	990057071
- 712 0168 00000000 		.word	.LANCHOR1
- 713 016c 00000000 		.word	_ZL13AudioCallbackPKfPfj
- 714              		.cfi_endproc
- 715              	.LFE4243:
- 717              		.section	.text.startup._GLOBAL__sub_I_PIN_MUX_SEL_0,"ax",%progbits
- 718              		.align	1
- 719              		.p2align 2,,3
- 720              		.syntax unified
- 721              		.thumb
- 722              		.thumb_func
- 723              		.fpu fpv5-d16
- 725              	_GLOBAL__sub_I_PIN_MUX_SEL_0:
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 25
+ 149:birds-and-the-bees.cpp ****   setupNormalAdc();
+ 848              		.loc 8 149 3 is_stmt 1 view .LVU196
+ 849              		.loc 8 149 17 is_stmt 0 view .LVU197
+ 850 0024 FFF7FEFF 		bl	_Z14setupNormalAdcv
+ 851              	.LVL55:
+ 150:birds-and-the-bees.cpp **** 
+ 151:birds-and-the-bees.cpp ****   // AdcChannelConfig adcConfig;
+ 152:birds-and-the-bees.cpp ****   // adcConfig.InitSingle(hw.GetPin(15));
+ 153:birds-and-the-bees.cpp ****   // hw.adc.Init(&adcConfig, 1);
+ 154:birds-and-the-bees.cpp ****   // hw.adc.Start();
+ 155:birds-and-the-bees.cpp **** 
+ 156:birds-and-the-bees.cpp ****   //   AdcChannelConfig adc[4];
+ 157:birds-and-the-bees.cpp ****   //   adc[0].InitSingle(hw.GetPin(15));
+ 158:birds-and-the-bees.cpp ****   //   adc[1].InitSingle(hw.GetPin(16));
+ 159:birds-and-the-bees.cpp ****   //   adc[2].InitSingle(hw.GetPin(17));
+ 160:birds-and-the-bees.cpp ****   //   adc[3].InitSingle(hw.GetPin(18));
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 29
 
 
- 726              	.LFB4802:
- 152:birds-and-the-bees.cpp ****   }
- 153:birds-and-the-bees.cpp **** }
- 727              		.loc 8 153 1 view -0
- 728              		.cfi_startproc
- 729              		@ args = 0, pretend = 0, frame = 0
- 730              		@ frame_needed = 0, uses_anonymous_args = 0
- 731              	.LBB129:
- 732              	.LBI129:
- 733              		.loc 8 153 1 view .LVU156
- 734              	.LVL62:
- 735              	.LBB130:
+ 161:birds-and-the-bees.cpp ****   //   hw.adc.Init(adc, 4); // my Daisyhw instance is called hw
+ 162:birds-and-the-bees.cpp ****   //   hw.adc.Start();
+ 163:birds-and-the-bees.cpp **** 
+ 164:birds-and-the-bees.cpp ****   // Set parameters for oscillator
+ 165:birds-and-the-bees.cpp ****   SetupOsc(sample_rate);
+ 852              		.loc 8 165 3 is_stmt 1 view .LVU198
+ 853              		.loc 8 165 11 is_stmt 0 view .LVU199
+ 854 0028 9DED010A 		vldr.32	s0, [sp, #4]	@ int
+ 855 002c FFF7FEFF 		bl	_Z8SetupOscf
+ 856              	.LVL56:
+ 166:birds-and-the-bees.cpp ****   envelope.Init(sample_rate, AUDIO_BLOCK_SIZE);
+ 857              		.loc 8 166 3 is_stmt 1 view .LVU200
+ 858              		.loc 8 166 16 is_stmt 0 view .LVU201
+ 859 0030 3021     		movs	r1, #48
+ 860 0032 0B48     		ldr	r0, .L38+4
+ 861 0034 9DED010A 		vldr.32	s0, [sp, #4]	@ int
+ 862 0038 FFF7FEFF 		bl	_ZN7daisysp4Adsr4InitEfi
+ 863              	.LVL57:
+ 167:birds-and-the-bees.cpp **** 
+ 168:birds-and-the-bees.cpp ****   // start callback
+ 169:birds-and-the-bees.cpp ****   hw.StartAudio(AudioCallback);
+ 864              		.loc 8 169 3 is_stmt 1 view .LVU202
+ 865              		.loc 8 169 16 is_stmt 0 view .LVU203
+ 866 003c 0949     		ldr	r1, .L38+8
+ 867 003e 0748     		ldr	r0, .L38
+ 868 0040 094C     		ldr	r4, .L38+12
+ 869 0042 FFF7FEFF 		bl	_ZN5daisy9DaisySeed10StartAudioEPFvPKfPfjE
+ 870              	.LVL58:
+ 871              	.L36:
+ 170:birds-and-the-bees.cpp **** 
+ 171:birds-and-the-bees.cpp ****   while (1) {
+ 872              		.loc 8 171 3 is_stmt 1 discriminator 1 view .LVU204
+ 172:birds-and-the-bees.cpp ****     knob = hw.adc.GetFloat(0);
+ 873              		.loc 8 172 5 discriminator 1 view .LVU205
+ 874              		.loc 8 172 27 is_stmt 0 discriminator 1 view .LVU206
+ 875 0046 0021     		movs	r1, #0
+ 876 0048 0848     		ldr	r0, .L38+16
+ 877 004a FFF7FEFF 		bl	_ZNK5daisy9AdcHandle8GetFloatEh
+ 878              	.LVL59:
+ 173:birds-and-the-bees.cpp ****     hw.DelayMs(100);
+ 879              		.loc 8 173 15 discriminator 1 view .LVU207
+ 880 004e 6421     		movs	r1, #100
+ 881 0050 0248     		ldr	r0, .L38
+ 172:birds-and-the-bees.cpp ****     knob = hw.adc.GetFloat(0);
+ 882              		.loc 8 172 10 discriminator 1 view .LVU208
+ 883 0052 84ED000A 		vstr.32	s0, [r4]
+ 884              		.loc 8 173 5 is_stmt 1 discriminator 1 view .LVU209
+ 885              		.loc 8 173 15 is_stmt 0 discriminator 1 view .LVU210
+ 886 0056 FFF7FEFF 		bl	_ZN5daisy9DaisySeed7DelayMsEj
+ 887              	.LVL60:
+ 171:birds-and-the-bees.cpp ****     knob = hw.adc.GetFloat(0);
+ 888              		.loc 8 171 3 is_stmt 1 discriminator 1 view .LVU211
+ 889 005a F4E7     		b	.L36
+ 890              	.L39:
+ 891              		.align	2
+ 892              	.L38:
+ 893 005c 00000000 		.word	.LANCHOR0
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 30
+
+
+ 894 0060 00000000 		.word	.LANCHOR10
+ 895 0064 00000000 		.word	_ZL13AudioCallbackPKfPfj
+ 896 0068 00000000 		.word	.LANCHOR1
+ 897 006c 18000000 		.word	.LANCHOR0+24
+ 898              		.cfi_endproc
+ 899              	.LFE4245:
+ 901              		.section	.text.startup._GLOBAL__sub_I_PIN_MUX_SEL_0,"ax",%progbits
+ 902              		.align	1
+ 903              		.p2align 2,,3
+ 904              		.syntax unified
+ 905              		.thumb
+ 906              		.thumb_func
+ 907              		.fpu fpv5-d16
+ 909              	_GLOBAL__sub_I_PIN_MUX_SEL_0:
+ 910              	.LFB4804:
+ 174:birds-and-the-bees.cpp ****   }
+ 175:birds-and-the-bees.cpp **** }
+ 911              		.loc 8 175 1 view -0
+ 912              		.cfi_startproc
+ 913              		@ args = 0, pretend = 0, frame = 0
+ 914              		@ frame_needed = 0, uses_anonymous_args = 0
+ 915              	.LBB182:
+ 916              	.LBI182:
+ 917              		.loc 8 175 1 view .LVU213
+ 918              	.LVL61:
+ 919              	.LBB183:
   16:birds-and-the-bees.cpp **** 
- 736              		.loc 8 16 23 view .LVU157
+ 920              		.loc 8 16 23 view .LVU214
   16:birds-and-the-bees.cpp **** 
- 737              		.loc 8 16 15 is_stmt 0 view .LVU158
- 738 0000 0020     		movs	r0, #0
- 739 0002 1A4A     		ldr	r2, .L38
- 740 0004 1A49     		ldr	r1, .L38+4
- 741              	.LBE130:
- 742              	.LBE129:
- 743              		.loc 8 153 1 view .LVU159
- 744 0006 10B5     		push	{r4, lr}
- 745              		.cfi_def_cfa_offset 8
- 746              		.cfi_offset 4, -8
- 747              		.cfi_offset 14, -4
- 748              	.LBB162:
- 749              	.LBB160:
- 750              	.LBB131:
- 751              	.LBB132:
- 752              	.LBB133:
- 753              	.LBB134:
- 754              	.LBB135:
+ 921              		.loc 8 16 15 is_stmt 0 view .LVU215
+ 922 0000 0020     		movs	r0, #0
+ 923 0002 1A4A     		ldr	r2, .L42
+ 924 0004 1A49     		ldr	r1, .L42+4
+ 925              	.LBE183:
+ 926              	.LBE182:
+ 927              		.loc 8 175 1 view .LVU216
+ 928 0006 10B5     		push	{r4, lr}
+ 929              		.cfi_def_cfa_offset 8
+ 930              		.cfi_offset 4, -8
+ 931              		.cfi_offset 14, -4
+ 932              	.LBB215:
+ 933              	.LBB213:
+ 934              	.LBB184:
+ 935              	.LBB185:
+ 936              	.LBB186:
+ 937              	.LBB187:
+ 938              	.LBB188:
   62:../libDaisy/src/hid/audio.h ****     ~AudioHandle() {}
- 755              		.loc 7 62 35 view .LVU160
- 756 0008 0446     		mov	r4, r0
- 757              	.LBE135:
- 758              	.LBE134:
- 759              	.LBE133:
- 760              	.LBE132:
- 761              	.LBE131:
+ 939              		.loc 5 62 35 view .LVU217
+ 940 0008 0446     		mov	r4, r0
+ 941              	.LBE188:
+ 942              	.LBE187:
+ 943              	.LBE186:
+ 944              	.LBE185:
+ 945              	.LBE184:
   16:birds-and-the-bees.cpp **** 
- 762              		.loc 8 16 15 view .LVU161
- 763 000a FFF7FEFF 		bl	__aeabi_atexit
- 764              	.LVL63:
- 765              	.LBB150:
- 766              	.LBI131:
+ 946              		.loc 8 16 15 view .LVU218
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 31
+
+
+ 947 000a FFF7FEFF 		bl	__aeabi_atexit
+ 948              	.LVL62:
+ 949              	.LBB203:
+ 950              	.LBI184:
   21:../libDaisy/src/daisy_seed.h ****     ~DaisySeed() {}
- 767              		.loc 3 21 5 is_stmt 1 view .LVU162
- 768              	.LBB148:
- 769              	.LBB140:
- 770              	.LBI133:
+ 951              		.loc 1 21 5 is_stmt 1 view .LVU219
+ 952              	.LBB201:
+ 953              	.LBB193:
+ 954              	.LBI186:
   62:../libDaisy/src/hid/audio.h ****     ~AudioHandle() {}
- 771              		.loc 7 62 5 view .LVU163
- 772              	.LBB138:
- 773              	.LBB136:
+ 955              		.loc 5 62 5 view .LVU220
+ 956              	.LBB191:
+ 957              	.LBB189:
   62:../libDaisy/src/hid/audio.h ****     ~AudioHandle() {}
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 26
-
-
- 774              		.loc 7 62 35 is_stmt 0 view .LVU164
- 775 000e 1948     		ldr	r0, .L38+8
- 776              	.LBE136:
- 777              	.LBE138:
- 778              	.LBE140:
- 779              	.LBE148:
- 780              	.LBE150:
-  18:birds-and-the-bees.cpp **** static VariableShapeOscillator osc[8];
- 781              		.loc 8 18 18 view .LVU165
- 782 0010 1949     		ldr	r1, .L38+12
- 783 0012 164A     		ldr	r2, .L38
- 784              	.LBB151:
- 785              	.LBB149:
- 786              	.LBB141:
- 787              	.LBB139:
- 788              	.LBB137:
+ 958              		.loc 5 62 35 is_stmt 0 view .LVU221
+ 959 000e 1948     		ldr	r0, .L42+8
+ 960              	.LBE189:
+ 961              	.LBE191:
+ 962              	.LBE193:
+ 963              	.LBE201:
+ 964              	.LBE203:
+  18:birds-and-the-bees.cpp **** // static VariableShapeOscillator osc[NUM_OF_OSCILLATORS];
+ 965              		.loc 8 18 18 view .LVU222
+ 966 0010 1949     		ldr	r1, .L42+12
+ 967 0012 164A     		ldr	r2, .L42
+ 968              	.LBB204:
+ 969              	.LBB202:
+ 970              	.LBB194:
+ 971              	.LBB192:
+ 972              	.LBB190:
   62:../libDaisy/src/hid/audio.h ****     ~AudioHandle() {}
- 789              		.loc 7 62 35 view .LVU166
- 790 0014 4461     		str	r4, [r0, #20]
- 791              	.LVL64:
+ 973              		.loc 5 62 35 view .LVU223
+ 974 0014 4461     		str	r4, [r0, #20]
+ 975              	.LVL63:
   62:../libDaisy/src/hid/audio.h ****     ~AudioHandle() {}
- 792              		.loc 7 62 35 view .LVU167
- 793              	.LBE137:
- 794              	.LBE139:
- 795              	.LBE141:
- 796              	.LBB142:
- 797              	.LBI142:
+ 976              		.loc 5 62 35 view .LVU224
+ 977              	.LBE190:
+ 978              	.LBE192:
+ 979              	.LBE194:
+ 980              	.LBB195:
+ 981              	.LBI195:
   84:../libDaisy/src/per/adc.h ****     ~AdcHandle() {}
- 798              		.loc 6 84 5 is_stmt 1 view .LVU168
+ 982              		.loc 4 84 5 is_stmt 1 view .LVU225
   84:../libDaisy/src/per/adc.h ****     ~AdcHandle() {}
- 799              		.loc 6 84 5 is_stmt 0 view .LVU169
- 800              	.LBE142:
- 801              	.LBB143:
- 802              	.LBI143:
- 803              		.file 9 "../libDaisy/src/per/dac.h"
+ 983              		.loc 4 84 5 is_stmt 0 view .LVU226
+ 984              	.LBE195:
+ 985              	.LBB196:
+ 986              	.LBI196:
+ 987              		.file 10 "../libDaisy/src/per/dac.h"
    1:../libDaisy/src/per/dac.h **** #pragma once
    2:../libDaisy/src/per/dac.h **** #ifndef DSY_DAC_H
    3:../libDaisy/src/per/dac.h **** #define DSY_DAC_H
@@ -1544,6 +1858,9 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
    6:../libDaisy/src/per/dac.h **** 
    7:../libDaisy/src/per/dac.h **** namespace daisy
    8:../libDaisy/src/per/dac.h **** {
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 32
+
+
    9:../libDaisy/src/per/dac.h **** /** DAC handle for Built-in DAC Peripheral 
   10:../libDaisy/src/per/dac.h ****  ** 
   11:../libDaisy/src/per/dac.h ****  ** For now only Normal Mode is supported,
@@ -1558,9 +1875,6 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   20:../libDaisy/src/per/dac.h **** class DacHandle
   21:../libDaisy/src/per/dac.h **** {
   22:../libDaisy/src/per/dac.h ****   public:
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 27
-
-
   23:../libDaisy/src/per/dac.h ****     /** Return Values for the DacHandle class */
   24:../libDaisy/src/per/dac.h ****     enum class Result
   25:../libDaisy/src/per/dac.h ****     {
@@ -1604,6 +1918,9 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   63:../libDaisy/src/per/dac.h ****     {
   64:../libDaisy/src/per/dac.h ****         ENABLED,
   65:../libDaisy/src/per/dac.h ****         DISABLED,
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 33
+
+
   66:../libDaisy/src/per/dac.h ****     };
   67:../libDaisy/src/per/dac.h **** 
   68:../libDaisy/src/per/dac.h ****     /** Configuration structure for initializing the DAC structure. */
@@ -1618,497 +1935,509 @@ ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 1
   77:../libDaisy/src/per/dac.h ****         Channel     chn;
   78:../libDaisy/src/per/dac.h ****         Mode        mode;
   79:../libDaisy/src/per/dac.h ****         BitDepth    bitdepth;
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 28
-
-
   80:../libDaisy/src/per/dac.h ****         BufferState buff_state;
   81:../libDaisy/src/per/dac.h ****     };
   82:../libDaisy/src/per/dac.h **** 
   83:../libDaisy/src/per/dac.h ****     DacHandle() : pimpl_(nullptr) {}
- 804              		.loc 9 83 5 is_stmt 1 view .LVU170
- 805              	.LBB144:
- 806              	.LBB145:
- 807              		.loc 9 83 33 is_stmt 0 view .LVU171
- 808 0016 0462     		str	r4, [r0, #32]
- 809              	.LVL65:
- 810              		.loc 9 83 33 view .LVU172
- 811              	.LBE145:
- 812              	.LBE144:
- 813              	.LBE143:
- 814              	.LBB146:
- 815              	.LBI146:
+ 988              		.loc 10 83 5 is_stmt 1 view .LVU227
+ 989              	.LBB197:
+ 990              	.LBB198:
+ 991              		.loc 10 83 33 is_stmt 0 view .LVU228
+ 992 0016 0462     		str	r4, [r0, #32]
+ 993              	.LVL64:
+ 994              		.loc 10 83 33 view .LVU229
+ 995              	.LBE198:
+ 996              	.LBE197:
+ 997              	.LBE196:
+ 998              	.LBB199:
+ 999              	.LBI199:
   40:../libDaisy/src/hid/usb.h **** 
- 816              		.loc 5 40 5 is_stmt 1 view .LVU173
+ 1000              		.loc 3 40 5 is_stmt 1 view .LVU230
   40:../libDaisy/src/hid/usb.h **** 
- 817              		.loc 5 40 5 is_stmt 0 view .LVU174
- 818              	.LBE146:
- 819              	.LBB147:
- 820              	.LBI147:
+ 1001              		.loc 3 40 5 is_stmt 0 view .LVU231
+ 1002              	.LBE199:
+ 1003              	.LBB200:
+ 1004              	.LBI200:
   58:../libDaisy/src/sys/system.h ****     ~System() {}
- 821              		.loc 4 58 5 is_stmt 1 view .LVU175
+ 1005              		.loc 2 58 5 is_stmt 1 view .LVU232
   58:../libDaisy/src/sys/system.h ****     ~System() {}
- 822              		.loc 4 58 5 is_stmt 0 view .LVU176
- 823              	.LBE147:
- 824              	.LBE149:
- 825              	.LBE151:
-  18:birds-and-the-bees.cpp **** static VariableShapeOscillator osc[8];
- 826              		.loc 8 18 18 view .LVU177
- 827 0018 FFF7FEFF 		bl	__aeabi_atexit
- 828              	.LVL66:
-  19:birds-and-the-bees.cpp **** static MoogLadder filterLeft;
- 829              		.loc 8 19 37 is_stmt 1 view .LVU178
-  19:birds-and-the-bees.cpp **** static MoogLadder filterLeft;
- 830              		.loc 8 19 32 is_stmt 0 view .LVU179
- 831 001c 134A     		ldr	r2, .L38
- 832 001e 1749     		ldr	r1, .L38+16
- 833 0020 2046     		mov	r0, r4
- 834 0022 FFF7FEFF 		bl	__aeabi_atexit
- 835              	.LVL67:
- 836              	.LBB152:
- 837              	.LBI152:
+ 1006              		.loc 2 58 5 is_stmt 0 view .LVU233
+ 1007              	.LBE200:
+ 1008              	.LBE202:
+ 1009              	.LBE204:
+  18:birds-and-the-bees.cpp **** // static VariableShapeOscillator osc[NUM_OF_OSCILLATORS];
+ 1010              		.loc 8 18 18 view .LVU234
+ 1011 0018 FFF7FEFF 		bl	__aeabi_atexit
+ 1012              	.LVL65:
+  20:birds-and-the-bees.cpp **** static MoogLadder filterLeft;
+ 1013              		.loc 8 20 41 is_stmt 1 view .LVU235
+  20:birds-and-the-bees.cpp **** static MoogLadder filterLeft;
+ 1014              		.loc 8 20 19 is_stmt 0 view .LVU236
+ 1015 001c 134A     		ldr	r2, .L42
+ 1016 001e 1749     		ldr	r1, .L42+16
+ 1017 0020 2046     		mov	r0, r4
+ 1018 0022 FFF7FEFF 		bl	__aeabi_atexit
+ 1019              	.LVL66:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 34
+
+
+ 1020              	.LBB205:
+ 1021              	.LBI205:
   20:../DaisySP/Source/Filters/moogladder.h ****     ~MoogLadder() {}
- 838              		.loc 2 20 5 is_stmt 1 view .LVU180
+ 1022              		.loc 7 20 5 is_stmt 1 view .LVU237
   20:../DaisySP/Source/Filters/moogladder.h ****     ~MoogLadder() {}
- 839              		.loc 2 20 5 is_stmt 0 view .LVU181
- 840              	.LBE152:
-  20:birds-and-the-bees.cpp **** static MoogLadder filterRight;
- 841              		.loc 8 20 19 view .LVU182
- 842 0026 1649     		ldr	r1, .L38+20
- 843 0028 104A     		ldr	r2, .L38
- 844 002a 1648     		ldr	r0, .L38+24
- 845 002c FFF7FEFF 		bl	__aeabi_atexit
- 846              	.LVL68:
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 29
-
-
- 847              	.LBB153:
- 848              	.LBI153:
+ 1023              		.loc 7 20 5 is_stmt 0 view .LVU238
+ 1024              	.LBE205:
+  21:birds-and-the-bees.cpp **** static MoogLadder filterRight;
+ 1025              		.loc 8 21 19 view .LVU239
+ 1026 0026 1649     		ldr	r1, .L42+20
+ 1027 0028 104A     		ldr	r2, .L42
+ 1028 002a 1648     		ldr	r0, .L42+24
+ 1029 002c FFF7FEFF 		bl	__aeabi_atexit
+ 1030              	.LVL67:
+ 1031              	.LBB206:
+ 1032              	.LBI206:
   20:../DaisySP/Source/Filters/moogladder.h ****     ~MoogLadder() {}
- 849              		.loc 2 20 5 is_stmt 1 view .LVU183
+ 1033              		.loc 7 20 5 is_stmt 1 view .LVU240
   20:../DaisySP/Source/Filters/moogladder.h ****     ~MoogLadder() {}
- 850              		.loc 2 20 5 is_stmt 0 view .LVU184
- 851              	.LBE153:
-  21:birds-and-the-bees.cpp **** static Adsr envelope;
- 852              		.loc 8 21 19 view .LVU185
- 853 0030 0E4A     		ldr	r2, .L38
- 854 0032 1349     		ldr	r1, .L38+20
- 855 0034 1448     		ldr	r0, .L38+28
- 856 0036 FFF7FEFF 		bl	__aeabi_atexit
- 857              	.LVL69:
- 858              	.LBB154:
- 859              	.LBI154:
+ 1034              		.loc 7 20 5 is_stmt 0 view .LVU241
+ 1035              	.LBE206:
+  22:birds-and-the-bees.cpp **** static Adsr envelope;
+ 1036              		.loc 8 22 19 view .LVU242
+ 1037 0030 0E4A     		ldr	r2, .L42
+ 1038 0032 1349     		ldr	r1, .L42+20
+ 1039 0034 1448     		ldr	r0, .L42+28
+ 1040 0036 FFF7FEFF 		bl	__aeabi_atexit
+ 1041              	.LVL68:
+ 1042              	.LBB207:
+ 1043              	.LBI207:
   36:../DaisySP/Source/Control/adsr.h ****     ~Adsr() {}
- 860              		.loc 1 36 5 is_stmt 1 view .LVU186
- 861              	.LBB155:
- 862              	.LBB156:
+ 1044              		.loc 6 36 5 is_stmt 1 view .LVU243
+ 1045              	.LBB208:
+ 1046              	.LBB209:
   36:../DaisySP/Source/Control/adsr.h ****     ~Adsr() {}
- 863              		.loc 1 36 12 is_stmt 0 view .LVU187
- 864 003a 1448     		ldr	r0, .L38+32
- 865 003c 0023     		movs	r3, #0
- 866 003e DFF854C0 		ldr	ip, .L38+40
- 867              	.LBE156:
- 868 0042 8485     		strh	r4, [r0, #44]	@ movhi
- 869              	.LVL70:
+ 1047              		.loc 6 36 12 is_stmt 0 view .LVU244
+ 1048 003a 1448     		ldr	r0, .L42+32
+ 1049 003c 0023     		movs	r3, #0
+ 1050 003e DFF854C0 		ldr	ip, .L42+40
+ 1051              	.LBE209:
+ 1052 0042 8485     		strh	r4, [r0, #44]	@ movhi
+ 1053              	.LVL69:
   36:../DaisySP/Source/Control/adsr.h ****     ~Adsr() {}
- 870              		.loc 1 36 12 view .LVU188
- 871              	.LBE155:
- 872              	.LBE154:
-  22:birds-and-the-bees.cpp **** 
- 873              		.loc 8 22 13 view .LVU189
- 874 0044 094A     		ldr	r2, .L38
- 875 0046 1249     		ldr	r1, .L38+36
- 876              	.LBB159:
- 877              	.LBB158:
- 878              	.LBB157:
+ 1054              		.loc 6 36 12 view .LVU245
+ 1055              	.LBE208:
+ 1056              	.LBE207:
+  23:birds-and-the-bees.cpp **** 
+ 1057              		.loc 8 23 13 view .LVU246
+ 1058 0044 094A     		ldr	r2, .L42
+ 1059 0046 1249     		ldr	r1, .L42+36
+ 1060              	.LBB212:
+ 1061              	.LBB211:
+ 1062              	.LBB210:
   36:../DaisySP/Source/Control/adsr.h ****     ~Adsr() {}
- 879              		.loc 1 36 12 view .LVU190
- 880 0048 0360     		str	r3, [r0]	@ float
- 881 004a 4360     		str	r3, [r0, #4]	@ float
- 882 004c C0F808C0 		str	ip, [r0, #8]	@ float
- 883 0050 C360     		str	r3, [r0, #12]	@ float
- 884 0052 C0F810C0 		str	ip, [r0, #16]	@ float
- 885 0056 C0F814C0 		str	ip, [r0, #20]	@ float
- 886 005a C0F818C0 		str	ip, [r0, #24]	@ float
- 887 005e C361     		str	r3, [r0, #28]	@ float
- 888 0060 0362     		str	r3, [r0, #32]	@ float
- 889 0062 4362     		str	r3, [r0, #36]	@ float
- 890              	.LBE157:
- 891              	.LBE158:
- 892              	.LBE159:
- 893              	.LBE160:
- 894              	.LBE162:
- 895              		.loc 8 153 1 view .LVU191
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 30
+ 1063              		.loc 6 36 12 view .LVU247
+ 1064 0048 0360     		str	r3, [r0]	@ float
+ 1065 004a 4360     		str	r3, [r0, #4]	@ float
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 35
 
 
- 896 0064 BDE81040 		pop	{r4, lr}
- 897              		.cfi_restore 14
- 898              		.cfi_restore 4
- 899              		.cfi_def_cfa_offset 0
- 900              	.LBB163:
- 901              	.LBB161:
-  22:birds-and-the-bees.cpp **** 
- 902              		.loc 8 22 13 view .LVU192
- 903 0068 FFF7FEBF 		b	__aeabi_atexit
- 904              	.LVL71:
- 905              	.L39:
- 906              		.align	2
- 907              	.L38:
- 908 006c 00000000 		.word	__dso_handle
- 909 0070 00000000 		.word	__tcf_0
- 910 0074 00000000 		.word	.LANCHOR0
- 911 0078 00000000 		.word	_ZN5daisy9DaisySeedD1Ev
- 912 007c 00000000 		.word	__tcf_1
- 913 0080 00000000 		.word	_ZN7daisysp10MoogLadderD1Ev
- 914 0084 00000000 		.word	.LANCHOR10
- 915 0088 00000000 		.word	.LANCHOR11
- 916 008c 00000000 		.word	.LANCHOR12
- 917 0090 00000000 		.word	_ZN7daisysp4AdsrD1Ev
- 918 0094 000080BF 		.word	-1082130432
- 919              	.LBE161:
- 920              	.LBE163:
- 921              		.cfi_endproc
- 922              	.LFE4802:
- 924              		.section	.init_array,"aw",%init_array
- 925              		.align	2
- 926 0000 00000000 		.word	_GLOBAL__sub_I_PIN_MUX_SEL_0(target1)
- 927              		.global	knob
- 928              		.global	stereoSpread
- 929              		.global	octave
- 930              		.global	releaseMs
- 931              		.global	sustain
- 932              		.global	decayMs
- 933              		.global	attackMs
- 934              		.global	tune
- 935              		.global	overdrive
- 936              		.global	enveloptToCutoff
- 937              		.global	filterSwarmSpread
- 938              		.global	resonance
- 939              		.global	cutoffHz
- 940              		.global	swarmParcialRange
- 941              		.global	swarmPreset
- 942              		.global	portamento
- 943              		.global	outputVolume
- 944              		.global	knob_
- 945              		.global	PIN_ADC_POT_MUX2
- 946              		.global	PIN_ADC_POT_MUX1
- 947              		.global	PIN_MUX_SEL_2
- 948              		.global	PIN_MUX_SEL_1
- 949              		.global	PIN_MUX_SEL_0
- 950              		.section	.bss._ZL10filterLeft,"aw",%nobits
- 951              		.align	2
- 952              		.set	.LANCHOR10,. + 0
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 31
+ 1066 004c C0F808C0 		str	ip, [r0, #8]	@ float
+ 1067 0050 C360     		str	r3, [r0, #12]	@ float
+ 1068 0052 C0F810C0 		str	ip, [r0, #16]	@ float
+ 1069 0056 C0F814C0 		str	ip, [r0, #20]	@ float
+ 1070 005a C0F818C0 		str	ip, [r0, #24]	@ float
+ 1071 005e C361     		str	r3, [r0, #28]	@ float
+ 1072 0060 0362     		str	r3, [r0, #32]	@ float
+ 1073 0062 4362     		str	r3, [r0, #36]	@ float
+ 1074              	.LBE210:
+ 1075              	.LBE211:
+ 1076              	.LBE212:
+ 1077              	.LBE213:
+ 1078              	.LBE215:
+ 1079              		.loc 8 175 1 view .LVU248
+ 1080 0064 BDE81040 		pop	{r4, lr}
+ 1081              		.cfi_restore 14
+ 1082              		.cfi_restore 4
+ 1083              		.cfi_def_cfa_offset 0
+ 1084              	.LBB216:
+ 1085              	.LBB214:
+  23:birds-and-the-bees.cpp **** 
+ 1086              		.loc 8 23 13 view .LVU249
+ 1087 0068 FFF7FEBF 		b	__aeabi_atexit
+ 1088              	.LVL70:
+ 1089              	.L43:
+ 1090              		.align	2
+ 1091              	.L42:
+ 1092 006c 00000000 		.word	__dso_handle
+ 1093 0070 00000000 		.word	__tcf_0
+ 1094 0074 00000000 		.word	.LANCHOR0
+ 1095 0078 00000000 		.word	_ZN5daisy9DaisySeedD1Ev
+ 1096 007c 00000000 		.word	__tcf_1
+ 1097 0080 00000000 		.word	_ZN7daisysp10MoogLadderD1Ev
+ 1098 0084 00000000 		.word	.LANCHOR11
+ 1099 0088 00000000 		.word	.LANCHOR12
+ 1100 008c 00000000 		.word	.LANCHOR10
+ 1101 0090 00000000 		.word	_ZN7daisysp4AdsrD1Ev
+ 1102 0094 000080BF 		.word	-1082130432
+ 1103              	.LBE214:
+ 1104              	.LBE216:
+ 1105              		.cfi_endproc
+ 1106              	.LFE4804:
+ 1108              		.section	.init_array,"aw",%init_array
+ 1109              		.align	2
+ 1110 0000 00000000 		.word	_GLOBAL__sub_I_PIN_MUX_SEL_0(target1)
+ 1111              		.global	knob
+ 1112              		.global	cutoffRibbon
+ 1113              		.global	pitchRibbon
+ 1114              		.global	stereoSpread
+ 1115              		.global	octave
+ 1116              		.global	releaseMs
+ 1117              		.global	sustain
+ 1118              		.global	decayMs
+ 1119              		.global	attackMs
+ 1120              		.global	tune
+ 1121              		.global	overdrive
+ 1122              		.global	enveloptToCutoff
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 36
 
 
- 955              	_ZL10filterLeft:
- 956 0000 00000000 		.space	68
- 956      00000000 
- 956      00000000 
- 956      00000000 
- 956      00000000 
- 957              		.section	.bss._ZL11filterRight,"aw",%nobits
- 958              		.align	2
- 959              		.set	.LANCHOR11,. + 0
- 962              	_ZL11filterRight:
- 963 0000 00000000 		.space	68
- 963      00000000 
- 963      00000000 
- 963      00000000 
- 963      00000000 
- 964              		.section	.bss._ZL2hw,"aw",%nobits
- 965              		.align	2
- 966              		.set	.LANCHOR0,. + 0
- 969              	_ZL2hw:
- 970 0000 00000000 		.space	60
- 970      00000000 
- 970      00000000 
- 970      00000000 
- 970      00000000 
- 971              		.section	.bss._ZL3osc,"aw",%nobits
- 972              		.align	2
- 973              		.set	.LANCHOR2,. + 0
- 976              	_ZL3osc:
- 977 0000 00000000 		.space	352
- 977      00000000 
- 977      00000000 
- 977      00000000 
- 977      00000000 
- 978              		.section	.bss._ZL8envelope,"aw",%nobits
- 979              		.align	2
- 980              		.set	.LANCHOR12,. + 0
- 983              	_ZL8envelope:
- 984 0000 00000000 		.space	48
- 984      00000000 
- 984      00000000 
- 984      00000000 
- 984      00000000 
- 985              		.section	.bss.attackMs,"aw",%nobits
- 986              		.align	2
- 989              	attackMs:
- 990 0000 00000000 		.space	4
- 991              		.section	.bss.decayMs,"aw",%nobits
- 992              		.align	2
- 995              	decayMs:
- 996 0000 00000000 		.space	4
- 997              		.section	.bss.enveloptToCutoff,"aw",%nobits
- 998              		.align	2
- 1001              	enveloptToCutoff:
- 1002 0000 00000000 		.space	4
- 1003              		.section	.bss.knob_,"aw",%nobits
- 1004              		.align	2
- 1005              		.set	.LANCHOR9,. + 0
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 32
+ 1123              		.global	filterSwarmSpread
+ 1124              		.global	resonance
+ 1125              		.global	cutoffHz
+ 1126              		.global	swarmParcialRange
+ 1127              		.global	swarmPreset
+ 1128              		.global	portamento
+ 1129              		.global	outputVolume
+ 1130              		.global	knob_
+ 1131              		.global	PIN_ADC_POT_MUX2
+ 1132              		.global	PIN_ADC_POT_MUX1
+ 1133              		.global	PIN_MUX_SEL_2
+ 1134              		.global	PIN_MUX_SEL_1
+ 1135              		.global	PIN_MUX_SEL_0
+ 1136              		.section	.bss._ZL10filterLeft,"aw",%nobits
+ 1137              		.align	2
+ 1138              		.set	.LANCHOR11,. + 0
+ 1141              	_ZL10filterLeft:
+ 1142 0000 00000000 		.space	68
+ 1142      00000000 
+ 1142      00000000 
+ 1142      00000000 
+ 1142      00000000 
+ 1143              		.section	.bss._ZL11filterRight,"aw",%nobits
+ 1144              		.align	2
+ 1145              		.set	.LANCHOR12,. + 0
+ 1148              	_ZL11filterRight:
+ 1149 0000 00000000 		.space	68
+ 1149      00000000 
+ 1149      00000000 
+ 1149      00000000 
+ 1149      00000000 
+ 1150              		.section	.bss._ZL2hw,"aw",%nobits
+ 1151              		.align	2
+ 1152              		.set	.LANCHOR0,. + 0
+ 1155              	_ZL2hw:
+ 1156 0000 00000000 		.space	60
+ 1156      00000000 
+ 1156      00000000 
+ 1156      00000000 
+ 1156      00000000 
+ 1157              		.section	.bss._ZL3osc,"aw",%nobits
+ 1158              		.align	2
+ 1159              		.set	.LANCHOR2,. + 0
+ 1162              	_ZL3osc:
+ 1163 0000 00000000 		.space	40
+ 1163      00000000 
+ 1163      00000000 
+ 1163      00000000 
+ 1163      00000000 
+ 1164              		.section	.bss._ZL8envelope,"aw",%nobits
+ 1165              		.align	2
+ 1166              		.set	.LANCHOR10,. + 0
+ 1169              	_ZL8envelope:
+ 1170 0000 00000000 		.space	48
+ 1170      00000000 
+ 1170      00000000 
+ 1170      00000000 
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 37
 
 
- 1008              	knob_:
- 1009 0000 00000000 		.space	768
- 1009      00000000 
- 1009      00000000 
- 1009      00000000 
- 1009      00000000 
- 1010              		.section	.bss.overdrive,"aw",%nobits
- 1011              		.align	2
- 1014              	overdrive:
- 1015 0000 00000000 		.space	4
- 1016              		.section	.bss.portamento,"aw",%nobits
- 1017              		.align	2
- 1020              	portamento:
- 1021 0000 00000000 		.space	4
- 1022              		.section	.bss.releaseMs,"aw",%nobits
- 1023              		.align	2
- 1026              	releaseMs:
- 1027 0000 00000000 		.space	4
- 1028              		.section	.bss.resonance,"aw",%nobits
- 1029              		.align	2
- 1032              	resonance:
- 1033 0000 00000000 		.space	4
- 1034              		.section	.bss.sustain,"aw",%nobits
- 1035              		.align	2
- 1038              	sustain:
- 1039 0000 00000000 		.space	4
- 1040              		.section	.bss.swarmParcialRange,"aw",%nobits
- 1041              		.align	2
- 1044              	swarmParcialRange:
- 1045 0000 00000000 		.space	4
- 1046              		.section	.bss.swarmPreset,"aw",%nobits
- 1047              		.align	2
- 1050              	swarmPreset:
- 1051 0000 00000000 		.space	4
- 1052              		.section	.bss.tune,"aw",%nobits
- 1053              		.align	2
- 1056              	tune:
- 1057 0000 00000000 		.space	4
- 1058              		.section	.data.PIN_ADC_POT_MUX1,"aw"
- 1059              		.align	2
- 1060              		.set	.LANCHOR4,. + 0
- 1063              	PIN_ADC_POT_MUX1:
- 1064 0000 0F000000 		.word	15
- 1065              		.section	.data.PIN_ADC_POT_MUX2,"aw"
- 1066              		.align	2
- 1067              		.set	.LANCHOR8,. + 0
- 1070              	PIN_ADC_POT_MUX2:
- 1071 0000 10000000 		.word	16
- 1072              		.section	.data.PIN_MUX_SEL_0,"aw"
- 1073              		.align	2
- 1074              		.set	.LANCHOR5,. + 0
- 1077              	PIN_MUX_SEL_0:
- 1078 0000 11000000 		.word	17
- 1079              		.section	.data.PIN_MUX_SEL_1,"aw"
- 1080              		.align	2
- 1081              		.set	.LANCHOR6,. + 0
- 1084              	PIN_MUX_SEL_1:
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 33
+ 1170      00000000 
+ 1171              		.section	.bss.attackMs,"aw",%nobits
+ 1172              		.align	2
+ 1175              	attackMs:
+ 1176 0000 00000000 		.space	4
+ 1177              		.section	.bss.cutoffRibbon,"aw",%nobits
+ 1178              		.align	2
+ 1181              	cutoffRibbon:
+ 1182 0000 00000000 		.space	4
+ 1183              		.section	.bss.decayMs,"aw",%nobits
+ 1184              		.align	2
+ 1187              	decayMs:
+ 1188 0000 00000000 		.space	4
+ 1189              		.section	.bss.enveloptToCutoff,"aw",%nobits
+ 1190              		.align	2
+ 1193              	enveloptToCutoff:
+ 1194 0000 00000000 		.space	4
+ 1195              		.section	.bss.knob_,"aw",%nobits
+ 1196              		.align	2
+ 1197              		.set	.LANCHOR9,. + 0
+ 1200              	knob_:
+ 1201 0000 00000000 		.space	768
+ 1201      00000000 
+ 1201      00000000 
+ 1201      00000000 
+ 1201      00000000 
+ 1202              		.section	.bss.overdrive,"aw",%nobits
+ 1203              		.align	2
+ 1206              	overdrive:
+ 1207 0000 00000000 		.space	4
+ 1208              		.section	.bss.pitchRibbon,"aw",%nobits
+ 1209              		.align	2
+ 1212              	pitchRibbon:
+ 1213 0000 00000000 		.space	4
+ 1214              		.section	.bss.portamento,"aw",%nobits
+ 1215              		.align	2
+ 1218              	portamento:
+ 1219 0000 00000000 		.space	4
+ 1220              		.section	.bss.releaseMs,"aw",%nobits
+ 1221              		.align	2
+ 1224              	releaseMs:
+ 1225 0000 00000000 		.space	4
+ 1226              		.section	.bss.resonance,"aw",%nobits
+ 1227              		.align	2
+ 1230              	resonance:
+ 1231 0000 00000000 		.space	4
+ 1232              		.section	.bss.sustain,"aw",%nobits
+ 1233              		.align	2
+ 1236              	sustain:
+ 1237 0000 00000000 		.space	4
+ 1238              		.section	.bss.swarmParcialRange,"aw",%nobits
+ 1239              		.align	2
+ 1242              	swarmParcialRange:
+ 1243 0000 00000000 		.space	4
+ 1244              		.section	.bss.swarmPreset,"aw",%nobits
+ 1245              		.align	2
+ 1248              	swarmPreset:
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 38
 
 
- 1085 0000 12000000 		.word	18
- 1086              		.section	.data.PIN_MUX_SEL_2,"aw"
- 1087              		.align	2
- 1088              		.set	.LANCHOR7,. + 0
- 1091              	PIN_MUX_SEL_2:
- 1092 0000 13000000 		.word	19
- 1093              		.section	.data.cutoffHz,"aw"
- 1094              		.align	2
- 1097              	cutoffHz:
- 1098 0000 0000C842 		.word	1120403456
- 1099              		.section	.data.filterSwarmSpread,"aw"
- 1100              		.align	2
- 1103              	filterSwarmSpread:
- 1104 0000 0000003F 		.word	1056964608
- 1105              		.section	.data.knob,"aw"
- 1106              		.align	2
- 1107              		.set	.LANCHOR1,. + 0
- 1110              	knob:
- 1111 0000 0000003F 		.word	1056964608
- 1112              		.section	.data.octave,"aw"
- 1113              		.align	2
- 1116              	octave:
- 1117 0000 02000000 		.word	2
- 1118              		.section	.data.outputVolume,"aw"
- 1119              		.align	2
- 1122              	outputVolume:
- 1123 0000 0000403F 		.word	1061158912
- 1124              		.section	.data.stereoSpread,"aw"
- 1125              		.align	2
- 1126              		.set	.LANCHOR3,. + 0
- 1129              	stereoSpread:
- 1130 0000 0000003F 		.word	1056964608
- 1131              		.text
- 1132              	.Letext0:
- 1133              		.file 10 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1134              		.file 11 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1135              		.file 12 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1136              		.file 13 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1137              		.file 14 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1138              		.file 15 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1139              		.file 16 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1140              		.file 17 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1141              		.file 18 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1142              		.file 19 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1143              		.file 20 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1144              		.file 21 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1145              		.file 22 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1146              		.file 23 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1147              		.file 24 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1148              		.file 25 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1149              		.file 26 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1150              		.file 27 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1151              		.file 28 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1152              		.file 29 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1153              		.file 30 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1154              		.file 31 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1155              		.file 32 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 34
+ 1249 0000 00000000 		.space	4
+ 1250              		.section	.bss.tune,"aw",%nobits
+ 1251              		.align	2
+ 1254              	tune:
+ 1255 0000 00000000 		.space	4
+ 1256              		.section	.data.PIN_ADC_POT_MUX1,"aw"
+ 1257              		.align	2
+ 1258              		.set	.LANCHOR4,. + 0
+ 1261              	PIN_ADC_POT_MUX1:
+ 1262 0000 0F000000 		.word	15
+ 1263              		.section	.data.PIN_ADC_POT_MUX2,"aw"
+ 1264              		.align	2
+ 1265              		.set	.LANCHOR8,. + 0
+ 1268              	PIN_ADC_POT_MUX2:
+ 1269 0000 10000000 		.word	16
+ 1270              		.section	.data.PIN_MUX_SEL_0,"aw"
+ 1271              		.align	2
+ 1272              		.set	.LANCHOR5,. + 0
+ 1275              	PIN_MUX_SEL_0:
+ 1276 0000 11000000 		.word	17
+ 1277              		.section	.data.PIN_MUX_SEL_1,"aw"
+ 1278              		.align	2
+ 1279              		.set	.LANCHOR6,. + 0
+ 1282              	PIN_MUX_SEL_1:
+ 1283 0000 12000000 		.word	18
+ 1284              		.section	.data.PIN_MUX_SEL_2,"aw"
+ 1285              		.align	2
+ 1286              		.set	.LANCHOR7,. + 0
+ 1289              	PIN_MUX_SEL_2:
+ 1290 0000 13000000 		.word	19
+ 1291              		.section	.data.cutoffHz,"aw"
+ 1292              		.align	2
+ 1295              	cutoffHz:
+ 1296 0000 0000C842 		.word	1120403456
+ 1297              		.section	.data.filterSwarmSpread,"aw"
+ 1298              		.align	2
+ 1301              	filterSwarmSpread:
+ 1302 0000 0000003F 		.word	1056964608
+ 1303              		.section	.data.knob,"aw"
+ 1304              		.align	2
+ 1305              		.set	.LANCHOR1,. + 0
+ 1308              	knob:
+ 1309 0000 0000003F 		.word	1056964608
+ 1310              		.section	.data.octave,"aw"
+ 1311              		.align	2
+ 1314              	octave:
+ 1315 0000 02000000 		.word	2
+ 1316              		.section	.data.outputVolume,"aw"
+ 1317              		.align	2
+ 1320              	outputVolume:
+ 1321 0000 0000403F 		.word	1061158912
+ 1322              		.section	.data.stereoSpread,"aw"
+ 1323              		.align	2
+ 1324              		.set	.LANCHOR3,. + 0
+ 1327              	stereoSpread:
+ 1328 0000 0000003F 		.word	1056964608
+ 1329              		.text
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 39
 
 
- 1156              		.file 33 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1157              		.file 34 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1158              		.file 35 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1159              		.file 36 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1160              		.file 37 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1161              		.file 38 "../DaisySP/Source/Control/adenv.h"
- 1162              		.file 39 "../DaisySP/Source/Utility/dsp.h"
- 1163              		.file 40 "../DaisySP/Source/Synthesis/variableshapeosc.h"
- 1164              		.file 41 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1165              		.file 42 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1166              		.file 43 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1167              		.file 44 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1168              		.file 45 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1169              		.file 46 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
- 1170              		.file 47 "../libDaisy/src/daisy_core.h"
- 1171              		.file 48 "../libDaisy/src/per/tim.h"
- 1172              		.file 49 "../libDaisy/src/per/sai.h"
- 1173              		.file 50 "../libDaisy/src/hid/ctrl.h"
- 1174              		.file 51 "../libDaisy/src/hid/logger_impl.h"
- 1175              		.file 52 "../libDaisy/src/util/wav_format.h"
- 1176              		.file 53 "../libDaisy/src/hid/logger.h"
- 1177              		.file 54 "../libDaisy/src/per/qspi.h"
- 1178              		.file 55 "../libDaisy/src/per/gpio.h"
- 1179              		.file 56 "../libDaisy/src/dev/sdram.h"
- 1180              		.file 57 "../libDaisy/src/dev/sr_595.h"
- 1181              		.file 58 "<built-in>"
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 35
+ 1330              	.Letext0:
+ 1331              		.file 11 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1332              		.file 12 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1333              		.file 13 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1334              		.file 14 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1335              		.file 15 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1336              		.file 16 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1337              		.file 17 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1338              		.file 18 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1339              		.file 19 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1340              		.file 20 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1341              		.file 21 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1342              		.file 22 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1343              		.file 23 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1344              		.file 24 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1345              		.file 25 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1346              		.file 26 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1347              		.file 27 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1348              		.file 28 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1349              		.file 29 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1350              		.file 30 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1351              		.file 31 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1352              		.file 32 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1353              		.file 33 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1354              		.file 34 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1355              		.file 35 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1356              		.file 36 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1357              		.file 37 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1358              		.file 38 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1359              		.file 39 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1360              		.file 40 "../libDaisy/src/daisy_core.h"
+ 1361              		.file 41 "../libDaisy/src/per/tim.h"
+ 1362              		.file 42 "../libDaisy/src/per/sai.h"
+ 1363              		.file 43 "../libDaisy/src/hid/ctrl.h"
+ 1364              		.file 44 "../libDaisy/src/hid/logger_impl.h"
+ 1365              		.file 45 "../libDaisy/src/util/wav_format.h"
+ 1366              		.file 46 "../libDaisy/src/hid/logger.h"
+ 1367              		.file 47 "../libDaisy/src/per/qspi.h"
+ 1368              		.file 48 "../libDaisy/src/per/gpio.h"
+ 1369              		.file 49 "../libDaisy/src/dev/sdram.h"
+ 1370              		.file 50 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1371              		.file 51 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1372              		.file 52 "../DaisySP/Source/Control/adenv.h"
+ 1373              		.file 53 "../DaisySP/Source/Utility/dsp.h"
+ 1374              		.file 54 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1375              		.file 55 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1376              		.file 56 "/usr/local/Caskroom/gcc-arm-embedded/10-2020-q4-major/gcc-arm-none-eabi-10-2020-q4-major
+ 1377              		.file 57 "../libDaisy/src/dev/sr_595.h"
+ 1378              		.file 58 "<built-in>"
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 40
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 birds-and-the-bees.cpp
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:17     .text._ZN7daisysp4AdsrD2Ev:0000000000000000 $t
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:26     .text._ZN7daisysp4AdsrD2Ev:0000000000000000 _ZN7daisysp4AdsrD2Ev
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:26     .text._ZN7daisysp4AdsrD2Ev:0000000000000000 _ZN7daisysp4AdsrD1Ev
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:43     .text._ZN7daisysp10MoogLadderD2Ev:0000000000000000 $t
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:51     .text._ZN7daisysp10MoogLadderD2Ev:0000000000000000 _ZN7daisysp10MoogLadderD2Ev
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:51     .text._ZN7daisysp10MoogLadderD2Ev:0000000000000000 _ZN7daisysp10MoogLadderD1Ev
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:68     .text._ZN5daisy9DaisySeedD2Ev:0000000000000000 $t
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:76     .text._ZN5daisy9DaisySeedD2Ev:0000000000000000 _ZN5daisy9DaisySeedD2Ev
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:76     .text._ZN5daisy9DaisySeedD2Ev:0000000000000000 _ZN5daisy9DaisySeedD1Ev
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:117    .text.__tcf_0:0000000000000000 $t
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:124    .text.__tcf_0:0000000000000000 __tcf_0
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:138    .text._ZL13AudioCallbackPKfPfj:0000000000000000 $t
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:145    .text._ZL13AudioCallbackPKfPfj:0000000000000000 _ZL13AudioCallbackPKfPfj
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:374    .text._ZL13AudioCallbackPKfPfj:00000000000000c4 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:383    .text.__tcf_1:0000000000000000 $t
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:390    .text.__tcf_1:0000000000000000 __tcf_1
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:401    .text._Z8SetupOscf:0000000000000000 $t
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:409    .text._Z8SetupOscf:0000000000000000 _Z8SetupOscf
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:463    .text._Z8SetupOscf:0000000000000028 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:468    .text.startup.main:0000000000000000 $t
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:476    .text.startup.main:0000000000000000 main
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:703    .text.startup.main:0000000000000144 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:718    .text.startup._GLOBAL__sub_I_PIN_MUX_SEL_0:0000000000000000 $t
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:725    .text.startup._GLOBAL__sub_I_PIN_MUX_SEL_0:0000000000000000 _GLOBAL__sub_I_PIN_MUX_SEL_0
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:908    .text.startup._GLOBAL__sub_I_PIN_MUX_SEL_0:000000000000006c $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:925    .init_array:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1110   .data.knob:0000000000000000 knob
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1129   .data.stereoSpread:0000000000000000 stereoSpread
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1116   .data.octave:0000000000000000 octave
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1026   .bss.releaseMs:0000000000000000 releaseMs
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1038   .bss.sustain:0000000000000000 sustain
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:995    .bss.decayMs:0000000000000000 decayMs
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:989    .bss.attackMs:0000000000000000 attackMs
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1056   .bss.tune:0000000000000000 tune
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1014   .bss.overdrive:0000000000000000 overdrive
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1001   .bss.enveloptToCutoff:0000000000000000 enveloptToCutoff
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1103   .data.filterSwarmSpread:0000000000000000 filterSwarmSpread
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1032   .bss.resonance:0000000000000000 resonance
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1097   .data.cutoffHz:0000000000000000 cutoffHz
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1044   .bss.swarmParcialRange:0000000000000000 swarmParcialRange
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1050   .bss.swarmPreset:0000000000000000 swarmPreset
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1020   .bss.portamento:0000000000000000 portamento
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1122   .data.outputVolume:0000000000000000 outputVolume
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1008   .bss.knob_:0000000000000000 knob_
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1070   .data.PIN_ADC_POT_MUX2:0000000000000000 PIN_ADC_POT_MUX2
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1063   .data.PIN_ADC_POT_MUX1:0000000000000000 PIN_ADC_POT_MUX1
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1091   .data.PIN_MUX_SEL_2:0000000000000000 PIN_MUX_SEL_2
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1084   .data.PIN_MUX_SEL_1:0000000000000000 PIN_MUX_SEL_1
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1077   .data.PIN_MUX_SEL_0:0000000000000000 PIN_MUX_SEL_0
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:951    .bss._ZL10filterLeft:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:955    .bss._ZL10filterLeft:0000000000000000 _ZL10filterLeft
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:958    .bss._ZL11filterRight:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:962    .bss._ZL11filterRight:0000000000000000 _ZL11filterRight
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:965    .bss._ZL2hw:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:969    .bss._ZL2hw:0000000000000000 _ZL2hw
-ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s 			page 36
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:17     .text._ZN5daisy9DaisySeedD2Ev:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:26     .text._ZN5daisy9DaisySeedD2Ev:0000000000000000 _ZN5daisy9DaisySeedD2Ev
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:26     .text._ZN5daisy9DaisySeedD2Ev:0000000000000000 _ZN5daisy9DaisySeedD1Ev
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:67     .text._ZN7daisysp4AdsrD2Ev:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:75     .text._ZN7daisysp4AdsrD2Ev:0000000000000000 _ZN7daisysp4AdsrD2Ev
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:75     .text._ZN7daisysp4AdsrD2Ev:0000000000000000 _ZN7daisysp4AdsrD1Ev
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:92     .text._ZN7daisysp10MoogLadderD2Ev:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:100    .text._ZN7daisysp10MoogLadderD2Ev:0000000000000000 _ZN7daisysp10MoogLadderD2Ev
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:100    .text._ZN7daisysp10MoogLadderD2Ev:0000000000000000 _ZN7daisysp10MoogLadderD1Ev
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:117    .text.__tcf_0:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:124    .text.__tcf_0:0000000000000000 __tcf_0
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:138    .text._ZL13AudioCallbackPKfPfj:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:145    .text._ZL13AudioCallbackPKfPfj:0000000000000000 _ZL13AudioCallbackPKfPfj
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:335    .text._ZL13AudioCallbackPKfPfj:0000000000000090 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:346    .text.__tcf_1:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:353    .text.__tcf_1:0000000000000000 __tcf_1
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:364    .text._Z8SetupOscf:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:372    .text._Z8SetupOscf:0000000000000000 _Z8SetupOscf
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:529    .text._Z8SetupOscf:0000000000000058 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:536    .text._Z11setupMuxAdcv:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:544    .text._Z11setupMuxAdcv:0000000000000000 _Z11setupMuxAdcv
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:723    .text._Z11setupMuxAdcv:0000000000000108 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:736    .text._Z14setupNormalAdcv:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:744    .text._Z14setupNormalAdcv:0000000000000000 _Z14setupNormalAdcv
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:795    .text._Z14setupNormalAdcv:0000000000000034 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:800    .text.startup.main:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:808    .text.startup.main:0000000000000000 main
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:893    .text.startup.main:000000000000005c $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:902    .text.startup._GLOBAL__sub_I_PIN_MUX_SEL_0:0000000000000000 $t
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:909    .text.startup._GLOBAL__sub_I_PIN_MUX_SEL_0:0000000000000000 _GLOBAL__sub_I_PIN_MUX_SEL_0
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1092   .text.startup._GLOBAL__sub_I_PIN_MUX_SEL_0:000000000000006c $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1109   .init_array:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1308   .data.knob:0000000000000000 knob
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1181   .bss.cutoffRibbon:0000000000000000 cutoffRibbon
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1212   .bss.pitchRibbon:0000000000000000 pitchRibbon
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1327   .data.stereoSpread:0000000000000000 stereoSpread
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1314   .data.octave:0000000000000000 octave
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1224   .bss.releaseMs:0000000000000000 releaseMs
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1236   .bss.sustain:0000000000000000 sustain
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1187   .bss.decayMs:0000000000000000 decayMs
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1175   .bss.attackMs:0000000000000000 attackMs
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1254   .bss.tune:0000000000000000 tune
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1206   .bss.overdrive:0000000000000000 overdrive
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1193   .bss.enveloptToCutoff:0000000000000000 enveloptToCutoff
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1301   .data.filterSwarmSpread:0000000000000000 filterSwarmSpread
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1230   .bss.resonance:0000000000000000 resonance
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1295   .data.cutoffHz:0000000000000000 cutoffHz
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1242   .bss.swarmParcialRange:0000000000000000 swarmParcialRange
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1248   .bss.swarmPreset:0000000000000000 swarmPreset
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1218   .bss.portamento:0000000000000000 portamento
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1320   .data.outputVolume:0000000000000000 outputVolume
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1200   .bss.knob_:0000000000000000 knob_
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1268   .data.PIN_ADC_POT_MUX2:0000000000000000 PIN_ADC_POT_MUX2
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1261   .data.PIN_ADC_POT_MUX1:0000000000000000 PIN_ADC_POT_MUX1
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1289   .data.PIN_MUX_SEL_2:0000000000000000 PIN_MUX_SEL_2
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 41
 
 
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:972    .bss._ZL3osc:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:976    .bss._ZL3osc:0000000000000000 _ZL3osc
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:979    .bss._ZL8envelope:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:983    .bss._ZL8envelope:0000000000000000 _ZL8envelope
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:986    .bss.attackMs:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:992    .bss.decayMs:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:998    .bss.enveloptToCutoff:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1004   .bss.knob_:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1011   .bss.overdrive:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1017   .bss.portamento:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1023   .bss.releaseMs:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1029   .bss.resonance:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1035   .bss.sustain:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1041   .bss.swarmParcialRange:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1047   .bss.swarmPreset:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1053   .bss.tune:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1059   .data.PIN_ADC_POT_MUX1:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1066   .data.PIN_ADC_POT_MUX2:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1073   .data.PIN_MUX_SEL_0:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1080   .data.PIN_MUX_SEL_1:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1087   .data.PIN_MUX_SEL_2:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1094   .data.cutoffHz:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1100   .data.filterSwarmSpread:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1106   .data.knob:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1113   .data.octave:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1119   .data.outputVolume:0000000000000000 $d
-/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//ccq57CFy.s:1125   .data.stereoSpread:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1282   .data.PIN_MUX_SEL_1:0000000000000000 PIN_MUX_SEL_1
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1275   .data.PIN_MUX_SEL_0:0000000000000000 PIN_MUX_SEL_0
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1137   .bss._ZL10filterLeft:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1141   .bss._ZL10filterLeft:0000000000000000 _ZL10filterLeft
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1144   .bss._ZL11filterRight:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1148   .bss._ZL11filterRight:0000000000000000 _ZL11filterRight
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1151   .bss._ZL2hw:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1155   .bss._ZL2hw:0000000000000000 _ZL2hw
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1158   .bss._ZL3osc:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1162   .bss._ZL3osc:0000000000000000 _ZL3osc
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1165   .bss._ZL8envelope:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1169   .bss._ZL8envelope:0000000000000000 _ZL8envelope
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1172   .bss.attackMs:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1178   .bss.cutoffRibbon:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1184   .bss.decayMs:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1190   .bss.enveloptToCutoff:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1196   .bss.knob_:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1203   .bss.overdrive:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1209   .bss.pitchRibbon:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1215   .bss.portamento:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1221   .bss.releaseMs:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1227   .bss.resonance:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1233   .bss.sustain:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1239   .bss.swarmParcialRange:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1245   .bss.swarmPreset:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1251   .bss.tune:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1257   .data.PIN_ADC_POT_MUX1:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1264   .data.PIN_ADC_POT_MUX2:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1271   .data.PIN_MUX_SEL_0:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1278   .data.PIN_MUX_SEL_1:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1285   .data.PIN_MUX_SEL_2:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1292   .data.cutoffHz:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1298   .data.filterSwarmSpread:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1304   .data.knob:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1311   .data.octave:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1317   .data.outputVolume:0000000000000000 $d
+/var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s:1323   .data.stereoSpread:0000000000000000 $d
+                           .group:0000000000000000 _ZN5daisy9DaisySeedD5Ev
                            .group:0000000000000000 _ZN7daisysp4AdsrD5Ev
                            .group:0000000000000000 _ZN7daisysp10MoogLadderD5Ev
-                           .group:0000000000000000 _ZN5daisy9DaisySeedD5Ev
 
 UNDEFINED SYMBOLS
-_ZNK5daisy9AdcHandle11GetMuxFloatEhh
-_ZN7daisysp23VariableShapeOscillator7ProcessEv
-_ZN7daisysp23VariableShapeOscillator7SetFreqEf
-_ZN7daisysp23VariableShapeOscillator4InitEf
-_ZN5daisy9DaisySeed9ConfigureEv
-_ZN5daisy9DaisySeed4InitEb
-_ZN5daisy9DaisySeed15AudioSampleRateEv
+_ZNK5daisy9AdcHandle8GetFloatEh
+_ZN7daisysp10Oscillator12CalcPhaseIncEf
+_ZN7daisysp10Oscillator7ProcessEv
 _ZN5daisy9DaisySeed6GetPinEh
 _ZN5daisy16AdcChannelConfig7InitMuxE12dsy_gpio_pinjS1_S1_S1_
 _ZN5daisy9AdcHandle4InitEPNS_16AdcChannelConfigEjNS0_12OverSamplingE
@@ -2117,8 +2446,16 @@ _ZN5daisy6LoggerILNS_17LoggerDestinationE1EE8StartLogEb
 _ZNK5daisy9AdcHandle9GetMuxPtrEhh
 _ZNK5daisy9DaisySeed17AudioCallbackRateEv
 _ZN5daisy13AnalogControl4InitEPtfbbf
+_ZN5daisy16AdcChannelConfig10InitSingleE12dsy_gpio_pin
+_ZN5daisy9DaisySeed9ConfigureEv
+_ZN5daisy9DaisySeed4InitEb
+_ZN5daisy9DaisySeed17SetAudioBlockSizeEj
+ARM GAS  /var/folders/qg/q4v9m50j32g19d5z_5604vrc0000gp/T//cc9vvDJg.s 			page 42
+
+
+_ZN5daisy9DaisySeed15AudioSampleRateEv
+_ZN7daisysp4Adsr4InitEfi
 _ZN5daisy9DaisySeed10StartAudioEPFvPKfPfjE
-_ZNK5daisy9AdcHandle8GetFloatEh
 _ZN5daisy9DaisySeed7DelayMsEj
 __aeabi_atexit
 __dso_handle
